@@ -1,0 +1,11 @@
+*.out
+*.exe
+bin
+.clang
+.codelite
+*.mk
+Makefile
+*.txt
+.vs
+
+
