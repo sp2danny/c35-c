@@ -1,70 +1,70 @@
-#pragma once
 
-#include <list>
-#include <string>
-#include <vector>
+#pragma once
 
 #include "Common.h"
 
-extern void Main(const std::vector<std::string>&);
+extern void Main(const C35::StrVec&);
+
+namespace sf
+{
+class Event;
+}
+namespace sf
+{
+class RenderWindow;
+}
 
 namespace C35
 {
 class UpdateTarget
 {
 	public:
-	virtual ~UpdateTarget() {}
+	virtual ~UpdateTarget()  = default;
 	virtual void Update(int) = 0;
 	virtual bool Done() { return false; }
-	virtual bool Unload() { return false; }
 };
-
-namespace sf { struct Event; }
 
 class InputTarget
 {
 	public:
-	virtual ~InputTarget() {}
-	virtual void ParseInput(sf::Event&) = 0;
+	virtual ~InputTarget()              = default;
+	virtual bool ParseInput(sf::Event&) = 0;
 	virtual bool Done() { return false; }
-	virtual bool Unload() { return false; }
 };
+
+class Frame;
+
+typedef std::shared_ptr<Frame>        FramePtr;
+typedef std::shared_ptr<UpdateTarget> UpdatePtr;
+typedef std::shared_ptr<InputTarget>  InputPtr;
 
 class Frame : public UpdateTarget, InputTarget
 {
 	public:
-	virtual ~Frame() {}
-
-	// virtual void Update(int) =0;
 	virtual void Display() = 0;
-	// virtual void ParseInput(SDL_Event&) =0;
-	virtual bool Done()   = 0;
-	virtual bool Unload() = 0;
+	virtual bool Done()    = 0;
 
-	static void PushUnder(Frame*);
-	static void Push(Frame*);
+	static void PushUnder(FramePtr);
+	static void Push(FramePtr);
 
-	static void Modal(Frame*);
-	static void System(Frame*);
+	static void Modal(FramePtr);
+	static void System(FramePtr);
 
-	static void AddListener(InputTarget*);
-	static void AddActive(UpdateTarget*);
-
-	// protected:
-	// static SDL_Surface* screen;
+	static void AddListener(InputPtr);
+	static void AddActive(UpdatePtr);
 
 	private:
-	static std::list<Frame*>        stack;
-	static Frame*                   modal;
-	static Frame*                   system;
-	static std::list<UpdateTarget*> actives;
-	static std::list<InputTarget*>  listeners;
+	static std::vector<FramePtr>  stack;
+	static FramePtr               modal;
+	static FramePtr               system;
+	static std::vector<UpdatePtr> actives;
+	static std::vector<InputPtr>  listeners;
 
 	public:
 	static void Init(std::string);
-	static void Run();
+	static void Run(sf::RenderWindow&);
 
-	friend void Main(const std::vector<std::string>&);
+	friend void Main(const C35::StrVec&);
 };
 
 }  // namespace C35

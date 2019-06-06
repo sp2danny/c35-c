@@ -1,27 +1,25 @@
 
-
-#include <list>
 #include <cassert>
+#include <utility>
 
 // --------------------------------------------
 
 #include "FrameSystem.h"
 
-std::list<C35::Frame*>        C35::Frame::stack;
-std::list<C35::UpdateTarget*> C35::Frame::actives;
-std::list<C35::InputTarget*>  C35::Frame::listeners;
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
 
-C35::Frame* C35::Frame::modal = 0;
+std::vector<C35::FramePtr>  C35::Frame::stack;
+std::vector<C35::UpdatePtr> C35::Frame::actives;
+std::vector<C35::InputPtr>  C35::Frame::listeners;
 
-C35::Frame* C35::Frame::system = 0;
-
-// SDL_Surface* C35::Frame::screen = 0;
+C35::FramePtr C35::Frame::modal  = nullptr;
+C35::FramePtr C35::Frame::system = nullptr;
 
 namespace
 {
 [[maybe_unused]] const int WW = 1024;
 [[maybe_unused]] const int HH = 768;
-
 }  // namespace
 
 void C35::Frame::Init([[maybe_unused]] std::string name)
@@ -29,59 +27,45 @@ void C35::Frame::Init([[maybe_unused]] std::string name)
 	stack.clear();
 	listeners.clear();
 	actives.clear();
-	modal  = 0;
-	system = 0;
-	/*SDL_Init(SDL_INIT_EVERYTHING);
-
-	int mask = SDL_HWSURFACE | SDL_ANYFORMAT | SDL_DOUBLEBUF;
-#ifdef NDEBUG
-	mask |= SDL_FULLSCREEN;
-#endif
-
-	screen = SDL_SetVideoMode(WW, HH, 24, mask);
-
-	assert(screen);
-
-	SDL_WM_SetCaption(name.c_str(), 0);
-
-	srand(SDL_GetTicks());*/
-
-	// TTF_Init();
+	modal  = nullptr;
+	system = nullptr;
 }
 
-void C35::Frame::AddListener(InputTarget* it)
+void C35::Frame::AddListener(InputPtr it)
 {
-	listeners.push_back(it);
+	listeners.push_back(std::move(it));
 }
 
-void C35::Frame::AddActive(UpdateTarget* ut)
+void C35::Frame::AddActive(UpdatePtr ut)
 {
-	actives.push_back(ut);
+	actives.push_back(std::move(ut));
 }
 
-void C35::Frame::Run()
+void C35::Frame::Run(sf::RenderWindow& window)
 {
-	/*
-	int       last  = SDL_GetTicks();
-	unsigned  black = SDL_MapRGB(screen->format, 0, 0, 0);
-	SDL_Event lst_mm_e;
+	sf::Event lst_mm_e;
 
-	lst_mm_e.type     = SDL_MOUSEMOTION;
-	lst_mm_e.motion.x = lst_mm_e.motion.y = 0;
-	for (;;)
+	lst_mm_e.type        = sf::Event::MouseMoved;
+	lst_mm_e.mouseMove.x = lst_mm_e.mouseMove.y = 0;
+
+	while (true)
 	{
+		if (!window.isOpen())
+			break;
 		if (stack.empty())
 			break;
 
-		// --- Input ---
-		SDL_Event e;
-		int       i = SDL_PollEvent(&e);
-		if (i)
+		sf::Event e;
+		while (window.pollEvent(e))
 		{
-			if (e.type == SDL_MOUSEMOTION)
+			if (e.type == sf::Event::Closed)
+			{
+				window.close();
+				break;
+			}
+			if (e.type == sf::Event::MouseMoved)
 				lst_mm_e = e;
-			if (e.type == SDL_QUIT)
-				return;
+
 			if (modal)
 				modal->ParseInput(e);
 			else
@@ -93,25 +77,23 @@ void C35::Frame::Run()
 		}
 
 		// --- Update ---
-		int now = SDL_GetTicks();
-		GameEngine::Update(now - last);
-		stack.back()->Update(now - last);
+		int ticks = 7;
+		stack.back()->Update(ticks);
 		if (modal)
-			modal->Update(now - last);
+			modal->Update(ticks);
 		if (system)
-			system->Update(now - last);
+			system->Update(ticks);
 		for (auto ut : actives)
-			ut->Update(now - last);
-		last = now;
+			ut->Update(ticks);
 
 		// --- Display ---
-		SDL_FillRect(screen, 0, black);
+		window.clear();
 		stack.back()->Display();
 		if (modal)
 			modal->Display();
 		if (system)
 			system->Display();
-		SDL_Flip(screen);
+		window.display();
 
 		// --- Frame Phase ---
 		if (system && system->Done())
@@ -120,17 +102,13 @@ void C35::Frame::Run()
 		{
 			if (modal->Done())
 			{
-				if (modal->Unload())
-					delete modal;
-				modal = 0;
+				modal = nullptr;
 			}
 		}
 		else
 		{
 			if (stack.back()->Done())
 			{
-				if (stack.back()->Unload())
-					delete stack.back();
 				stack.pop_back();
 				if (!stack.empty())
 					stack.back()->ParseInput(lst_mm_e);
@@ -140,8 +118,6 @@ void C35::Frame::Run()
 		{
 			if ((*iter)->Done())
 			{
-				if ((*iter)->Unload())
-					delete (*iter);
 				iter = listeners.erase(iter);
 			}
 			else
@@ -153,8 +129,6 @@ void C35::Frame::Run()
 		{
 			if ((*iter)->Done())
 			{
-				if ((*iter)->Unload())
-					delete (*iter);
 				iter = actives.erase(iter);
 			}
 			else
@@ -162,31 +136,27 @@ void C35::Frame::Run()
 				++iter;
 			}
 		}
-	}*/
+	}
 }
 
-void C35::Frame::PushUnder(Frame* f)
+void C35::Frame::PushUnder(FramePtr f)
 {
 	assert(!stack.empty());
 	auto itr = stack.end();
-	--itr;
-	if (itr == stack.begin())
-		stack.push_front(f);
-	else
-		stack.insert(itr, f);
+	stack.insert(--itr, std::move(f));
 }
 
-void C35::Frame::Push(Frame* f)
+void C35::Frame::Push(FramePtr f)
 {
-	stack.push_back(f);
+	stack.push_back(std::move(f));
 }
 
-void C35::Frame::Modal(Frame* m)
+void C35::Frame::Modal(FramePtr m)
 {
-	modal = m;
+	modal = std::move(m);
 }
 
-void C35::Frame::System(Frame* s)
+void C35::Frame::System(FramePtr s)
 {
-	system = s;
+	system = std::move(s);
 }
