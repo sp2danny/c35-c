@@ -19,12 +19,12 @@ C35::Frame* C35::Frame::system = 0;
 
 namespace
 {
-const int WW = 1024;
-const int HH = 768;
+[[maybe_unused]] const int WW = 1024;
+[[maybe_unused]] const int HH = 768;
 
 }  // namespace
 
-void C35::Frame::Init(std::string name)
+void C35::Frame::Init([[maybe_unused]] std::string name)
 {
 	stack.clear();
 	listeners.clear();

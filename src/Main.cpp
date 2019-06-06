@@ -9,7 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
-void Main(const std::vector<std::string>& args)
+void Main([[maybe_unused]] const std::vector<std::string>& args)
 {
 
 	sf::RenderWindow window(sf::VideoMode(640, 480), "C35");
