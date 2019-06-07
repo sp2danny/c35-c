@@ -27,6 +27,7 @@ private:
 	alib::CIS back_cis;
 	alib::AC horsie_ac;
 	alib::Refl horsie, back;
+	bool wantquit = false;
 };
 
 C35::Intro::Intro()
@@ -47,15 +48,20 @@ void C35::Intro::Display(sf::RenderWindow& window)
 	window.draw(horsie);
 }
 
-bool C35::Intro::Done() { return false;}
+bool C35::Intro::Done() { return wantquit;}
 
 void C35::Intro::Update(int)
 {
 	horsie.Update();
 }
 
-bool C35::Intro::ParseInput(sf::Event&)
+bool C35::Intro::ParseInput(sf::Event& e)
 {
+	if (e.type == sf::Event::KeyPressed)
+	{
+		if (e.key.code == sf::Keyboard::Escape)
+			wantquit = true;
+	}
 	return false;
 }
 
@@ -63,7 +69,41 @@ void Main([[maybe_unused]] const C35::StrVec& args)
 {
 	srand(time(0));
 	
-	sf::RenderWindow window(sf::VideoMode(640, 480), "C35");
+	const auto& vms = sf::VideoMode::getFullscreenModes();
+	
+	bool found = false;
+	long long pixcnt;
+	sf::VideoMode vm;
+	
+	for (const auto& x : vms)
+	{
+		if ((x.width >= 640) && (x.height >= 480) && x.bitsPerPixel >= 24)
+		{
+			if (!found)
+			{
+				vm = x;
+				found = true;
+				pixcnt = x.width * x.height;
+			}
+			else
+			{
+				long long pc = x.width * x.height;
+				if (pc < pixcnt)
+				{
+					pixcnt = pc;
+					vm = x;
+				}
+			}
+		}
+	}
+	
+	if (!found) return;
+	
+	#ifndef NDEBUG
+	sf::RenderWindow window(vm, "C35");
+	#else
+	sf::RenderWindow window(vm, "C35", sf::Style::Fullscreen);
+	#endif
 
 	C35::Frame::Push(std::make_shared<C35::Intro>());
 	
