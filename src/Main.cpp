@@ -9,41 +9,60 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
+#include <alib.hpp>
+
 #include "Common.h"
 #include "FrameSystem.h"
-#include "Anim.h"
 
 namespace C35 { struct Intro; }
 
 struct C35::Intro : C35::Frame
 {
 	Intro();
-	virtual void Display() override;
+	virtual void Display(sf::RenderWindow&) override;
 	virtual bool Done() override;
 	virtual void Update(int) override;
 	virtual bool ParseInput(sf::Event&) override;
 private:
-	//Anim::CIS back;
-	//Anim::AC horsie_ac;
-	//Anim::Refl horsie;
+	alib::CIS back_cis;
+	alib::AC horsie_ac;
+	alib::Refl horsie, back;
 };
 
 C35::Intro::Intro()
 {
-	//back.LoadExt("back.bmp");
-	//horsie_ac.LoadExt("knight.ac");
-	//horsie_ac.Instance(90);
-	//horsie = horsie_ac.Refl("run", 90, 180);
+	back_cis.Load("img/back.bmp");
+	back_cis.Instance(0);
+	back = back_cis.Refl(0);
+	back.setPosition(0,0);
+	horsie_ac.Load("img/walk.ad");
+	horsie_ac.Instance(90);
+	horsie = horsie_ac.Refl("run", 90+45, rand()%256);
+	horsie.setPosition({500,350});
 }
 
-void C35::Intro::Display() {}
-bool C35::Intro::Done() { return false;}
-void C35::Intro::Update(int) {}
-bool C35::Intro::ParseInput(sf::Event&) {return false;}
+void C35::Intro::Display(sf::RenderWindow& window)
+{
+	window.draw(back);
+	window.draw(horsie);
+}
 
+bool C35::Intro::Done() { return false;}
+
+void C35::Intro::Update(int)
+{
+	horsie.Update();
+}
+
+bool C35::Intro::ParseInput(sf::Event&)
+{
+	return false;
+}
 
 void Main([[maybe_unused]] const C35::StrVec& args)
 {
+	srand(time(0));
+	
 	sf::RenderWindow window(sf::VideoMode(640, 480), "C35");
 
 	C35::Frame::Push(std::make_shared<C35::Intro>());

@@ -8,9 +8,6 @@ extern void Main(const C35::StrVec&);
 namespace sf
 {
 class Event;
-}
-namespace sf
-{
 class RenderWindow;
 }
 
@@ -41,8 +38,8 @@ typedef std::shared_ptr<InputTarget>  InputPtr;
 class Frame : public UpdateTarget, InputTarget
 {
 	public:
-	virtual void Display() = 0;
-	virtual bool Done()    = 0;
+	virtual void Display(sf::RenderWindow&) = 0;
+	virtual bool Done() = 0;
 
 	static void PushUnder(FramePtr);
 	static void Push(FramePtr);

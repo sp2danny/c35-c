@@ -45,7 +45,7 @@ void C35::Frame::Run(sf::RenderWindow& window)
 {
 	sf::Event lst_mm_e;
 
-	lst_mm_e.type        = sf::Event::MouseMoved;
+	lst_mm_e.type = sf::Event::MouseMoved;
 	lst_mm_e.mouseMove.x = lst_mm_e.mouseMove.y = 0;
 
 	while (true)
@@ -88,11 +88,11 @@ void C35::Frame::Run(sf::RenderWindow& window)
 
 		// --- Display ---
 		window.clear();
-		stack.back()->Display();
+		stack.back()->Display(window);
 		if (modal)
-			modal->Display();
+			modal->Display(window);
 		if (system)
-			system->Display();
+			system->Display(window);
 		window.display();
 
 		// --- Frame Phase ---
