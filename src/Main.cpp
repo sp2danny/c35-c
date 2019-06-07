@@ -4,8 +4,6 @@
 #include <sstream>
 #include <vector>
 
-#define SFML_STATIC
-
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 
@@ -67,7 +65,7 @@ bool C35::Intro::ParseInput(sf::Event& e)
 
 void Main([[maybe_unused]] const C35::StrVec& args)
 {
-	srand(time(0));
+	srand((unsigned int)time(0));
 	
 	const auto& vms = sf::VideoMode::getFullscreenModes();
 	
