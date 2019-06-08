@@ -63,8 +63,10 @@ bool C35::Intro::ParseInput(sf::Event& e)
 	return false;
 }
 
-void Main([[maybe_unused]] const C35::StrVec& args)
+void Main(const C35::StrVec& args)
 {
+	(void)args;
+
 	srand((unsigned int)time(0));
 	
 	const auto& vms = sf::VideoMode::getFullscreenModes();
@@ -103,6 +105,7 @@ void Main([[maybe_unused]] const C35::StrVec& args)
 	sf::RenderWindow window(vm, "C35", sf::Style::Fullscreen);
 	#endif
 
+	C35::Frame::Init("");
 	C35::Frame::Push(std::make_shared<C35::Intro>());
 	
 	C35::Frame::Run(window);

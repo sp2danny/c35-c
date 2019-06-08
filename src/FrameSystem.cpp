@@ -22,6 +22,8 @@ namespace
 [[maybe_unused]] const int HH = 768;
 }  // namespace
 
+
+
 void C35::Frame::Init([[maybe_unused]] std::string name)
 {
 	stack.clear();
