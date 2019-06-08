@@ -153,6 +153,11 @@ void C35::Frame::Push(FramePtr f)
 	stack.push_back(std::move(f));
 }
 
+void C35::Frame::Replace(FramePtr f)
+{
+	stack.back() = std::move(f);
+}
+
 void C35::Frame::Modal(FramePtr m)
 {
 	modal = std::move(m);

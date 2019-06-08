@@ -7,6 +7,8 @@
     <File Name="src/FrameSystem.cpp"/>
     <File Name="src/FrameSystem.h"/>
     <File Name="src/Main.cpp"/>
+    <File Name="src/FrameForwards.h"/>
+    <File Name="src/MainFrame.cpp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>

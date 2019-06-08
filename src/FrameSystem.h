@@ -15,7 +15,7 @@ namespace C35
 {
 class UpdateTarget
 {
-	public:
+public:
 	virtual ~UpdateTarget()  = default;
 	virtual void Update(int) = 0;
 	virtual bool Done() =0;//{ return false; }
@@ -23,7 +23,7 @@ class UpdateTarget
 
 class InputTarget
 {
-	public:
+public:
 	virtual ~InputTarget()              = default;
 	virtual bool ParseInput(sf::Event&) = 0;
 	virtual bool Done() =0;//{ return false; }
@@ -43,6 +43,7 @@ public:
 
 	static void PushUnder(FramePtr);
 	static void Push(FramePtr);
+	static void Replace(FramePtr);
 
 	static void Modal(FramePtr);
 	static void System(FramePtr);

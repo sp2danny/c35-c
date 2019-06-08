@@ -11,6 +11,7 @@
 
 #include "Common.h"
 #include "FrameSystem.h"
+#include "FrameForwards.h"
 
 namespace C35 { struct Intro; }
 
@@ -57,8 +58,10 @@ bool C35::Intro::ParseInput(sf::Event& e)
 {
 	if (e.type == sf::Event::KeyPressed)
 	{
-		if (e.key.code == sf::Keyboard::Escape)
+		/**/ if (e.key.code == sf::Keyboard::Escape)
 			wantquit = true;
+		else if (e.key.code == sf::Keyboard::Space)
+			Push(MakeMainFrame());
 	}
 	return false;
 }
