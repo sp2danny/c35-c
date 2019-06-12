@@ -100,6 +100,8 @@ void C35::Frame::Run(sf::RenderWindow& window)
 		// --- Frame Phase ---
 		if (system && system->Done())
 			return;
+		if (!window.isOpen())
+			return;
 		if (modal)
 		{
 			if (modal->Done())

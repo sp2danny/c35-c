@@ -12,6 +12,7 @@
 #include "Common.h"
 #include "FrameSystem.h"
 #include "FrameForwards.h"
+#include "Unit.h"
 
 namespace C35 { struct Intro; }
 
@@ -72,12 +73,11 @@ void Main(const C35::StrVec& args)
 
 	srand((unsigned int)time(0));
 	
-	const auto& vms = sf::VideoMode::getFullscreenModes();
-	
-	bool found = false;
-	long long pixcnt;
+	#ifdef NDEBUG
+	const auto&   vms   = sf::VideoMode::getFullscreenModes();
+	bool          found = false;
+	long long     pixcnt;
 	sf::VideoMode vm;
-	
 	for (const auto& x : vms)
 	{
 		if ((x.width >= 640) && (x.height >= 480) && x.bitsPerPixel >= 24)
@@ -99,16 +99,17 @@ void Main(const C35::StrVec& args)
 			}
 		}
 	}
-	
 	if (!found) return;
+	#endif
+	
 	
 	#ifndef NDEBUG
-	sf::RenderWindow window(vm, "C35");
+	sf::RenderWindow window({640, 480}, "C35");
 	#else
 	sf::RenderWindow window(vm, "C35", sf::Style::Fullscreen);
 	#endif
 
-	C35::Frame::Init("");
+	C35::Frame::Init("C35");
 	C35::Frame::Push(std::make_shared<C35::Intro>());
 	
 	C35::Frame::Run(window);

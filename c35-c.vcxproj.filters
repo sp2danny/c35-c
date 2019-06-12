@@ -13,21 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Library Files">
-      <UniqueIdentifier>{8ccd0439-492e-4b0d-8126-2ecf6b659339}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Library Files\Debug">
-      <UniqueIdentifier>{7cf00e3b-81d9-4783-85bc-ab84dd3673fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Library Files\Release">
-      <UniqueIdentifier>{bba8598c-f233-4d47-aba9-38e603914ff3}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\FrameSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MainFrame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,43 +32,8 @@
     <ClInclude Include="src\Common.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="..\anim\lib\alib.lib">
-      <Filter>Library Files\Release</Filter>
-    </Library>
-    <Library Include="..\anim\lib\alib-d.lib">
-      <Filter>Library Files\Debug</Filter>
-    </Library>
-    <Library Include="..\anim\TGUI-0.8\lib\tgui-s-d.lib">
-      <Filter>Library Files\Debug</Filter>
-    </Library>
-    <Library Include="..\..\SFML\lib\sfml-graphics-s-d.lib">
-      <Filter>Library Files\Debug</Filter>
-    </Library>
-    <Library Include="..\..\SFML\lib\sfml-system-s-d.lib">
-      <Filter>Library Files\Debug</Filter>
-    </Library>
-    <Library Include="..\..\SFML\lib\sfml-window-s-d.lib">
-      <Filter>Library Files\Debug</Filter>
-    </Library>
-    <Library Include="..\..\SFML\lib\freetype.lib">
-      <Filter>Library Files</Filter>
-    </Library>
-    <Library Include="..\anim\src\lzma\lib\x64\liblzma.lib">
-      <Filter>Library Files</Filter>
-    </Library>
-    <Library Include="..\..\SFML\lib\sfml-graphics-s.lib">
-      <Filter>Library Files\Release</Filter>
-    </Library>
-    <Library Include="..\..\SFML\lib\sfml-system-s.lib">
-      <Filter>Library Files\Release</Filter>
-    </Library>
-    <Library Include="..\..\SFML\lib\sfml-window-s.lib">
-      <Filter>Library Files\Release</Filter>
-    </Library>
-    <Library Include="..\anim\TGUI-0.8\lib\tgui-s.lib">
-      <Filter>Library Files\Release</Filter>
-    </Library>
+    <ClInclude Include="src\Unit.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

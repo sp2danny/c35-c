@@ -28,7 +28,7 @@ MainFrame::MainFrame()
 	UC mycol = 97;
 	
 	#define LD(x) \
-		x ## _ac.Load( "./img/units/" #x ".ac"); \
+		x ## _ac.Load( "./img/units/" #x ".fzac"); \
 		x ## _ac.Instance(mycol); \
 		x = x ## _ac.Refl("idle", 180, mycol)
 
