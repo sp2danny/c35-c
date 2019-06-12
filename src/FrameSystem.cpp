@@ -16,16 +16,17 @@ std::vector<C35::InputPtr>  C35::Frame::listeners;
 C35::FramePtr C35::Frame::modal  = nullptr;
 C35::FramePtr C35::Frame::system = nullptr;
 
+std::string C35::Frame::title;
+
 namespace
 {
 [[maybe_unused]] const int WW = 1024;
 [[maybe_unused]] const int HH = 768;
 }  // namespace
 
-
-
 void C35::Frame::Init([[maybe_unused]] std::string name)
 {
+	title = name;
 	stack.clear();
 	listeners.clear();
 	actives.clear();
@@ -45,6 +46,8 @@ void C35::Frame::AddActive(UpdatePtr ut)
 
 void C35::Frame::Run(sf::RenderWindow& window)
 {
+	window.setTitle(title);
+
 	sf::Event lst_mm_e;
 
 	lst_mm_e.type = sf::Event::MouseMoved;
@@ -74,7 +77,7 @@ void C35::Frame::Run(sf::RenderWindow& window)
 				stack.back()->ParseInput(e);
 			if (system)
 				system->ParseInput(e);
-			for (auto it : listeners)
+			for (auto&& it : listeners)
 				it->ParseInput(e);
 		}
 
@@ -85,7 +88,7 @@ void C35::Frame::Run(sf::RenderWindow& window)
 			modal->Update(ticks);
 		if (system)
 			system->Update(ticks);
-		for (auto ut : actives)
+		for (auto&& ut : actives)
 			ut->Update(ticks);
 
 		// --- Display ---
@@ -121,24 +124,16 @@ void C35::Frame::Run(sf::RenderWindow& window)
 		for (auto iter = listeners.begin(); iter != listeners.end();)
 		{
 			if ((*iter)->Done())
-			{
 				iter = listeners.erase(iter);
-			}
 			else
-			{
 				++iter;
-			}
 		}
 		for (auto iter = actives.begin(); iter != actives.end();)
 		{
 			if ((*iter)->Done())
-			{
 				iter = actives.erase(iter);
-			}
 			else
-			{
 				++iter;
-			}
 		}
 	}
 }

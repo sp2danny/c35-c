@@ -57,6 +57,7 @@ private:
 	static FramePtr               system;
 	static std::vector<UpdatePtr> actives;
 	static std::vector<InputPtr>  listeners;
+	static std::string            title;
 
 	static void Init(std::string);
 	static void Run(sf::RenderWindow&);

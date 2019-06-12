@@ -69,7 +69,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalDependencies>freetype.lib;liblzma.lib;winmm.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;alib-d.lib;sfml-graphics-s.lib;sfml-system-s.lib;sfml-window-s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freetype.lib;liblzma.lib;winmm.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;comdlg32.lib;advapi32.lib;shell32.lib;uuid.lib;alib-d.lib;sfml-graphics-s.lib;sfml-system-s.lib;sfml-window-s.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>/SFML/lib;/lzma/lib;../anim/lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -94,7 +94,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>freetype.lib;liblzma.lib;winmm.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;alib.lib;sfml-graphics-s.lib;sfml-system-s.lib;sfml-window-s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freetype.lib;liblzma.lib;winmm.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;comdlg32.lib;advapi32.lib;shell32.lib;uuid.lib;alib.lib;sfml-graphics-s.lib;sfml-system-s.lib;sfml-window-s.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>/SFML/lib;/lzma/lib;../anim/lib</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
     </Link>
@@ -103,9 +103,11 @@
     <ClCompile Include="src\FrameSystem.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\MainFrame.cpp" />
+    <ClCompile Include="src\Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Common.h" />
+    <ClInclude Include="src\FrameForwards.h" />
     <ClInclude Include="src\FrameSystem.h" />
     <ClInclude Include="src\Unit.h" />
   </ItemGroup>

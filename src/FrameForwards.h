@@ -7,10 +7,10 @@
 
 namespace C35
 {
-	
-class MainFrame;
 
 extern FramePtr MakeMainFrame();
+//extern FramePtr MakeTechFrame();
+//extern FramePtr MakeCityFrame();
 
 }
 
