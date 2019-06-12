@@ -4,6 +4,7 @@
 #include "Unit.h"
 //#include "Orders.h"
 #include "Board.h"
+#include "Player.h"
 //#include "City.h"
 #include "GameEngine.h"
 #include "Hexagon.h"
@@ -695,8 +696,8 @@ bool C35::Unit::CanGo(Dir6 d) const
 		{
 			return false;  // CanUnload(h2->x,h2->y);
 		}
-		if (h2->Town())
-			return (h2->Town()->owner == owner);
+		//if (h2->Town())
+		//	return (h2->Town()->owner == owner);
 		if (h2->units.empty())
 			return true;
 		return h2->units[0]->owner == owner;
@@ -728,7 +729,7 @@ bool C35::Unit::CanGo(Dir6 d) const
 }
 
 void C35::Unit::DoGo(Dir6 d)
-{
+{/*
 	Board*   brd = owner->game;
 	Hexagon& on  = brd->Get(x, y);
 	Hexagon* h   = on.neighbours[orders->dir];
@@ -824,7 +825,7 @@ void C35::Unit::DoGo(Dir6 d)
 		h->AddUnit(this);
 
 		OrderDone();
-	}
+	}*/
 }
 
 void C35::Unit::SetAnim(string name, int dir)
@@ -841,7 +842,7 @@ void C35::Unit::Display(int x, int y)
 {
 	if (!visible)
 		return;
-	ar.Overlay(SDL_GetVideoSurface(), x, y);
+	//ar.Overlay(SDL_GetVideoSurface(), x, y);
 
 	UnitType& ut     = UnitType::Lookup(type);
 	bool      notype = (ut.basetype == UnitType::None);
@@ -850,14 +851,14 @@ void C35::Unit::Display(int x, int y)
 	{
 		x -= SZ / 2 - 3;
 		y -= YSZ - 3;
-		SDL_PixelFormat* pf = SDL_GetVideoSurface()->format;
-		for (int i = stats.maxhp; i > 0; --i)
-		{
-			Uint32   col = (i > stats.hp) ? SDL_MapRGB(pf, 255, 0, 0) : SDL_MapRGB(pf, 0, 255, 0);
-			SDL_Rect r   = {x, y, 6, 6};
-			SDL_FillRect(SDL_GetVideoSurface(), &r, col);
-			y += 8;
-		}
+		//SDL_PixelFormat* pf = SDL_GetVideoSurface()->format;
+		//for (int i = stats.maxhp; i > 0; --i)
+		//{
+		//	Uint32   col = (i > stats.hp) ? SDL_MapRGB(pf, 255, 0, 0) : SDL_MapRGB(pf, 0, 255, 0);
+		//	SDL_Rect r   = {x, y, 6, 6};
+		//	SDL_FillRect(SDL_GetVideoSurface(), &r, col);
+		//	y += 8;
+		//}
 	}
 }
 
@@ -870,7 +871,7 @@ void C35::Unit::Attack(Dir6 d)
 	if (!h2)
 		return;
 	Unit* u2 = h2->DisplayUnit();
-	if ((!u2) || (u2->owner == owner))
+	/*if ((!u2) || (u2->owner == owner))
 	{
 		Orders* o = new Orders(Orders::move1);
 		o->dir    = d;
@@ -883,7 +884,7 @@ void C35::Unit::Attack(Dir6 d)
 		GameEngine::SetLA(*NewFightAnim(this, d));
 
 		// ui->EnterFight();
-	}
+	}*/
 	GameEngine::Game().PreparePlayerBoard(GameEngine::PAK());
 }
 
@@ -962,6 +963,7 @@ C35::Capabilities& C35::Unit::Capa()
 
 	Movement&& mm = MakeMovement();
 
+	/*
 	capa.canMove          = hm;
 	capa.canAttack        = hm && stats.off;
 	capa.canDefend        = stats.def;
@@ -977,6 +979,7 @@ C35::Capabilities& C35::Unit::Capa()
 	capa.canJoin          = hm && ut.join_num;
 	capa.canColony        = false;
 	capa.canFortify       = true;
+	*/
 
 	return capa;
 }
@@ -987,7 +990,7 @@ C35::Capabilities& C35::Unit::Capa()
 
 int                        C35::UnitType::nextId = 1;
 std::vector<C35::UnitType> C35::UnitType::types;
-C35::AD                    C35::UnitType::unit_icons;
+alib::AD                   C35::UnitType::unit_icons;
 
 C35::UnitType& C35::UnitType::New()
 {
@@ -1019,7 +1022,7 @@ C35::UnitType& C35::UnitType::Lookup(int id)
 
 int C35::UnitType::Size()
 {
-	return types.size();
+	return (int)types.size();
 }
 
 void C35::UnitType::Clear()
@@ -1030,49 +1033,49 @@ void C35::UnitType::Clear()
 
 namespace
 {
-SDL_Surface* ld_t(const char* name)
-{
-	static char buf[256];
-	sprintf(buf, "gfx/%s.bmp", name);
-	SDL_Surface* srf = SDL_LoadBMP(buf);
-	assert(srf);
-	Uint32 key = SDL_MapRGB(srf->format, 255, 0, 255);
-	SDL_SetColorKey(srf, SDL_SRCCOLORKEY, key);
-	return srf;
-}
+//SDL_Surface* ld_t(const char* name)
+//{
+//	static char buf[256];
+//	sprintf(buf, "gfx/%s.bmp", name);
+//	SDL_Surface* srf = SDL_LoadBMP(buf);
+//	assert(srf);
+//	Uint32 key = SDL_MapRGB(srf->format, 255, 0, 255);
+//	SDL_SetColorKey(srf, SDL_SRCCOLORKEY, key);
+//	return srf;
+//}
 }  // namespace
 
 void C35::UnitType::LoadBmp(string name)
 {
-	SDL_Surface* img = SDL_LoadBMP(("gfx/" + name + ".bmp").c_str());
-	SDL_Surface* tm  = MakeTransMaskFromImage(img);
-	cis.FromImg(img, tm, 0, 0);
-	have_gfx = have_cis;
-	SDL_FreeSurface(img);
-	SDL_FreeSurface(tm);
+//	SDL_Surface* img = SDL_LoadBMP(("gfx/" + name + ".bmp").c_str());
+//	SDL_Surface* tm  = MakeTransMaskFromImage(img);
+//	cis.FromImg(img, tm, 0, 0);
+//	have_gfx = have_cis;
+//	SDL_FreeSurface(img);
+//	SDL_FreeSurface(tm);
 }
 
 void C35::UnitType::LoadAD(string name)
 {
-	std::ifstream ifs("gfx/" + name + ".ad", ios_base::in | ios_base::binary);
-	ad.Load(ifs);
+	//std::ifstream ifs("gfx/" + name + ".ad", ios_base::in | ios_base::binary);
+	//ad.Load(ifs);
 	have_gfx = have_ad;
 }
 
 void C35::UnitType::Instance(Player* p)
 {
-	if (have_gfx == have_ad)
-		ad.Instance(p->color);
-	if (have_gfx == have_ac)
-		ac.Instance(p->color);
-	if (have_gfx == have_cis)
-		cis.Instance(p->color);
+	//if (have_gfx == have_ad)
+	//	ad.Instance(p->color);
+	//if (have_gfx == have_ac)
+	//	ac.Instance(p->color);
+	//if (have_gfx == have_cis)
+	//	cis.Instance(p->color);
 }
 
 void C35::UnitType::LoadAC(string name)
 {
-	std::ifstream ifs("gfx/" + name + ".ac", ios_base::in | ios_base::binary);
-	ac.Load(ifs);
+	//std::ifstream ifs("gfx/" + name + ".ac", ios_base::in | ios_base::binary);
+	//ac.Load(ifs);
 	have_gfx = have_ac;
 }
 
@@ -1082,10 +1085,10 @@ void C35::UnitType::LoadLate(string name)
 	have_gfx = have_name;
 }
 
-void C35::UnitType::MakeWhite()
-{
-	// s.MakeWhite();
-}
+//void C35::UnitType::MakeWhite()
+//{
+//	// s.MakeWhite();
+//}
 void C35::UnitType::DoneImg()
 {
 	// ad.FreeData();
@@ -1093,19 +1096,19 @@ void C35::UnitType::DoneImg()
 	// s.FreeData();
 }
 
-C35::AnimReflection C35::UnitType::GetIcon(UC hue)
+auto C35::UnitType::GetIcon(UC hue) -> alib::Refl
 {
 	return unit_icons.Refl(icon_id, hue);
 }
 
-C35::BA& C35::UnitType::GetIcon()
+auto C35::UnitType::GetIcon() -> alib::BA&
 {
 	return unit_icons.Closest(icon_id);
 }
 
 void C35::UnitType::HaveAllNow()
 {
-	unit_icons.LoadExt("gfx/icons/ui.ad");
+	unit_icons.Load("gfx/icons/ui.ad");
 
 #ifdef _DEBUG
 	unit_icons.DoAll<&BA::DoAll<&CIS::Skip3>>();
@@ -1120,11 +1123,11 @@ void C35::UnitType::HaveAllNow()
 		}
 
 	// for barbs
-	BasicAnim& ba = unit_icons.Closest(barbarian_utp->icon_id);
-	ba.DoAll<&CIS::MakeWhite>();
-	ba.DoAll<&CIS::MakeWhite>();
-	ba.DoAll<&CIS::MakeWhite>();
-	ba.Instance(0);
+	//BasicAnim& ba = unit_icons.Closest(barbarian_utp->icon_id);
+	//ba.DoAll<&CIS::MakeWhite>();
+	//ba.DoAll<&CIS::MakeWhite>();
+	//ba.DoAll<&CIS::MakeWhite>();
+	//ba.Instance(0);
 }
 
 void C35::UnitType::DoneAll()
@@ -1138,7 +1141,7 @@ void C35::UnitType::DoneAll()
 extern string ExtractFileExt(std::string fn);
 extern string ExtractFileBase(std::string fn);
 
-C35::AnimReflection C35::UnitType::GetRefl(string name, short dir, Player* p)
+auto C35::UnitType::GetRefl(string name, short dir, Player* p) -> alib::Refl
 {
 	if (have_gfx == have_name)
 	{
@@ -1160,18 +1163,18 @@ C35::AnimReflection C35::UnitType::GetRefl(string name, short dir, Player* p)
 	switch (have_gfx)
 	{
 	case have_ad:
-		return ad.Refl(dir, p->color);
+		//return ad.Refl(dir, p->color);
 	case have_ac:
-		return ac.Refl(name, dir, p->color);
+		//return ac.Refl(name, dir, p->color);
 	case have_cis:
-		return cis.Refl(p->color);
+		//return cis.Refl(p->color);
 	default:
 		assert(false);
 		throw "error";
 	}
 }
 
-void C35::UnitType::Scale150()
+/*void C35::UnitType::Scale150()
 {
 	switch (have_gfx)
 	{
@@ -1188,7 +1191,7 @@ void C35::UnitType::Scale150()
 		assert(false);
 		throw "error";
 	}
-}
+}*/
 
 int C35::UnitType::ToId(string n)
 {
@@ -1207,7 +1210,7 @@ C35::IdList C35::UnitType::ByName(string name)
 	{
 		if (name.empty())
 			break;
-		int p  = name.find(',');
+		auto p  = name.find(',');
 		int id = ToId(name.substr(0, p));
 		if (id)
 			vi.push_back(id);

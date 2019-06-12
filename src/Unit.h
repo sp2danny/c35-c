@@ -7,19 +7,15 @@
 #include <map>
 #include <cstring>
 
-#include "Common.h"
-
 #include <alib.hpp>
+
+#include "Common.h"
+#include "Player.h"
 
 namespace C35
 {
 struct Player;
 struct Unit;
-
-struct Player
-{
-	UC color;
-};
 
 using alib::Refl;
 

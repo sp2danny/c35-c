@@ -1,12 +1,14 @@
 
 #pragma once
 
+#include <vector>
 #include <deque>
+
 
 #include "Board.h"
 #include "FrameSystem.h"
 #include "Player.h"
-#include "LockedAnimation.h"
+//#include "LockedAnimation.h"
 
 namespace C35
 {
@@ -41,15 +43,15 @@ namespace C35
 		static void ActivateUnit(Unit*);
 
 		static void AddUnitOrder( Unit* , Orders );
-		static void AddStackOrder( vector<Unit*> , Orders );
+		static void AddStackOrder( std::vector<Unit*> , Orders );
 
 		static void TurnDone();
 
 		static bool ActionPosition( Pos& );
-		static bool InAnimation( AnimReflection& ar, Pos& worldCoord );
+		static bool InAnimation( alib::Refl & ar, Pos& worldCoord );
 		static bool InAnimation();
 
-		static void SetLA(LockedAnimation&);
+		//static void SetLA(LockedAnimation&);
 
 		static Frame* GUI();
 		

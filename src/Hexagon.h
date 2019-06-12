@@ -114,18 +114,18 @@ namespace C35
 
 		int WorkMultiplyer();
 
-		void ToStream(ostream&) const;
-		void FromStream(istream&);
+		void ToStream(std::ostream&) const;
+		void FromStream(std::istream&);
 
-		void AllToStream(ostream&) const;
-		void AllFromStream(istream&);
+		void AllToStream(std::ostream&) const;
+		void AllFromStream(std::istream&);
 
-		SDL_Surface* Surface();
+		//SDL_Surface* Surface();
 
 	private:
 		void workstop();
 
-		SDL_Surface* surf;
+		//SDL_Surface* surf;
 		bool valid;
 
 	};

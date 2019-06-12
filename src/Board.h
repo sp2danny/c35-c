@@ -7,12 +7,12 @@
 #include "Common.h"
 
 
-#include "Player.h"
+//#include "Player.h"
 
 #include "Hexagon.h"
 //#include "Controller.h"
 #include "Unit.h"
-#include "Orders.h"
+//#include "Orders.h"
 #include "GameEngine.h"
 
 namespace C35
@@ -37,20 +37,20 @@ namespace C35
 		int Height() const;
 		int Size() const;
 
-		Unit* DisplayUnit( Pos );
-		Unit* DisplayUnit( int x,int y ) { return DisplayUnit(Pos(x,y)); }
+		Unit* DisplayUnit(Pos);
+		Unit* DisplayUnit(int x, int y) { return DisplayUnit(Pos(x, y)); }
 
 	private:
 
-		void AddUnitOrder( Unit* , Orders );
-		void AddStackOrder( vector<Unit*> , Orders );
+		void AddUnitOrder(Unit* , Orders);
+		void AddStackOrder(std::vector<Unit*>, Orders);
 
 		PlayerBoard(Board*);
 
-		void AllToStream(ostream&) const;
-		void AllFromStream(istream&);
+		void AllToStream(std::ostream&) const;
+		void AllFromStream(std::istream&);
 
-		int width,height;
+		int width, height;
 		int turn;
 		std::vector<PlayerHex> map;
 
@@ -58,7 +58,7 @@ namespace C35
 
 	// internal
 
-		void add_n( PlayerHex&, Dir6, int,int, bool );
+		void add_n(PlayerHex&, Dir6, int,int, bool);
 		void do_neighbours(bool);
 
 	friend
@@ -79,19 +79,19 @@ namespace C35
 		Hexagon& Get(int);
 
 		bool Inside(Pos) const;
-		bool Inside(int x,int y) const { return Inside(Pos(x,y)); }
+		bool Inside(int x, int y) const { return Inside(Pos(x,y)); }
 
-		void PathFrom(Pos,const Movement&);
-		void PathFromTarget(Pos,const Movement&,Pos);
+		void PathFrom(Pos, const Movement&);
+		void PathFromTarget(Pos, const Movement&,Pos);
 
 		int Width() const { return width; }
 		int Height() const { return height; }
 
-		void ToStream(ostream&) const;
-		void FromStream(istream&); // loads a map
+		void ToStream(std::ostream&) const;
+		void FromStream(std::istream&);  // loads a map
 
-		void AllToStream(ostream&) const;
-		void AllFromStream(istream&); // loads a game
+		void AllToStream(std::ostream&) const;
+		void AllFromStream(std::istream&);  // loads a game
 
 		Player* AddHumanControlled(UC hue);
 		Player* AddComputerControlled(UC hue);
@@ -99,20 +99,20 @@ namespace C35
 
 		void PreparePlayerBoard(Player*);
 
-		int HexCnt() const { return map.size(); }
+		int HexCnt() const { return (int)map.size(); }
 
 		int TurnNumber() const { return turn; }
 
 		Player& GetPlayer(int i) { return *players[i]; }
 
-		Unit* DisplayUnit( Pos );
+		Unit* DisplayUnit(Pos);
 
 		void UpdateInflu();
 
 		std::vector<UC> AllPlayerColors();
 
 	private:
-		int width,height;
+		int width, height;
 		int turn;
 		std::vector<Hexagon> map; // this is how it really looks
 		std::vector<Player*> players;
@@ -120,14 +120,14 @@ namespace C35
 
 	// internal
 
-		void add_n( Hexagon&, Dir6, int,int, bool );
+		void add_n(Hexagon&, Dir6, int,int, bool);
 
 		void do_neighbours(bool);
 
 	friend
 		class GameEngine;
 
-
 	};
 
 }
+
