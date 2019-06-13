@@ -1,12 +1,11 @@
 
-#include "stdafx.h"
 
 // --------------------------------------------
 
 #include "Board.h"
 
 #include "Hexagon.h"
-#include "City.h"
+//#include "City.h"
 
 #define ever ;;
 
@@ -84,7 +83,7 @@ void C35::PlayerBoard::PathFromTarget(Pos p,const Movement& mm,Pos t)
 		int cost;
 	};
 
-	vector<ITEM> list;
+	std::vector<ITEM> list;
 	int alt = 0;
 	bool havetarget = false;
 	while(!havetarget)
@@ -121,7 +120,7 @@ void C35::PlayerBoard::PathFromTarget(Pos p,const Movement& mm,Pos t)
 		}
 		if( list.empty() ) break;
 		int low = list[0].cost;
-		int i,n = list.size();
+		int i,n = (int)list.size();
 		for(i=1;i<n;++i)
 			if( list[i].cost < low )
 				low = list[i].cost;
@@ -141,14 +140,14 @@ void C35::PlayerBoard::PathFromTarget(Pos p,const Movement& mm,Pos t)
 
 }
 
-void C35::PlayerBoard::AddUnitOrder( Unit* , Orders )
-{
-}
-
-void C35::PlayerBoard::AddStackOrder( vector<Unit*> us, Orders o)
-{
-	for(Unit* u : us) AddUnitOrder(u,o);
-}
+//void C35::PlayerBoard::AddUnitOrder( Unit* , Orders )
+//{
+//}
+//
+//void C35::PlayerBoard::AddStackOrder( vector<Unit*> us, Orders o)
+//{
+//	for(Unit* u : us) AddUnitOrder(u,o);
+//}
 
 C35::PlayerBoard::PlayerBoard(Board* master)
 {
@@ -383,7 +382,7 @@ void C35::Board::PathFromTarget(Pos p,const Movement& mm,Pos t)
 		int cost;
 	};
 
-	vector<ITEM> list;
+	std::vector<ITEM> list;
 	int alt = 0;
 	bool havetarget = false;
 	while(!havetarget)
@@ -420,7 +419,7 @@ void C35::Board::PathFromTarget(Pos p,const Movement& mm,Pos t)
 		}
 		if( list.empty() ) break;
 		int low = list[0].cost;
-		int i,n = list.size();
+		int i,n = (int)list.size();
 		for(i=1;i<n;++i)
 			if( list[i].cost < low )
 				low = list[i].cost;
@@ -440,7 +439,7 @@ void C35::Board::PathFromTarget(Pos p,const Movement& mm,Pos t)
 
 }
 
-void C35::Board::ToStream(ostream& o) const
+void C35::Board::ToStream(std::ostream& o) const
 {
 	WriteBinary(o,width);
 	WriteBinary(o,height);
@@ -453,7 +452,7 @@ void C35::Board::ToStream(ostream& o) const
 	}
 }
 
-void  C35::Board::AllToStream(ostream& o) const
+void C35::Board::AllToStream(std::ostream& o) const
 {
 	WriteBinary(o,width);
 	WriteBinary(o,height);
@@ -466,7 +465,7 @@ void  C35::Board::AllToStream(ostream& o) const
 	}
 }
 
-void C35::Board::FromStream(istream& in)
+void C35::Board::FromStream(std::istream& in)
 {
 	ReadBinary(in,width);
 	ReadBinary(in,height);
@@ -486,7 +485,7 @@ void C35::Board::FromStream(istream& in)
 	do_neighbours(true);
 }
 
-void C35::Board::AllFromStream(istream& in)
+void C35::Board::AllFromStream(std::istream& in)
 {
 	ReadBinary(in,width);
 	ReadBinary(in,height);
@@ -537,12 +536,12 @@ namespace
 
 void C35::Board::UpdateInflu()
 {
-	for( Hexagon& h : map )
-	{
-		if( ! h.city ) continue;
-		int i = h.city->Influence();
-		RecI(&h,h.city->owner,i);
-	}
+	//for( Hexagon& h : map )
+	//{
+	//	if( ! h.city ) continue;
+	//	int i = h.city->Influence();
+	//	RecI(&h,h.city->owner,i);
+	//}
 }
 
 void C35::Board::PreparePlayerBoard(Player* p)
@@ -562,13 +561,13 @@ void C35::Board::PreparePlayerBoard(Player* p)
 	{
 		PlayerHex& ph=b->Get(i);
 		Hexagon&   rh=Get(i);
-		City* c=rh.city;
+		/*City* c=rh.city;
 		if(c && (c->owner==p) )
 		{
 			int infl = c->Influence();
 			RecV(&ph,infl+1);
 		} 
-		else if(!rh.units.empty())
+		else*/ if(!rh.units.empty())
 		{
 			if(rh.units[0]->owner==p)
 			{

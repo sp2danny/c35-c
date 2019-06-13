@@ -18,6 +18,11 @@ C35::FramePtr C35::Frame::system = nullptr;
 
 std::string C35::Frame::title;
 
+namespace C35
+{
+const int SZ = 50;
+const int YSZ = 50;
+}  // namespace C35
 namespace
 {
 [[maybe_unused]] const int WW = 1024;
@@ -50,7 +55,7 @@ void C35::Frame::Run(sf::RenderWindow& window)
 
 	sf::Event lst_mm_e;
 
-	lst_mm_e.type = sf::Event::MouseMoved;
+	lst_mm_e.type        = sf::Event::MouseMoved;
 	lst_mm_e.mouseMove.x = lst_mm_e.mouseMove.y = 0;
 
 	while (true)

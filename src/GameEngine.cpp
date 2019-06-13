@@ -1,20 +1,21 @@
 
-#include "stdafx.h"
+#include <iostream>
+#include <fstream>
 
 // --------------------------------------------
 
 #include "GameEngine.h"
 
-#include "GUI.h"
-#include "City.h"
-#include "Tech.h"
-#include "Resource.h"
-#include "Menu.h"
+//#include "GUI.h"
+//#include "City.h"
+//#include "Tech.h"
+//#include "Resource.h"
+//#include "Menu.h"
 #include "UnitAction.h"
 #include "FrameSystem.h"
-#include "CityView.h"
-#include "AI.h"
-#include "LockedAnimation.h"
+//#include "CityView.h"
+//#include "AI.h"
+//#include "LockedAnimation.h"
 
 using namespace std;
 
@@ -28,12 +29,12 @@ deque<C35::Pos> C35::GameEngine::ap_stack;
 void C35::GameEngine::Init()
 {
 
-	gui = new C35::GUI();
+	//gui = new C35::GUI();
 	UnitCreator();
-	ImprovementCreator();
-	Resource::Maker();
-	TechType::Creator();
-	CityView::Init();
+	//ImprovementCreator();
+	//Resource::Maker();
+	//TechType::Creator();
+	//CityView::Init();
 }
 
 namespace
@@ -46,7 +47,7 @@ namespace
 	C35::AnimReflection la_ar;
 	C35::Pos la_pos;
 	*/
-	C35::LockedAnimation* locked=0;
+	//C35::LockedAnimation* locked=0;
 }
 
 void C35::GameEngine::LoadGame(const char*)
@@ -88,7 +89,7 @@ void ScoutSome(C35::Player* pl,C35::Pos p, int r)
 
 void C35::GameEngine::Setup(bool fromstart)
 {
-	int i,n=psp.size();
+	int i,n = (int)psp.size();
 
 	int x,w = board.Width();
 	int y,h = board.Height();
@@ -111,12 +112,12 @@ void C35::GameEngine::Setup(bool fromstart)
 		//Player* ai = board.AddHumanControlled(hue);
 	}
 
-	Frame::AddActive( new AI );
+	//Frame::AddActive( new AI );
 
 	Player* barbs = & board.GetPlayer(0);
 
 	UnitType::HaveAllNow();
-	GUI::HaveAllNow();
+	//GUI::HaveAllNow();
 
 	if(fromstart)
 	{
@@ -170,8 +171,7 @@ void C35::GameEngine::Setup(bool fromstart)
 
 void C35::GameEngine::LoadMap(const char* mapname)
 {
-
-	ifstream ifs(mapname,ios_base::in | ios_base::binary );
+	std::ifstream ifs(mapname,ios_base::in | ios_base::binary );
 
 	int i,n;
 	ReadBinary(ifs,n);
@@ -223,8 +223,8 @@ void C35::GameEngine::ActivateUnit(Unit* u)
 	active = u;
 	if(active)
 		active->currently = true;
-	UnitInfo::MakeFrom(u);
-	UnitAction::MakeFrom(u,Frame::screen->w/2,Frame::screen->h-40);
+	//UnitInfo::MakeFrom(u);
+	//UnitAction::MakeFrom(u,Frame::screen->w/2,Frame::screen->h-40);
 }
 
 C35::Unit* C35::GameEngine::NextUnit()
@@ -276,7 +276,7 @@ C35::Player* C35::GameEngine::PresentAtKeyboard()
 	return & board.GetPlayer(hp);
 }
 
-void C35::GameEngine::AddUnitOrder( Unit* u, Orders o )
+/*void C35::GameEngine::AddUnitOrder( Unit* u, Orders o )
 {
 	CP()->board->AddUnitOrder(u,o);
 }
@@ -284,7 +284,7 @@ void C35::GameEngine::AddUnitOrder( Unit* u, Orders o )
 void C35::GameEngine::AddStackOrder( vector<Unit*> uv , Orders o )
 {
 	CP()->board->AddStackOrder(uv,o);
-}
+}*/
 
 void C35::GameEngine::TurnDone()
 {
@@ -299,8 +299,8 @@ void C35::GameEngine::TurnDone()
 
 		for(i=1;i<=n;++i)
 		{
-			Hexagon& h = board.Get(i);
-			if(h.city) h.city->Tick();
+			//Hexagon& h = board.Get(i);
+			//if(h.city) h.city->Tick();
 		}
 
 		PrepareTurn(false);
@@ -329,8 +329,8 @@ void C35::GameEngine::TurnDone()
 
 		NextUnit();
 		Unit* u = ActiveUnit();
-		if(u) ap_stack.push_back( Pos(u->x,u->y) );
-		else if( City* c = CP()->capital ) ap_stack.push_back( Pos(c->x, c->y) );
+		/**/ if(u) ap_stack.push_back( Pos(u->x,u->y) );
+		//else if( City* c = CP()->capital ) ap_stack.push_back( Pos(c->x, c->y) );
 	}
 
 }
@@ -345,36 +345,36 @@ bool C35::GameEngine::ActionPosition( Pos& p )
 
 void C35::GameEngine::Update(int ms)
 {
-	if(!locked) return;
+	//if(!locked) return;
 
-	locked->Update(ms);
-	if( locked->Done() )
-	{
-		if(locked->Unload()) delete locked;
-		locked = 0;
-	}
+	//locked->Update(ms);
+	//if( locked->Done() )
+	//{
+	//	if(locked->Unload()) delete locked;
+	//	locked = 0;
+	//}
 }
 
-void C35::GameEngine::SetLA(LockedAnimation& la)
-{
-	locked = &la;
-}
+//void C35::GameEngine::SetLA(LockedAnimation& la)
+//{
+//	locked = &la;
+//}
 
-bool C35::GameEngine::InAnimation( AnimReflection& ar, Pos& worldCoord )
-{
-	if(locked)
-	{
-		ar = locked->Refl();
-		worldCoord = locked->Position();
-		return true;
-	}
-	return false;
-}
-
-bool C35::GameEngine::InAnimation()
-{
-	return locked;
-}
+//bool C35::GameEngine::InAnimation( AnimReflection& ar, Pos& worldCoord )
+//{
+//	if(locked)
+//	{
+//		ar = locked->Refl();
+//		worldCoord = locked->Position();
+//		return true;
+//	}
+//	return false;
+//}
+//
+//bool C35::GameEngine::InAnimation()
+//{
+//	return locked;
+//}
 
 
 

@@ -1,14 +1,12 @@
 
-#include "stdafx.h"
-
 // --------------------------------------------
 
 #include "Hexagon.h"
 
 #include "Unit.h"
-#include "Orders.h"
+//#include "Orders.h"
 #include "Player.h"
-#include "City.h"
+//#include "City.h"
 
 // ***************
 // *** HexCore ***
@@ -155,7 +153,7 @@ C35::Hexagon::Hexagon()
 	resource=0;
 	goody=0;
 	valid=false;
-	surf=0;
+	//surf=0;
 }
 
 namespace std {
@@ -242,7 +240,7 @@ std::set<C35::AvailAct> C35::Hexagon::Avail()
 
 void C35::Hexagon::workstop()
 {
-	for(Unit* u : units)
+	/*for(Unit* u : units)
 	{
 		if( u->orders && u->orders->WorkerJob() )
 		{
@@ -251,7 +249,7 @@ void C35::Hexagon::workstop()
 			delete o;
 			u->SetAnim("idle",270);
 		}
-	}
+	}*/
 }
 
 void C35::Hexagon::AddRoad()
@@ -561,7 +559,7 @@ void C35::Hexagon::RemoveUnit(Unit* u/*,UI* ui*/)
 	// error
 }
 
-void C35::Hexagon::ToStream(ostream& o) const
+void C35::Hexagon::ToStream(std::ostream& o) const
 {
 	WriteBinary(o, id);
 	WriteBinary(o, tile);
@@ -572,7 +570,7 @@ void C35::Hexagon::ToStream(ostream& o) const
 	WriteBinary(o, y);
 }
 
-void C35::Hexagon::FromStream(istream& i)
+void C35::Hexagon::FromStream(std::istream& i)
 {
 	ReadBinary(i, id);
 	ReadBinary(i, tile);
@@ -583,15 +581,15 @@ void C35::Hexagon::FromStream(istream& i)
 	ReadBinary(i, y);
 }
 
-void C35::Hexagon::AllToStream(ostream& o) const
+void C35::Hexagon::AllToStream(std::ostream& o) const
 {
 	ToStream(o);
 	WriteBinary(o,obscure);
 	int p = 0;
 	if(owner) p=owner->id;
 	WriteBinary(o,p);
-	City::ToStream(city, o);
-	int i,n = units.size();
+	//City::ToStream(city, o);
+	int i,n = (int)units.size();
 	WriteBinary(o,n);
 	if(n)
 	{
@@ -603,7 +601,7 @@ void C35::Hexagon::AllToStream(ostream& o) const
 	}
 }
 
-void C35::Hexagon::AllFromStream(istream& i)
+void C35::Hexagon::AllFromStream(std::istream& i)
 {
 	FromStream(i);
 	ReadBinary(i,obscure);
@@ -613,12 +611,12 @@ void C35::Hexagon::AllFromStream(istream& i)
 		owner = Player::Lookup(p);
 	else
 		owner = nullptr;
-	city = City::FromStream(i,owner);
-	if(city)
-	{
-		city->x = x;
-		city->y = y;
-	}
+	//city = City::FromStream(i,owner);
+	//if(city)
+	//{
+	//	city->x = x;
+	//	city->y = y;
+	//}
 	units.clear();
 	int j,n;
 	ReadBinary(i,n);

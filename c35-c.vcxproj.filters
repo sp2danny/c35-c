@@ -30,6 +30,18 @@
     <ClCompile Include="src\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Hexagon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Board.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Common.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\FrameSystem.h">
@@ -45,6 +57,15 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Player.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Hexagon.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameEngine.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Board.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
