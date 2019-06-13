@@ -28,10 +28,10 @@ namespace C35
 		PlayerHex& Get(int);
 
 		bool Inside(Pos) const;
-		bool Inside(int x,int y) const { return Inside(Pos(x,y)); }
+		bool Inside(int x, int y) const { return Inside(Pos(x,y)); }
 
-		void PathFrom(Pos,const Movement&);
-		void PathFromTarget(Pos,const Movement&,Pos);
+		void PathFrom(Pos, const Movement&);
+		void PathFromTarget(Pos, const Movement&, Pos);
 
 		int Width() const;
 		int Height() const;

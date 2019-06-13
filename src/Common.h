@@ -108,7 +108,9 @@ inline std::string IntToStrPad(int i, unsigned n, char p) { std::string s = std:
 template<typename T>
 void ReadBinary(std::istream& istr, T& val)
 {
-	int i,n = sizeof(T);
+	istr.read((char*)&val, sizeof(val));
+
+	/*int i,n = sizeof(T);
 	char* p = (char*) &val;
 
 	for (i=0; i<n; ++i)
@@ -117,7 +119,7 @@ void ReadBinary(std::istream& istr, T& val)
 		istr.read(&c,1);
 		(*p) = c;
 		++p;
-	}
+	}*/
 }
 
 template<typename T>

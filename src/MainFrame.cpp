@@ -1,7 +1,11 @@
 
+#include <iostream>
+#include <fstream>
+
 #include <alib.hpp>
 
 #include "FrameForwards.h"
+#include "Board.h"
 
 namespace C35
 {
@@ -21,12 +25,35 @@ private:
 	bool wantsQuit = false;
 	
 	alib::Refl worker, settler, warrior, horseman;
+
+	Board board;
 };
 
 MainFrame::MainFrame()
 {
+	std::vector<Pos> psp;
+	{
+		std::ifstream ifs("map-01.m35", std::ios_base::in | std::ios_base::binary);
+
+		int i, n;
+		ReadBinary(ifs, n);
+		psp.clear();
+		for (i = 0; i < n; ++i)
+		{
+			Pos p;
+			ReadBinary(ifs, p.x);
+			ReadBinary(ifs, p.y);
+			psp.push_back(p);
+		}
+
+		board.FromStream(ifs);
+
+		//Setup();
+
+	}
+
 	UC mycol = 97;
-	
+
 	#define LD(x) \
 		x ## _ac.Load( "./img/units/" #x ".fzac"); \
 		x ## _ac.Instance(mycol); \
@@ -41,7 +68,6 @@ MainFrame::MainFrame()
 	settler.setPosition(100,200);
 	warrior.setPosition(200,100);
 	horseman.setPosition(200,200);
-
 }
 
 void MainFrame::Display(sf::RenderWindow& rw)
@@ -82,3 +108,4 @@ FramePtr MakeMainFrame()
 
 
 }  // namespace C35
+

@@ -101,8 +101,7 @@ void Main(const C35::StrVec& args)
 	}
 	if (!found) return;
 	#endif
-	
-	
+
 	#ifndef NDEBUG
 	sf::RenderWindow window({640, 480}, "C35");
 	#else
