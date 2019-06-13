@@ -9,6 +9,17 @@
     <File Name="src/Main.cpp"/>
     <File Name="src/FrameForwards.h"/>
     <File Name="src/MainFrame.cpp"/>
+    <File Name="src/Board.cpp"/>
+    <File Name="src/Board.h"/>
+    <File Name="src/GameEngine.cpp"/>
+    <File Name="src/GameEngine.h"/>
+    <File Name="src/Hexagon.cpp"/>
+    <File Name="src/Hexagon.h"/>
+    <File Name="src/Player.cpp"/>
+    <File Name="src/Player.h"/>
+    <File Name="src/Unit.cpp"/>
+    <File Name="src/Unit.h"/>
+    <File Name="src/Common.cpp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>

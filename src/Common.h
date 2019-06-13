@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include <cstdint>
 #include <memory>
+#include <cstddef>
 
 namespace C35
 {
@@ -104,6 +105,10 @@ namespace C35
 
 inline std::string IntToStr(int i) { return std::to_string(i); }
 inline std::string IntToStrPad(int i, unsigned n, char p) { std::string s = std::to_string(i); while(s.length()<n) s=p+s; return s; }
+
+template<typename T>
+std::ptrdiff_t ssize(const T& t)
+{ return (std::ptrdiff_t)std::size(t); }
 
 template<typename T>
 void ReadBinary(std::istream& istr, T& val)

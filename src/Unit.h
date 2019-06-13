@@ -52,12 +52,12 @@ public:
 class BasicTroop : public Capabilities
 {
 public:
-	virtual bool CanMove() { return true; }
-	virtual bool CanAttack() { return true; }
-	virtual bool CanDefend() { return true; }
-	virtual bool CanMoveCity() { return true; }
-	virtual bool CanMoveLand() { return true; }
-	virtual bool CanFortify() { return true; }
+	virtual bool CanMove()     override { return true; }
+	virtual bool CanAttack()   override { return true; }
+	virtual bool CanDefend()   override { return true; }
+	virtual bool CanMoveCity() override { return true; }
+	virtual bool CanMoveLand() override { return true; }
+	virtual bool CanFortify()  override { return true; }
 
 	virtual Capabilities* Clone() override { return new BasicTroop(); }
 };

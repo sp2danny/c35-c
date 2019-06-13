@@ -593,12 +593,12 @@ void RecI(C35::Hexagon* h, C35::Player* p, int r)
 
 void C35::Board::UpdateInflu()
 {
-	// for( Hexagon& h : map )
-	//{
-	//	if( ! h.city ) continue;
-	//	int i = h.city->Influence();
-	//	RecI(&h,h.city->owner,i);
-	//}
+	for( Hexagon& h : map )
+	{
+		if( ! h.city ) continue;
+		//int i = h.city->Influence();
+		RecI(&h,0,1); //h.city->owner,i);
+	}
 }
 
 void C35::Board::PreparePlayerBoard(Player* p)

@@ -104,7 +104,7 @@ int C35::Unit::NewID()
 
 void C35::Unit::Register(int id, Unit* u)
 {
-	if (units.size() <= id)
+	if (ssize(units) <= id)
 	{
 		units.resize(id + 1);
 	}
@@ -115,7 +115,7 @@ C35::Unit* C35::Unit::Lookup(int id)
 {
 	if (id < 0)
 		return 0;
-	if (id >= units.size())
+	if (id >= ssize(units))
 		return 0;
 	return units[id];
 }
@@ -283,9 +283,9 @@ bool C35::Unit::AcceptsOrder()
 	return true;
 }
 
-static short DirOff[] = {60, 0, 300, 240, 180, 120};
+//static short DirOff[] = {60, 0, 300, 240, 180, 120};
 
-void C35::Unit::ExecuteOrder(Board* brd)
+void C35::Unit::ExecuteOrder([[maybe_unused]] Board* brd)
 {
 	/*
 	if (!orders)
@@ -544,21 +544,21 @@ void C35::Unit::ExecuteOrder(Board* brd)
 	*/
 }
 
-static void RecursiveConnect(C35::Hexagon* h)
-{
-	using namespace C35;
-	h->route_cost = 1;
-	for (Dir6 d = d6_beg; d != d6_end; ++d)
-	{
-		Hexagon* n = h->neighbours[d];
-		if (!n)
-			continue;
-		if (n->route_cost)
-			continue;
-		if (n->Roaded())
-			RecursiveConnect(n);
-	}
-}
+//static void RecursiveConnect(C35::Hexagon* h)
+//{
+//	using namespace C35;
+//	h->route_cost = 1;
+//	for (Dir6 d = d6_beg; d != d6_end; ++d)
+//	{
+//		Hexagon* n = h->neighbours[d];
+//		if (!n)
+//			continue;
+//		if (n->route_cost)
+//			continue;
+//		if (n->Roaded())
+//			RecursiveConnect(n);
+//	}
+//}
 
 void C35::Unit::AutoPilot()
 {
@@ -623,7 +623,7 @@ void C35::Unit::AbortOrder()
 		OrderDone(true);
 }
 
-void C35::Unit::OrderDone(bool all)
+void C35::Unit::OrderDone([[maybe_unused]] bool all)
 { /*
 	 Orders* o = orders;
 	 orders    = o->queue;
@@ -658,7 +658,7 @@ bool C35::Unit::CanCity()
 	UnitType& ut = UnitType::Lookup(type);
 	if (!ut.capa.settle)
 		return false;
-	Board* brd;
+	Board* brd = 0;
 	//= owner->game;
 	Hexagon& hex = brd->Get(x, y);
 	if (hex.Town())
@@ -676,13 +676,13 @@ bool C35::Unit::CanCity()
 	return true;
 }
 
-bool C35::Unit::CanGo(Dir6 d) const
+bool C35::Unit::CanGo([[maybe_unused]] Dir6 d) const
 {
 	UnitType& ut = UnitType::Lookup(type);
 
-	Hexagon& h1 = h1;
+	Hexagon/*&*/ h1 ;
 	//owner->game->Get(x, y);
-	Hexagon* h2 = h1.neighbours[d];
+	Hexagon* h2 = 0;//h1.neighbours[d];
 
 	if (!h2)
 		return false;
@@ -728,7 +728,7 @@ bool C35::Unit::CanGo(Dir6 d) const
 	}
 }
 
-void C35::Unit::DoGo(Dir6 d)
+void C35::Unit::DoGo([[maybe_unused]] Dir6 d)
 {/*
 	Board*   brd = owner->game;
 	Hexagon& on  = brd->Get(x, y);
@@ -870,7 +870,7 @@ void C35::Unit::Attack(Dir6 d)
 	Hexagon* h2  = h1.neighbours[d];
 	if (!h2)
 		return;
-	Unit* u2 = h2->DisplayUnit();
+	[[maybe_unused]] Unit* u2 = h2->DisplayUnit();
 	/*if ((!u2) || (u2->owner == owner))
 	{
 		Orders* o = new Orders(Orders::move1);
@@ -901,7 +901,7 @@ bool C35::Unit::CanLoad(const Unit* u) const
 	}
 	UnitType& ut_me = UnitType::Lookup(type);
 
-	if ((loaded.size() + 1) > ut_me.load_capa)
+	if ((ssize(loaded) + 1) > ut_me.load_capa)
 		return false;
 
 	return true;
@@ -955,13 +955,13 @@ void C35::Unit::DoUnload(Dir6 d)
 
 C35::Capabilities& C35::Unit::Capa()
 {
-	UnitType& ut = UnitType::Lookup(type);
+	[[maybe_unused]] UnitType& ut = UnitType::Lookup(type);
 
-	bool hm = stats.move != 0;
+	[[maybe_unused]] bool hm = stats.move != 0;
 
-	Hexagon& hex = owner->game->Get(x, y);
+	[[maybe_unused]] Hexagon& hex = owner->game->Get(x, y);
 
-	Movement&& mm = MakeMovement();
+	[[maybe_unused]] Movement&& mm = MakeMovement();
 
 	/*
 	capa.canMove          = hm;
@@ -1007,7 +1007,7 @@ C35::UnitType& C35::UnitType::New()
 
 	types.back().have_gfx = have_none;
 
-	assert(types.size() == types.back().id);
+	assert(ssize(types) == types.back().id);
 
 	return types.back();
 }
@@ -1015,7 +1015,7 @@ C35::UnitType& C35::UnitType::New()
 C35::UnitType& C35::UnitType::Lookup(int id)
 {
 	assert(id > 0);
-	assert(id <= types.size());
+	assert(id <= ssize(types));
 
 	return types[id - 1];
 }
@@ -1045,7 +1045,7 @@ namespace
 //}
 }  // namespace
 
-void C35::UnitType::LoadBmp(string name)
+void C35::UnitType::LoadBmp([[maybe_unused]] string name)
 {
 //	SDL_Surface* img = SDL_LoadBMP(("gfx/" + name + ".bmp").c_str());
 //	SDL_Surface* tm  = MakeTransMaskFromImage(img);
@@ -1055,14 +1055,14 @@ void C35::UnitType::LoadBmp(string name)
 //	SDL_FreeSurface(tm);
 }
 
-void C35::UnitType::LoadAD(string name)
+void C35::UnitType::LoadAD([[maybe_unused]] string name)
 {
 	//std::ifstream ifs("gfx/" + name + ".ad", ios_base::in | ios_base::binary);
 	//ad.Load(ifs);
 	have_gfx = have_ad;
 }
 
-void C35::UnitType::Instance(Player* p)
+void C35::UnitType::Instance([[maybe_unused]] Player* p)
 {
 	//if (have_gfx == have_ad)
 	//	ad.Instance(p->color);
@@ -1072,7 +1072,7 @@ void C35::UnitType::Instance(Player* p)
 	//	cis.Instance(p->color);
 }
 
-void C35::UnitType::LoadAC(string name)
+void C35::UnitType::LoadAC([[maybe_unused]] string name)
 {
 	//std::ifstream ifs("gfx/" + name + ".ac", ios_base::in | ios_base::binary);
 	//ac.Load(ifs);
@@ -1141,7 +1141,7 @@ void C35::UnitType::DoneAll()
 extern string ExtractFileExt(std::string fn);
 extern string ExtractFileBase(std::string fn);
 
-auto C35::UnitType::GetRefl(string name, short dir, Player* p) -> alib::Refl
+auto C35::UnitType::GetRefl([[maybe_unused]] string name, [[maybe_unused]] short dir, [[maybe_unused]] Player* p) -> alib::Refl
 {
 	if (have_gfx == have_name)
 	{

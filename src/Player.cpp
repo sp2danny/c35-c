@@ -3,6 +3,7 @@
 
 // --------------------------------------------
 
+#include "Common.h"
 #include "Player.h"
 
 //#include "City.h"
@@ -17,7 +18,7 @@ int C35::Player::NewID()
 
 void C35::Player::Register(int id,C35::Player* p)
 {
-	if( players.size() <= id )
+	if( ssize(players) <= id )
 	{
 		players.resize( id+1, 0 );
 	}
@@ -27,8 +28,8 @@ void C35::Player::Register(int id,C35::Player* p)
 
 C35::Player* C35::Player::Lookup(int id)
 {
-	if(id<0) return 0;
-	if(id>=players.size()) return 0;
+	if(id < 0) return 0;
+	if(id >= ssize(players)) return 0;
 	return players[id];
 }
 
