@@ -117,6 +117,7 @@
     <ClInclude Include="src\FrameSystem.h" />
     <ClInclude Include="src\GameEngine.h" />
     <ClInclude Include="src\Hexagon.h" />
+    <ClInclude Include="src\Orders.h" />
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\Unit.h" />
   </ItemGroup>

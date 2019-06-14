@@ -68,5 +68,8 @@
     <ClInclude Include="src\Board.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Orders.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
