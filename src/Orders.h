@@ -43,8 +43,7 @@ struct Orders
 
 	Orders& stack(Order o) { orders.push_back(o); return *this; }
 	Orders& set(Order o) { orders.clear(); return stack(o); }
-
 };
 
-
 }  // namespace C35
+
