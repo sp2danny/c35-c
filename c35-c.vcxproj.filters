@@ -54,6 +54,9 @@
     <ClCompile Include="src\old\UnitAction.cpp">
       <Filter>Source Files\old</Filter>
     </ClCompile>
+    <ClCompile Include="src\Unit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\FrameSystem.h">
@@ -91,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="src\old\UnitAction.h">
       <Filter>Source Files\old</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Unit.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
