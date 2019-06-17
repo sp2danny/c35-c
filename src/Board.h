@@ -14,14 +14,15 @@ namespace C35
 		std::vector<HexCore> map;
 
 		HexCore* at(int, int);
+		const HexCore* at(int x, int y) const { return ((Board*)this)->at(x,y); }
 		HexCore* pix(int, int);
 
 		void Randomize(int, int);
 		void Load(std::istream&);
-		void Save(std::ostream&);
+		void Save(std::ostream&) const;
 
 	private:
-		void MapN();
+		void MapN(bool = true);
 	};
 
 
