@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\old">
+      <UniqueIdentifier>{b5d652de-924d-414f-88ca-4cd91ccc5b34}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -24,22 +27,13 @@
     <ClCompile Include="src\MainFrame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Unit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Player.cpp">
+    <ClCompile Include="src\Common.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Hexagon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Board.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Common.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,25 +44,13 @@
     <ClInclude Include="src\Common.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Unit.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\FrameForwards.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Player.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Hexagon.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameEngine.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Board.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Orders.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

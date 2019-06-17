@@ -46,61 +46,6 @@ namespace C35
 
 	typedef unsigned char UC;
 
-	//typedef Hexagon* PHexagon;
-
-	typedef unsigned short Tile;
-	typedef unsigned short Mask;
-
-	typedef unsigned long Color;
-
-	// masks
-	const Mask road   = 1;
-	const Mask rail   = 2;
-	const Mask forest = 4;
-	const Mask jungle = 8;
-	const Mask mine   = 16;
-	const Mask irri   = 32;
-
-	const Mask river_upright   = 64;
-	const Mask river_right     = 128;
-	const Mask river_downright = 256;
-
-	const Mask bridge = 512;
-
-	// tiles
-	const Tile grass  = 1;
-	const Tile bonus  = 2;
-	const Tile plains = 3;
-	const Tile desert = 4;
-	const Tile floodp = 5;
-	const Tile tundra = 6;
-	const Tile hill   = 7;
-	const Tile mount  = 8;
-	const Tile coast  = 9;
-	const Tile sea    = 10;
-	const Tile ocean  = 11;
-
-	// tile overlay id's
-	enum class TOID {
-		road_c, road_r, road_dr, road_dl, road_l, road_ul, 
-		forest, pine, jungle,
-		irri, mine,
-		river_ur, river_r, river_dr,
-		goody, camp,
-		bridge_r, bridge_dr, bridge_dl, bridge_l, bridge_ul, 
-		hang_r_l, hang_ur_dl, hang_ul_dr,
-		rail,
-		city_1, city_2, city_3,
-		grid
-	};
-
-	// marker id's
-	enum class MID {
-		normal, road_to, go_to, rally, 
-		unavail, selected,
-		bombard, airdrop
-	};
-
 }
 
 inline std::string IntToStr(int i) { return std::to_string(i); }

@@ -103,23 +103,16 @@
     <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="src\Common.cpp" />
     <ClCompile Include="src\FrameSystem.cpp" />
-    <ClCompile Include="src\GameEngine.cpp" />
     <ClCompile Include="src\Hexagon.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\MainFrame.cpp" />
-    <ClCompile Include="src\Player.cpp" />
-    <ClCompile Include="src\Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Board.h" />
     <ClInclude Include="src\Common.h" />
     <ClInclude Include="src\FrameForwards.h" />
     <ClInclude Include="src\FrameSystem.h" />
-    <ClInclude Include="src\GameEngine.h" />
     <ClInclude Include="src\Hexagon.h" />
-    <ClInclude Include="src\Orders.h" />
-    <ClInclude Include="src\Player.h" />
-    <ClInclude Include="src\Unit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

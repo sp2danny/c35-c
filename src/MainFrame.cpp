@@ -5,7 +5,8 @@
 #include <alib.hpp>
 
 #include "FrameForwards.h"
-#include "Board.h"
+
+#include "Hexagon.h"
 
 namespace C35
 {
@@ -21,61 +22,23 @@ public:
 	virtual bool ParseInput(sf::Event&) override;
 
 private:
-	alib::AC worker_ac, settler_ac, warrior_ac, horseman_ac;
+	//alib::AC worker_ac, settler_ac, warrior_ac, horseman_ac;
 	bool wantsQuit = false;
 	
-	alib::Refl worker, settler, warrior, horseman;
+	//alib::Refl worker, settler, warrior, horseman;
 
-	Board board;
+	//Board board;
 };
 
 MainFrame::MainFrame()
 {
-	std::vector<Pos> psp;
-	{
-		std::ifstream ifs("map-01.m35", std::ios_base::in | std::ios_base::binary);
 
-		int i, n;
-		ReadBinary(ifs, n);
-		psp.clear();
-		for (i = 0; i < n; ++i)
-		{
-			Pos p;
-			ReadBinary(ifs, p.x);
-			ReadBinary(ifs, p.y);
-			psp.push_back(p);
-		}
 
-		board.FromStream(ifs);
-
-		//Setup();
-
-	}
-
-	UC mycol = 97;
-
-	#define LD(x) \
-		x ## _ac.Load( "./img/units/" #x ".fzac"); \
-		x ## _ac.Instance(mycol); \
-		x = x ## _ac.Refl("idle", 180, mycol)
-
-	LD(worker);
-	LD(settler);
-	LD(warrior);
-	LD(horseman);
-	
-	worker.setPosition(100,100);
-	settler.setPosition(100,200);
-	warrior.setPosition(200,100);
-	horseman.setPosition(200,200);
 }
 
 void MainFrame::Display(sf::RenderWindow& rw)
 {
-	rw.draw(worker);
-	rw.draw(settler);
-	rw.draw(warrior);
-	rw.draw(horseman);
+
 }
 
 bool MainFrame::Done()
@@ -85,10 +48,7 @@ bool MainFrame::Done()
 
 void MainFrame::Update(int)
 {
-	worker   .Update();
-	settler  .Update();
-	warrior  .Update();
-	horseman .Update();
+
 }
 
 bool MainFrame::ParseInput(sf::Event& e)
