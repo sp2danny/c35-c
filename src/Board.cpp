@@ -174,10 +174,24 @@ void C35::Board::Instance()
 
 void C35::Board::Display(sf::RenderWindow& rw, int ox, int oy)
 {
-	for (auto&& hx : map)
+	for (int y = 0; y < w; ++y)
 	{
-		alib::Refl refl = tiles.Refl(hx.tile, 0);
-		refl.setPosition(hx.px - ox, hx.py - oy);
-		rw.draw(refl);
+		int yy = at(0, y)->py - oy;
+		if (yy < -60)
+			continue;
+		if (yy > (480+60))
+			break;
+		for (int x=0; x<h; ++x)
+		{
+			HexCore& hx   = *at(x, y);
+			int xx = hx.px - ox;
+			if (xx < -60)
+				continue;
+			if (xx > (640+60))
+				break;
+			alib::Refl refl = tiles.Refl(hx.tile, 0);
+			refl.setPosition(xx, yy);
+			rw.draw(refl);
+		}
 	}
 }

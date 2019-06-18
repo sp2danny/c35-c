@@ -102,11 +102,11 @@ void Main(const C35::StrVec& args)
 	if (!found) return;
 	#endif
 
-	#ifndef NDEBUG
+	//#ifndef NDEBUG
 	sf::RenderWindow window({640, 480}, "C35");
-	#else
-	sf::RenderWindow window(vm, "C35", sf::Style::Fullscreen);
-	#endif
+	//#else
+	//sf::RenderWindow window(vm, "C35", sf::Style::Fullscreen);
+	//#endif
 
 	C35::Frame::Init("C35");
 	C35::Frame::Push(std::make_shared<C35::Intro>());

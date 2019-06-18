@@ -53,9 +53,6 @@ private:
 	static int next;
 };
 
-
-
-
 template<typename... Args>
 int UnitType::emplace(Args&&... args)
 {

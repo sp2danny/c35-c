@@ -57,13 +57,13 @@ bool MainFrame::ParseInput(sf::Event& e)
 		if (e.key.code == sf::Keyboard::Escape)
 			wantsQuit = true;
 		if (e.key.code == sf::Keyboard::Left)
-			--ox;
+			ox -= 3;
 		if (e.key.code == sf::Keyboard::Right)
-			++ox;
+			ox += 3;
 		if (e.key.code == sf::Keyboard::Up)
-			--oy;
+			oy -= 3;
 		if (e.key.code == sf::Keyboard::Down)
-			++oy;
+			oy += 3;
 	}
 	return false;
 }

@@ -20,8 +20,8 @@ std::string C35::Frame::title;
 
 namespace C35
 {
-const int SZ = 50;
-const int YSZ = 50;
+const int SZ  = 60;
+const int YSZ = 47;
 }  // namespace C35
 namespace
 {
