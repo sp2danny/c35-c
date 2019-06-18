@@ -27,10 +27,11 @@ const USh  irri   = 4;
 
 // tiles
 const USh grass  = 1;
-const USh plains = 2;
-const USh hill   = 3;
-const USh coast  = 4;
-const USh sea    = 5;
+const USh plains = 3;
+const USh hill   = 7;
+const USh coast  = 9;
+const USh sea    = 10;
+
 
 struct Hexagon;
 

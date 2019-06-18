@@ -21,10 +21,49 @@ void C35::Board::Randomize(int ww, int hh)
 	h = hh;
 	map.resize(w * h);
 
-	for (auto&& h : map)
+	auto dfe = [ww, hh](int x, int y) -> int {
+		int xd, yd;
+		if (x > (ww / 2))
+			xd = (ww - 1) - x;
+		else
+			xd = x;
+		if (y > (hh / 2))
+			yd = (hh - 1) - y;
+		else
+			yd = y;
+		return std::min(xd, yd);
+	};
+
+	for (int y = 0; y < h; ++y)
 	{
-		h.clr();
+		for (int x = 0; x < w; ++x)
+		{
+			auto& h = *at(x, y);
+			h.clr();
+			h.x = x;
+			h.y = y;
+			auto d = dfe(h.x, h.y);
+			if (d < 3)
+			{
+				h.tile = sea;
+				continue;
+			}
+			if (d < 5)
+			{
+				h.tile = coast;
+				continue;
+			}
+			auto r = rand() % 100;
+			if (r < 40)
+				h.tile = grass;
+			else if (r < 80)
+				h.tile = plains;
+			else
+				h.tile = hill;
+		}
 	}
+
+	MapN();
 }
 
 void C35::Board::Load(std::istream& in)
@@ -44,8 +83,8 @@ void C35::Board::Load(std::istream& in)
 			ReadBinary(in, h.mask);
 			ReadBinary(in, h.flavor);
 			ReadBinary(in, h.resource);
-			h.x  = x;
-			h.y  = y;
+			h.x = x;
+			h.y = y;
 		}
 	}
 	MapN();
@@ -72,8 +111,7 @@ void C35::Board::Save(std::ostream& out) const
 
 void C35::Board::MapN(bool wrap)
 {
-	auto add_n = [&](C35::HexCore& hex, Dir6 d, int x, int y)
-	{
+	auto add_n = [&](C35::HexCore& hex, Dir6 d, int x, int y) {
 		hex.neigh[d] = nullptr;
 		if (y < 0 || y >= h)
 			return;
@@ -100,14 +138,14 @@ void C35::Board::MapN(bool wrap)
 		{
 			HexCore& h = *at(x, y);
 
-			h.x  = x;
-			h.y  = y;
+			h.x = x;
+			h.y = y;
 			if (y % 2)
 			{
 				// odd
-				add_n(h, d6_upleft,    x,     y - 1);
-				add_n(h, d6_upright,   x + 1, y - 1);
-				add_n(h, d6_downleft,  x,     y + 1);
+				add_n(h, d6_upleft, x, y - 1);
+				add_n(h, d6_upright, x + 1, y - 1);
+				add_n(h, d6_downleft, x, y + 1);
 				add_n(h, d6_downright, x + 1, y + 1);
 				h.px = SZ + SZ * x;
 				h.py = YSZ * y;
@@ -115,15 +153,31 @@ void C35::Board::MapN(bool wrap)
 			else
 			{
 				// even
-				add_n(h, d6_upleft,    x - 1, y - 1);
-				add_n(h, d6_upright,   x,     y - 1);
-				add_n(h, d6_downleft,  x - 1, y + 1);
-				add_n(h, d6_downright, x,     y + 1);
+				add_n(h, d6_upleft, x - 1, y - 1);
+				add_n(h, d6_upright, x, y - 1);
+				add_n(h, d6_downleft, x - 1, y + 1);
+				add_n(h, d6_downright, x, y + 1);
 				h.px = (SZ / 2) + SZ * x;
 				h.py = YSZ * y;
 			}
 			add_n(h, d6_right, x + 1, y);
 			add_n(h, d6_left, x - 1, y);
 		}
+	}
+}
+
+void C35::Board::Instance()
+{
+	tiles.Load("img/tiles.ad");
+	tiles.Instance(0);
+}
+
+void C35::Board::Display(sf::RenderWindow& rw, int ox, int oy)
+{
+	for (auto&& hx : map)
+	{
+		alib::Refl refl = tiles.Refl(hx.tile, 0);
+		refl.setPosition(hx.px - ox, hx.py - oy);
+		rw.draw(refl);
 	}
 }

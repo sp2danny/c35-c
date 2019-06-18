@@ -1,6 +1,8 @@
 
 #pragma once
 
+#include <alib.hpp>
+
 #include "Common.h"
 #include "Hexagon.h"
 
@@ -21,19 +23,14 @@ namespace C35
 		void Load(std::istream&);
 		void Save(std::ostream&) const;
 
+		void Instance();
+		void Display(sf::RenderWindow&, int, int);
+
 	private:
 		void MapN(bool = true);
+
+		alib::AD tiles;
 	};
-
-
-
-
-
-
-
-
-
-
 
 }
 
