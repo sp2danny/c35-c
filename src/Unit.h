@@ -45,6 +45,7 @@ struct Unit : RepositoryBase<Unit>
 	static int fromtype(std::string_view);
 
 	void instance(UC, std::string_view = "idle");
+	void set(std::string_view, short=225);
 
 	alib::Refl refl;
 

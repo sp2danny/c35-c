@@ -55,11 +55,17 @@ MainFrame::MainFrame()
 	p2 = Player::lookup(Player::create(200, board, true))->ref();
 	p2->name() = "Player Two";
 
-	auto hx = board.spawn("Worker",  p1, {7, 7})->at;
+	Ref<Unit> u;
+
+	u = board.spawn("Worker", p1, {7, 7});
+	auto hx = u->at;
 	ox = hx->px - 640/2; oy = hx->py - 480/2;
-	board.spawn("Worker",  p2, {8, 7});
-	board.spawn("Worker",  p2, {8, 7});
-	board.spawn("Warrior", p2, {9, 7});
+	u = board.spawn("Worker",  p2, {8, 7});
+	u->set("mine",90);
+	u = board.spawn("Worker",  p2, {8, 8});
+	u->set("road",270);
+	u = board.spawn("Warrior", p2, {9, 7});
+	u->set("attack");
 
 	box.LoadBMP("img/box.bmp", {255,0,255}, 0, 0);
 	box.Instance(0);
@@ -73,7 +79,7 @@ void MainFrame::Display(sf::RenderWindow& rw)
 	rw.draw(boxr);
 	auto dur = std::chrono::duration_cast<std::chrono::microseconds>(t3-t1).count();
 	auto fps = 2000000 / dur;
-	old_fps = 0.99 * old_fps + 0.01 * fps;
+	old_fps = 0.99f * old_fps + 0.01f * fps;
 	rw.setTitle(std::to_string((int)(old_fps+0.5)));
 }
 
@@ -109,7 +115,6 @@ bool MainFrame::ParseInput(sf::Event& e)
 		if (e.key.code == sf::Keyboard::Up)    down.up = true;
 		if (e.key.code == sf::Keyboard::Down)  down.dn = true;
 	}
-
 
 	if (e.type == sf::Event::KeyReleased)
 	{

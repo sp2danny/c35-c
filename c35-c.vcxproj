@@ -70,7 +70,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalDependencies>freetype.lib;liblzma.lib;winmm.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;comdlg32.lib;advapi32.lib;shell32.lib;uuid.lib;alib-d.lib;sfml-graphics-s.lib;sfml-system-s.lib;sfml-window-s.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>/SFML/lib;/lzma/lib;../anim/lib;..\anim\src\lzma\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>/SFML/lib;/lzma/lib;../anim/lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
