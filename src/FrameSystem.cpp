@@ -22,9 +22,6 @@ namespace C35
 {
 const int SZ  = 60;
 const int YSZ = 47;
-}  // namespace C35
-namespace
-{
 [[maybe_unused]] const int WW = 1024;
 [[maybe_unused]] const int HH = 768;
 }  // namespace

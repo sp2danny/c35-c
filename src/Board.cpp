@@ -190,7 +190,7 @@ void C35::Board::Display(sf::RenderWindow& rw, int ox, int oy)
 			if (xx > (640+60))
 				break;
 			alib::Refl refl = tiles.Refl(hx.tile, 0);
-			refl.setPosition(xx, yy);
+			refl.setPosition((float)xx, (float)yy);
 			rw.draw(refl);
 		}
 	}
