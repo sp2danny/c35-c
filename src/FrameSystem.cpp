@@ -56,7 +56,7 @@ void C35::Frame::Run(sf::RenderWindow& window)
 	lst_mm_e.mouseMove.x = lst_mm_e.mouseMove.y = 0;
 
 	window.setKeyRepeatEnabled(false);
-	//window.setVerticalSyncEnabled(true);
+	window.setVerticalSyncEnabled(true);
 
 	while (true)
 	{

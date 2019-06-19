@@ -39,6 +39,7 @@ private:
 	TP t1,t2,t3;
 
 	int dx=0, dy=0;
+	float old_fps = 60.0f;
 };
 
 MainFrame::MainFrame()
@@ -72,7 +73,8 @@ void MainFrame::Display(sf::RenderWindow& rw)
 	rw.draw(boxr);
 	auto dur = std::chrono::duration_cast<std::chrono::microseconds>(t3-t1).count();
 	auto fps = 2000000 / dur;
-	rw.setTitle(std::to_string(fps));
+	old_fps = 0.99 * old_fps + 0.01 * fps;
+	rw.setTitle(std::to_string((int)(old_fps+0.5)));
 }
 
 bool MainFrame::Done()
