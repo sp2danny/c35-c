@@ -6,17 +6,14 @@
 #include <map>
 
 #include "Common.h"
+#include "Repository.h"
 
 namespace C35
 {
-struct Player;
-typedef std::reference_wrapper<Player> PRef;
 
-struct Player
+struct Player : RepositoryBase<Player>
 {
-	int id;
 
-	std::string name;
 	UC color;
 
 	City* capital;
@@ -29,15 +26,8 @@ struct Player
 	bool isbarb;
 	bool pak;
 
-	static int newPlayer();
-	static Player* lookup(int);
-	static int lookup(std::string);
-
 	static std::vector<int> all();
 
-private:
-	static int nextId;
-	static std::map<int, Player> players;
 };
 
 }  // namespace C35

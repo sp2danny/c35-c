@@ -104,5 +104,8 @@
     <ClInclude Include="src\Player.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Repository.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
