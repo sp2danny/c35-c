@@ -6,6 +6,7 @@
 #include <set>
 
 #include "Common.h"
+#include "Unit.h"
 
 namespace C35
 {
@@ -51,6 +52,8 @@ struct HexCore
 	bool IsSea() const;
 	bool IsRivered(Dir6) const;
 	bool HaveCover() const;
+
+	std::vector<Ref<Unit>> units;
 
 	void clr()
 	{

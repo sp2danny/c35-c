@@ -3,8 +3,6 @@
 
 #include "Player.h"
 
-
-
 std::vector<int> C35::Player::all()
 {
 	std::vector<int> a;

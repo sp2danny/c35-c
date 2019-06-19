@@ -20,6 +20,10 @@ struct Player : RepositoryBase<Player>
 
 	Board* game;
 
+	Player(UC col, Board& b, bool pak)
+		: color(col), capital(nullptr), game(&b), gold(0), isbarb(false), pak(pak)
+	{}
+
 	std::vector<int> met;
 
 	int  gold;

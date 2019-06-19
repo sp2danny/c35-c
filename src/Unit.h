@@ -32,11 +32,14 @@ struct Unit : RepositoryBase<Unit>
 	{
 		UC a, d, m, mr, h, hr;
 	} stats;
-	int     xp, lev;
-	int     x, y;
+	int xp, lev;
+	int x, y;
+
 	Player* owner;
 
-	int fromtype(std::string);
+	static int fromtype(std::string_view);
+
+	void instance(UC) {}
 
 };
 

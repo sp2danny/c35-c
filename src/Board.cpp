@@ -2,6 +2,7 @@
 #include <cassert>
 
 #include "Board.h"
+#include "Player.h"
 
 auto C35::Board::at(int x, int y) -> HexCore*
 {
@@ -195,3 +196,24 @@ void C35::Board::Display(sf::RenderWindow& rw, int ox, int oy)
 		}
 	}
 }
+
+auto C35::Board::spawn(std::string_view type, Ref<Player> player, Pos pos)
+	-> Ref<Unit>
+{
+	int       id   = Unit::fromtype(type);
+	Unit&     unit = *Unit::lookup(id);
+	HexCore*  hx   = at(pos.x, pos.y);
+	Ref<Unit> ref  = unit.ref();
+
+	unit.x     = pos.x;
+	unit.y     = pos.y;
+	unit.owner = player;
+
+	unit.instance(player->color);
+	hx->units.push_back(ref);
+
+	return ref;
+}
+
+
+

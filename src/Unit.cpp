@@ -14,7 +14,7 @@
 // *** Unit ***
 // ************
 
-auto C35::Unit::fromtype(std::string n) -> int
+auto C35::Unit::fromtype(std::string_view n) -> int
 {
 	int utix = UnitType::lookup(n);
 	if (!utix)

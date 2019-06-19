@@ -14,6 +14,7 @@ struct Ref
 	Ref() = default;
 	T* operator->() { return T::lookup(m_index); }
 	T& operator*() { return *T::lookup(m_index); }
+	operator T*() { return T::lookup(m_index); }
 friend
 	struct RepositoryBase<T>;
 private:
@@ -36,7 +37,7 @@ struct RepositoryBase
 		if (iter == table.end()) return nullptr;
 		return &iter->second;
 	}
-	static int lookup(std::string name)
+	static int lookup(std::string_view name)
 	{
 		for (auto&& r : table)
 			if (r.second.m_name == name) return r.first;

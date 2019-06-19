@@ -9,28 +9,30 @@
 namespace C35
 {
 
-	class Board
-	{
-	public:
-		int w, h;
-		std::vector<HexCore> map;
+class Board
+{
+public:
+	int w, h;
+	std::vector<HexCore> map;
 
-		HexCore* at(int, int);
-		const HexCore* at(int x, int y) const { return ((Board*)this)->at(x,y); }
-		HexCore* pix(int, int);
+	HexCore* at(int, int);
+	const HexCore* at(int x, int y) const { return ((Board*)this)->at(x,y); }
+	HexCore* pix(int, int);
 
-		void Randomize(int, int);
-		void Load(std::istream&);
-		void Save(std::ostream&) const;
+	void Randomize(int, int);
+	void Load(std::istream&);
+	void Save(std::ostream&) const;
 
-		void Instance();
-		void Display(sf::RenderWindow&, int, int);
+	void Instance();
+	void Display(sf::RenderWindow&, int, int);
 
-	private:
-		void MapN(bool = true);
+	Ref<Unit> spawn(std::string_view, Ref<Player>, Pos);
 
-		alib::AD tiles;
-	};
+private:
+	void MapN(bool = true);
+
+	alib::AD tiles;
+};
 
 }
 
