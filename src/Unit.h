@@ -25,6 +25,8 @@ struct UnitType : RepositoryBase<UnitType>
 
 };
 
+struct HexCore;
+
 struct Unit : RepositoryBase<Unit>
 {
 	Ref<UnitType> ut;
@@ -38,11 +40,11 @@ struct Unit : RepositoryBase<Unit>
 	int x, y;
 
 	Player* owner;
+	HexCore* at;
 
 	static int fromtype(std::string_view);
 
 	void instance(UC, std::string_view = "idle");
-
 
 	alib::Refl refl;
 

@@ -235,6 +235,7 @@ auto C35::Board::spawn(std::string_view type, Ref<Player> player, Pos pos)
 	unit.x      = pos.x;
 	unit.y      = pos.y;
 	unit.owner  = player;
+	unit.at     = hx;
 
 	std::string name = player->name();
 	name += "'s ";

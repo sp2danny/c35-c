@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <chrono>
 
 #include <alib.hpp>
 
@@ -24,36 +25,54 @@ public:
 	virtual bool ParseInput(sf::Event&) override;
 
 private:
-	// alib::AC worker_ac, settler_ac, warrior_ac, horseman_ac;
+
 	bool wantsQuit = false;
 
-	// alib::Refl worker, settler, warrior, horseman;
+	alib::CIS box;
+	alib::Refl boxr;
 
 	Board board;
 	int   ox, oy;
 	Ref<Player> p1, p2;
+
+	typedef std::chrono::time_point<std::chrono::high_resolution_clock> TP;
+	TP t1,t2,t3;
+
+	int dx=0, dy=0;
 };
 
 MainFrame::MainFrame()
 {
+	t1 = t2 = t3 = std::chrono::high_resolution_clock::now();
+
 	board.Randomize(300, 200);
 	board.Instance();
-	ox = oy = 0;
+
 	MakeWarr(); MakeWorker();
 	p1 = Player::lookup(Player::create(100, board, true))->ref();
 	p1->name() = "Player One";
 	p2 = Player::lookup(Player::create(200, board, true))->ref();
 	p2->name() = "Player Two";
 
-	board.spawn("Worker",  p1, {7, 7});
+	auto hx = board.spawn("Worker",  p1, {7, 7})->at;
+	ox = hx->px - 640/2; oy = hx->py - 480/2;
 	board.spawn("Worker",  p2, {8, 7});
 	board.spawn("Worker",  p2, {8, 7});
 	board.spawn("Warrior", p2, {9, 7});
+
+	box.LoadBMP("img/box.bmp", {255,0,255}, 0, 0);
+	box.Instance(0);
+	boxr = box.Refl(0);
+	boxr.setPosition(640.0f-box.Width(), 480.0f-box.Height());
 }
 
 void MainFrame::Display(sf::RenderWindow& rw)
 {
 	board.Display(rw, ox, oy);
+	rw.draw(boxr);
+	auto dur = std::chrono::duration_cast<std::chrono::microseconds>(t3-t1).count();
+	auto fps = 2000000 / dur;
+	rw.setTitle(std::to_string(fps));
 }
 
 bool MainFrame::Done()
@@ -64,23 +83,47 @@ bool MainFrame::Done()
 void MainFrame::Update(int)
 {
 	board.update();
+	t1 = t2;
+	t2 = t3;
+	t3 = std::chrono::high_resolution_clock::now();
+	ox += dx;
+	oy += dy;
 }
+
 
 bool MainFrame::ParseInput(sf::Event& e)
 {
+	static struct {
+		bool dn, up, lf, rg;
+	} down = {0,0,0,0};
+
 	if (e.type == sf::Event::KeyPressed)
 	{
 		if (e.key.code == sf::Keyboard::Escape)
 			wantsQuit = true;
-		if (e.key.code == sf::Keyboard::Left)
-			ox -= 3;
-		if (e.key.code == sf::Keyboard::Right)
-			ox += 3;
-		if (e.key.code == sf::Keyboard::Up)
-			oy -= 3;
-		if (e.key.code == sf::Keyboard::Down)
-			oy += 3;
+
+		if (e.key.code == sf::Keyboard::Left)  down.lf = true;
+		if (e.key.code == sf::Keyboard::Right) down.rg = true;
+		if (e.key.code == sf::Keyboard::Up)    down.up = true;
+		if (e.key.code == sf::Keyboard::Down)  down.dn = true;
 	}
+
+
+	if (e.type == sf::Event::KeyReleased)
+	{
+		if (e.key.code == sf::Keyboard::Left)  down.lf = false;
+		if (e.key.code == sf::Keyboard::Right) down.rg = false;
+		if (e.key.code == sf::Keyboard::Up)    down.up = false;
+		if (e.key.code == sf::Keyboard::Down)  down.dn = false;
+	}
+
+	int s=1;
+	dx=dy=0;
+	if (down.dn) dy += s;
+	if (down.up) dy -= s;
+	if (down.rg) dx += s;
+	if (down.lf) dx -= s;
+
 	return false;
 }
 
