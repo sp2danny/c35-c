@@ -112,7 +112,8 @@ void C35::Board::Save(std::ostream& out) const
 
 void C35::Board::MapN(bool wrap)
 {
-	auto add_n = [&](C35::HexCore& hex, Dir6 d, int x, int y) {
+	auto add_n = [&](C35::HexCore& hex, Dir6 d, int x, int y)
+	{
 		hex.neigh[d] = nullptr;
 		if (y < 0 || y >= h)
 			return;
@@ -205,9 +206,13 @@ auto C35::Board::spawn(std::string_view type, Ref<Player> player, Pos pos)
 	HexCore*  hx   = at(pos.x, pos.y);
 	Ref<Unit> ref  = unit.ref();
 
-	unit.x     = pos.x;
-	unit.y     = pos.y;
-	unit.owner = player;
+	unit.x      = pos.x;
+	unit.y      = pos.y;
+	unit.owner  = player;
+	std::string name = player->name();
+	name += "'s ";
+	name += type;
+	unit.name() = name;
 
 	unit.instance(player->color);
 	hx->units.push_back(ref);

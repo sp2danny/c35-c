@@ -45,15 +45,9 @@ MainFrame::MainFrame()
 	p2 = Player::lookup(Player::create(200, board, true))->ref();
 	p2->name() = "Player Two";
 
-	auto& u1 = *Unit::lookup(Unit::fromtype("Worker"));
-	u1.x = 15; u1.y = 15;
-	u1.owner = p1;
-	board.at(15,15)->units.push_back(u1.ref());
+	board.spawn("Worker", p1, {15, 15});
+	board.spawn("Worker", p2, {18, 15});
 
-	auto& u2 = *Unit::lookup(Unit::fromtype("Worker"));
-	u2.x = 15; u2.y = 15;
-	u2.owner = p2;
-	board.at(18, 15)->units.push_back(u2.ref());
 }
 
 void MainFrame::Display(sf::RenderWindow& rw)
