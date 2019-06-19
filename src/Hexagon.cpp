@@ -60,8 +60,9 @@ bool C35::HexCore::IsRivered(Dir6 d) const
 	case d6_upleft:
 		n = neigh[d];
 		return n && (n->mask & d6_downright);
+	default:
+		return false;
 	}
-	return false;
 }
 
 bool C35::HexCore::HaveCover() const

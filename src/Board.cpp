@@ -13,6 +13,8 @@ auto C35::Board::at(int x, int y) -> HexCore*
 
 auto C35::Board::pix(int px, int py) -> HexCore*
 {
+	(void)px;
+	(void)py;
 	return nullptr;
 }
 
