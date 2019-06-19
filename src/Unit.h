@@ -4,6 +4,8 @@
 #include "Common.h"
 #include "Repository.h"
 
+#include "alib.hpp"
+
 namespace C35
 {
 
@@ -39,8 +41,11 @@ struct Unit : RepositoryBase<Unit>
 
 	static int fromtype(std::string_view);
 
-	void instance(UC) {}
+	void instance(UC, std::string_view = "idle");
 
+	alib::Refl refl;
+
+	inline static std::map<std::string, alib::AC> cache;
 };
 
 extern void MakeWarr(), MakeWorker();

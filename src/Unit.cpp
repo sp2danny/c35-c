@@ -33,6 +33,19 @@ auto C35::Unit::fromtype(std::string_view n) -> int
 	return uix;
 }
 
+void C35::Unit::instance(UC col, std::string_view anim)
+{
+	std::string name = ut->name();
+	auto iter = cache.find(name);
+	if (iter == cache.end())
+	{
+		iter = cache.try_emplace(name).first;
+		iter->second.Load("img/units/" + name + ".fzac");
+	}
+	iter->second.Instance(col);
+	refl = iter->second.Refl(std::string(anim), 45, col);
+}
+
 void C35::MakeWarr()
 {
 	int       id = UnitType::create();

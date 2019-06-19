@@ -69,3 +69,11 @@ bool C35::HexCore::HaveCover() const
 	return cover != 0;
 }
 
+void C35::HexCore::update()
+{
+	for (auto&& u : units)
+	{
+		u->refl.Update();
+	}
+}
+

@@ -45,9 +45,10 @@ MainFrame::MainFrame()
 	p2 = Player::lookup(Player::create(200, board, true))->ref();
 	p2->name() = "Player Two";
 
-	board.spawn("Worker", p1, {15, 15});
-	board.spawn("Worker", p2, {18, 15});
-
+	board.spawn("Worker",  p1, {15, 15});
+	board.spawn("Worker",  p2, {18, 15});
+	board.spawn("Worker",  p2, {18, 15});
+	board.spawn("Warrior", p2, {17, 15});
 }
 
 void MainFrame::Display(sf::RenderWindow& rw)
@@ -60,7 +61,10 @@ bool MainFrame::Done()
 	return wantsQuit;
 }
 
-void MainFrame::Update(int) {}
+void MainFrame::Update(int)
+{
+	board.update();
+}
 
 bool MainFrame::ParseInput(sf::Event& e)
 {

@@ -55,6 +55,8 @@ struct HexCore
 
 	std::vector<Ref<Unit>> units;
 
+	void update();
+
 	void clr()
 	{
 		tile = cover = mask = 0;

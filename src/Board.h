@@ -28,6 +28,8 @@ public:
 
 	Ref<Unit> spawn(std::string_view, Ref<Player>, Pos);
 
+	void update();
+
 private:
 	void MapN(bool = true);
 

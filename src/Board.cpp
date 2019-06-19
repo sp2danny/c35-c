@@ -16,6 +16,14 @@ auto C35::Board::pix(int px, int py) -> HexCore*
 	return nullptr;
 }
 
+void C35::Board::update()
+{
+	for (auto&& hx : map)
+	{
+		hx.update();
+	}
+}
+
 void C35::Board::Randomize(int ww, int hh)
 {
 	w = ww;
@@ -196,6 +204,24 @@ void C35::Board::Display(sf::RenderWindow& rw, int ox, int oy)
 			rw.draw(refl);
 		}
 	}
+
+	for (int y = 0; y < w; ++y)
+	{
+		int yy = at(0, y)->py - oy;
+		if (yy < -60) continue;
+		if (yy > (480 + 60)) break;
+		for (int x = 0; x < h; ++x)
+		{
+			HexCore& hx = *at(x, y);
+			if (hx.units.empty()) continue;
+			int xx = hx.px - ox;
+			if (xx < -60) continue;
+			if (xx > (640 + 60)) break;
+			auto r = hx.units.back()->refl;
+			r.setPosition((float)xx, (float)yy);
+			rw.draw(r);
+		}
+	}
 }
 
 auto C35::Board::spawn(std::string_view type, Ref<Player> player, Pos pos)
@@ -209,6 +235,7 @@ auto C35::Board::spawn(std::string_view type, Ref<Player> player, Pos pos)
 	unit.x      = pos.x;
 	unit.y      = pos.y;
 	unit.owner  = player;
+
 	std::string name = player->name();
 	name += "'s ";
 	name += type;
