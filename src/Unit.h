@@ -43,8 +43,10 @@ struct Unit : RepositoryBase<Unit>
 
 	void instance(UC, std::string_view = "idle");
 
+
 	alib::Refl refl;
 
+private:
 	inline static std::map<std::string, alib::AC> cache;
 };
 

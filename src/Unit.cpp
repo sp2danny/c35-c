@@ -41,6 +41,21 @@ void C35::Unit::instance(UC col, std::string_view anim)
 	{
 		iter = cache.try_emplace(name).first;
 		iter->second.Load("img/units/" + name + ".fzac");
+		auto fort = iter->second.Have("fortify");
+		if (fort)
+		{
+			int i, n = fort->Count();
+			for (i=0; i<n; ++i)
+			{
+				auto& var = fort->Get(i);
+				auto dirs = var.AllDirs();
+				for (auto d : dirs)
+				{
+					auto& ba = var.Get(d);
+					ba.SetRep(false);
+				}
+			}
+		}
 	}
 	iter->second.Instance(col);
 	refl = iter->second.Refl(std::string(anim), 45, col);
