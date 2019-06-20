@@ -11,36 +11,45 @@
 
 namespace C35
 {
-	struct Action : RepositoryBase<Action>
+struct Action : RepositoryBase<Action>
+{
+	bool        haveButton;
+	bool        haveShortcut;
+	bool        dynamicLocation;
+	bool        visible;
+	bool        enabled;
+	int         location;
+	int         x, y;
+	alib::AD    button;
+	std::string tooltip;
+	char        shortcut;
+
+	std::function<void(Ref<Action>)> onActivate;
+};
+
+struct MapGui : public Frame
+{
+	virtual void Display(sf::RenderWindow&) override;
+	virtual bool ParseInput(sf::Event&) override;
+	virtual void Update(int) override;
+	virtual bool Done() override;
+
+	struct
 	{
-		bool haveButton;
-		bool haveShortcut;
-		bool dynamicLocation;
-		bool visible;
-		bool enabled;
-		int location;
-		int x,y;
-		alib::AD button;
-		std::string tooltip;
-		char shortcut;
-		std::function<void(Ref<Action>)> onActivate;
-	};
+		bool minimap, advisors, replay, unitaction, diplomacy, portrait;
+	} show, enabled;
 
-	struct MapGui : public Frame
-	{
-		virtual void Display(sf::RenderWindow&) override;
-		virtual bool ParseInput(sf::Event&) override;
-		virtual void Update(int) override;
-		virtual bool Done() override;
+	std::vector<Ref<Action>> actionGroupSystem;
+	std::vector<Ref<Action>> actionGroupMap;
+	std::vector<Ref<Action>> actionGroupUnit;
 
+	Ref<Unit> active;
 
-		std::vector<Ref<Action>> actionGroupSystem;
-		std::vector<Ref<Action>> actionGroupMap;
-		std::vector<Ref<Action>> actionGroupUnit;
+	Ref<Player> pak;
 
-		Ref<Unit> active;
-	};
-
+private:
+	alib::BA minimap, portrait;
+	alib::AC advisors, replay, diplomacy;
+};
 
 }  // namespace C35
-
