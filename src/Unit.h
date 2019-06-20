@@ -50,6 +50,8 @@ struct Unit : RepositoryBase<Unit>
 	alib::Refl refl;
 	static void clearcache() {cache.clear();}
 
+	static void unloadBase(std::string = "");
+
 private:
 	inline static std::map<std::string, alib::AC> cache;
 };

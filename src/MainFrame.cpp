@@ -58,16 +58,18 @@ MainFrame::MainFrame()
 
 	Ref<Unit> u;
 
-	u       = board.spawn("Worker", p1, {7, 7});
+	u = board.spawn("Worker", p1, {7, 7});
 	auto hx = u->at;
-	ox      = hx->px - 640 / 2;
-	oy      = hx->py - 480 / 2;
-	u       = board.spawn("Worker", p2, {8, 7});
+	ox = hx->px - 640 / 2;
+	oy = hx->py - 480 / 2;
+	u = board.spawn("Worker", p2, {8, 7});
 	u->set("mine", 90);
 	u = board.spawn("Worker", p2, {8, 8});
 	u->set("road", 270);
 	u = board.spawn("Warrior", p2, {9, 7});
 	u->set("attack");
+
+	Unit::unloadBase();
 
 	box.LoadBMP("img/box.bmp", {255, 0, 255}, 0, 0);
 	box.Instance(0);

@@ -29,6 +29,21 @@ auto C35::Unit::fromtype(std::string_view n) -> int
 	return uix;
 }
 
+void C35::Unit::unloadBase(std::string un)
+{
+	if (un.empty())
+	{
+		for (auto&& ac : cache)
+			ac.second.UnloadBase();
+	}
+	else
+	{
+		for (auto&& ac : cache)
+			if (ac.first==un)
+				ac.second.UnloadBase();
+	}
+}
+
 void C35::Unit::instance(UC col, std::string_view anim)
 {
 	std::string name = ut->name();
