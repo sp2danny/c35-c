@@ -48,6 +48,7 @@ struct Unit : RepositoryBase<Unit>
 	void set(std::string_view, short=225);
 
 	alib::Refl refl;
+	static void clearcache() {cache.clear();}
 
 private:
 	inline static std::map<std::string, alib::AC> cache;

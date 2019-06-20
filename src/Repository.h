@@ -57,6 +57,7 @@ struct RepositoryBase
 			return 0;
 		}
 	}
+	static void clear() { table.clear(); nextIndex=1; }
 
 protected:
 	static const std::map<int, T>& tab() { return table; }
