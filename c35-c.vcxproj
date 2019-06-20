@@ -64,12 +64,12 @@
       <EnforceTypeConversionRules>true</EnforceTypeConversionRules>
       <AdditionalIncludeDirectories>/SFML/include;../anim/src</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <BufferSecurityCheck />
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <AdditionalDependencies>freetype.lib;liblzma.lib;winmm.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;comdlg32.lib;advapi32.lib;shell32.lib;uuid.lib;alib-d.lib;sfml-graphics-s.lib;sfml-system-s.lib;sfml-window-s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freetype.lib;liblzma.lib;winmm.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;comdlg32.lib;advapi32.lib;shell32.lib;uuid.lib;alib-d.lib;sfml-graphics-s-d.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>/SFML/lib;/lzma/lib;../anim/lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -106,6 +106,7 @@
     <ClCompile Include="src\Hexagon.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\MainFrame.cpp" />
+    <ClCompile Include="src\MapGui.cpp" />
     <ClCompile Include="src\old\Board.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -136,9 +137,11 @@
   <ItemGroup>
     <ClInclude Include="src\Board.h" />
     <ClInclude Include="src\Common.h" />
+    <ClInclude Include="src\Conductor.h" />
     <ClInclude Include="src\FrameForwards.h" />
     <ClInclude Include="src\FrameSystem.h" />
     <ClInclude Include="src\Hexagon.h" />
+    <ClInclude Include="src\MapGui.h" />
     <ClInclude Include="src\old\Board.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>

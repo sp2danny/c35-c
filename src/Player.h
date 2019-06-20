@@ -11,6 +11,8 @@
 namespace C35
 {
 
+struct Unit;
+
 struct Player : RepositoryBase<Player>
 {
 
@@ -24,13 +26,16 @@ struct Player : RepositoryBase<Player>
 		: color(col), capital(nullptr), game(&b), gold(0), isbarb(false), pak(pak)
 	{}
 
-	std::vector<int> met;
+	std::vector<Ref<Player>> met;
+
+	std::vector<Ref<Unit>> units;
+	Ref<Unit> active;
 
 	int  gold;
 	bool isbarb;
 	bool pak;
 
-	static std::vector<int> all();
+	static std::vector<Ref<Player>> all();
 
 };
 

@@ -39,7 +39,7 @@ class Frame : public UpdateTarget, InputTarget
 {
 public:
 	virtual void Display(sf::RenderWindow&) = 0;
-	virtual bool Done() = 0;
+	virtual bool Done() override = 0;
 
 	static void PushUnder(FramePtr);
 	static void Push(FramePtr);

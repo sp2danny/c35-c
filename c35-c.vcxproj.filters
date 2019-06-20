@@ -60,6 +60,9 @@
     <ClCompile Include="src\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\MapGui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\FrameSystem.h">
@@ -105,6 +108,12 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Repository.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Conductor.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MapGui.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
