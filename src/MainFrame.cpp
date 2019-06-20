@@ -121,18 +121,18 @@ bool MainFrame::ParseInput(sf::Event& e)
 	{
 		if (e.key.code == sf::Keyboard::Escape) wantsQuit = true;
 
-		if (e.key.code == sf::Keyboard::Left) down.lf = true;
+		if (e.key.code == sf::Keyboard::Left)  down.lf = true;
 		if (e.key.code == sf::Keyboard::Right) down.rg = true;
-		if (e.key.code == sf::Keyboard::Up) down.up = true;
-		if (e.key.code == sf::Keyboard::Down) down.dn = true;
+		if (e.key.code == sf::Keyboard::Up)    down.up = true;
+		if (e.key.code == sf::Keyboard::Down)  down.dn = true;
 	}
 
 	if (e.type == sf::Event::KeyReleased)
 	{
-		if (e.key.code == sf::Keyboard::Left) down.lf = false;
+		if (e.key.code == sf::Keyboard::Left)  down.lf = false;
 		if (e.key.code == sf::Keyboard::Right) down.rg = false;
-		if (e.key.code == sf::Keyboard::Up) down.up = false;
-		if (e.key.code == sf::Keyboard::Down) down.dn = false;
+		if (e.key.code == sf::Keyboard::Up)    down.up = false;
+		if (e.key.code == sf::Keyboard::Down)  down.dn = false;
 	}
 
 	int s = 1;
