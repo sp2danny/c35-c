@@ -21,10 +21,10 @@ const USh river_right     = 128;
 const USh river_downright = 256;
 
 // cover
-const USh  forest = 1;
-const USh  jungle = 2;
-const USh  mine   = 3;
-const USh  irri   = 4;
+const USh forest = 1;
+const USh jungle = 2;
+const USh mine   = 3;
+const USh irri   = 4;
 
 // tiles
 const USh grass  = 1;
@@ -38,11 +38,11 @@ struct Hexagon;
 
 struct HexCore
 {
-	USh     tile, cover, mask;
-	UC      flavor;
-	int     x, y;
-	int     px, py;
-	UC      resource;
+	USh tile, cover, mask;
+	UC  flavor;
+	int x, y;
+	int px, py;
+	UC  resource;
 
 	Player* owner;
 	City*   city;
@@ -61,8 +61,8 @@ struct HexCore
 	{
 		tile = cover = mask = 0;
 		flavor = resource = 0;
-		owner  = nullptr;
-		city   = nullptr;
+		owner = nullptr;
+		city = nullptr;
 	}
 
 	HexCore* neigh[d6_end];
@@ -72,3 +72,5 @@ private:
 
 
 }  // namespace C35
+
+

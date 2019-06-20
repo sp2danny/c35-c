@@ -26,7 +26,7 @@ const int YSZ = 47;
 [[maybe_unused]] const int HH = 768;
 }  // namespace
 
-void C35::Frame::Init([[maybe_unused]] std::string name)
+void C35::Frame::Init(std::string name)
 {
 	title = name;
 	stack.clear();
@@ -169,3 +169,4 @@ void C35::Frame::System(FramePtr s)
 {
 	system = std::move(s);
 }
+

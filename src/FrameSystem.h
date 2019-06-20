@@ -16,17 +16,17 @@ namespace C35
 class UpdateTarget
 {
 public:
-	virtual ~UpdateTarget()  = default;
+	virtual ~UpdateTarget() = default;
 	virtual void Update(int) = 0;
-	virtual bool Done() =0;//{ return false; }
+	virtual bool Done() =0;
 };
 
 class InputTarget
 {
 public:
-	virtual ~InputTarget()              = default;
+	virtual ~InputTarget() = default;
 	virtual bool ParseInput(sf::Event&) = 0;
-	virtual bool Done() =0;//{ return false; }
+	virtual bool Done() =0;
 };
 
 class Frame;
