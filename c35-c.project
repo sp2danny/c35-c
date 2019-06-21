@@ -19,6 +19,9 @@
     <File Name="src/Repository.h"/>
     <File Name="src/Unit.cpp"/>
     <File Name="src/Unit.h"/>
+    <File Name="src/Conductor.h"/>
+    <File Name="src/MapGui.cpp"/>
+    <File Name="src/MapGui.h"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
