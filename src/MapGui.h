@@ -29,6 +29,8 @@ struct Action : RepositoryBase<Action>
 
 struct MapGui : public Frame
 {
+	MapGui();
+
 	virtual void Display(sf::RenderWindow&) override;
 	virtual bool ParseInput(sf::Event&) override;
 	virtual void Update(int) override;

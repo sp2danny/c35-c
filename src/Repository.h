@@ -14,9 +14,10 @@ struct Ref
 	Ref() = default;
 	T* operator->() { return T::lookup(m_index); }
 	T& operator*() { return *T::lookup(m_index); }
-	operator T*() { return T::lookup(m_index); }
-friend
-	struct RepositoryBase<T>;
+	   operator T*() { return T::lookup(m_index); }
+	   operator bool() const { return T::lookup(m_index) != nullptr; }
+	friend struct RepositoryBase<T>;
+
 private:
 	Ref(int idx) : m_index(idx) {}
 	int m_index = 0;
@@ -25,7 +26,7 @@ private:
 template<typename T>
 struct RepositoryBase
 {
-	int index() const { return m_index; }
+	int    index() const { return m_index; }
 	Ref<T> ref() { return Ref<T>{m_index}; }
 
 	std::string&     name() { return m_name; }
@@ -57,13 +58,17 @@ struct RepositoryBase
 			return 0;
 		}
 	}
-	static void clear() { table.clear(); nextIndex=1; }
+	static void clear()
+	{
+		table.clear();
+		nextIndex = 1;
+	}
 
 protected:
 	static const std::map<int, T>& tab() { return table; }
 
 private:
-	inline static int nextIndex = 1;
+	inline static int              nextIndex = 1;
 	inline static std::map<int, T> table;
 
 	int         m_index;

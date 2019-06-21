@@ -11,6 +11,7 @@
 #include "Board.h"
 #include "Unit.h"
 #include "Player.h"
+#include "MapGui.h"
 
 namespace C35
 {
@@ -28,15 +29,15 @@ public:
 private:
 	bool wantsQuit = false;
 
-	alib::CIS  box;
-	alib::Refl boxr;
-
 	Board       board;
 	int         ox, oy;
 	Ref<Player> p1, p2;
 
+	MapGui gui;
+
 	typedef std::chrono::time_point<std::chrono::high_resolution_clock> TP;
-	TP                                                                  t1, t2, t3;
+
+	TP t1, t2, t3;
 
 	int   dx = 0, dy = 0;
 	float old_fps = 60.0f;
@@ -59,6 +60,7 @@ MainFrame::MainFrame()
 	Ref<Unit> u;
 
 	u = board.spawn("Worker", p1, {7, 7});
+	gui.active = u;
 	auto hx = u->at;
 	ox = hx->px - 640 / 2;
 	oy = hx->py - 480 / 2;
@@ -71,10 +73,6 @@ MainFrame::MainFrame()
 
 	Unit::unloadBase();
 
-	box.LoadBMP("img/box.bmp", {255, 0, 255}, 0, 0);
-	box.Instance(0);
-	boxr = box.Refl(0);
-	boxr.setPosition(640.0f - box.Width(), 480.0f - box.Height());
 }
 
 MainFrame::~MainFrame()
@@ -88,7 +86,8 @@ MainFrame::~MainFrame()
 void MainFrame::Display(sf::RenderWindow& rw)
 {
 	board.Display(rw, ox, oy);
-	rw.draw(boxr);
+	gui.Display(rw);
+	
 	auto dur = std::chrono::duration_cast<std::chrono::microseconds>(t3 - t1).count();
 	auto fps = 2000000 / dur;
 	old_fps  = 0.99f * old_fps + 0.01f * fps;
@@ -100,9 +99,10 @@ bool MainFrame::Done()
 	return wantsQuit;
 }
 
-void MainFrame::Update(int)
+void MainFrame::Update(int ms)
 {
 	board.update();
+	gui.Update(ms);
 	t1 = t2;
 	t2 = t3;
 	t3 = std::chrono::high_resolution_clock::now();
@@ -141,6 +141,8 @@ bool MainFrame::ParseInput(sf::Event& e)
 	if (down.up) dy -= s;
 	if (down.rg) dx += s;
 	if (down.lf) dx -= s;
+
+	gui.ParseInput(e);
 
 	return false;
 }
