@@ -15,8 +15,6 @@ struct Conductor : public UpdateTarget, InputTarget
 		: player(player), board(board), owner(owner)
 	{}
 
-
-
 protected:
 	Ref<Player> player;
 	std::reference_wrapper<Board> board;

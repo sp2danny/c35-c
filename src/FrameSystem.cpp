@@ -46,6 +46,11 @@ void C35::Frame::AddActive(UpdatePtr ut)
 	actives.push_back(std::move(ut));
 }
 
+void C35::Frame::AddSubFrame(FramePtr sub)
+{
+	subFrames.push_back(sub);
+}
+
 void C35::Frame::Run(sf::RenderWindow& window)
 {
 	window.setTitle(title);

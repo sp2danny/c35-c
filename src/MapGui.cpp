@@ -13,7 +13,7 @@ sf::Text   text;
 alib::CIS  box;
 alib::Refl boxr;
 int        bw, bh;
-}  // namespace gui
+} // namespace gui
 
 C35::MapGui::MapGui()
 {

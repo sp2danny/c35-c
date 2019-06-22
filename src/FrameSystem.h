@@ -50,6 +50,11 @@ public:
 
 	static void AddListener(InputPtr);
 	static void AddActive(UpdatePtr);
+	
+	void AddSubFrame(FramePtr);
+
+protected:
+	std::vector<FramePtr> subFrames;
 
 private:
 	static std::vector<FramePtr>  stack;
