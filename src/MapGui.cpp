@@ -21,6 +21,7 @@ C35::MapGui::MapGui()
 	gui::text = sf::Text(" ", gui::font);
 	gui::box.LoadBMP("img/box.bmp", {255, 0, 255}, 0, 0);
 	gui::box.Instance(0);
+	//gui::box.UnloadBase();
 	gui::boxr = gui::box.Refl(0);
 	gui::bw   = gui::box.Width();
 	gui::bh   = gui::box.Height();
