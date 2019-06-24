@@ -650,7 +650,7 @@ void C35::Board::PreparePlayerBoard(Player* p)
 			}
 			if (!onno)
 			{
-				ph.clr();
+				ph.Clr();
 				ph.units.clear();
 				break;
 			}

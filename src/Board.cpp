@@ -50,7 +50,7 @@ void C35::Board::Randomize(int ww, int hh)
 		for (int x = 0; x < w; ++x)
 		{
 			auto& h = *at(x, y);
-			h.clr();
+			h.Clr();
 			h.x = x;
 			h.y = y;
 			auto d = dfe(h.x, h.y);
@@ -88,7 +88,7 @@ void C35::Board::Load(std::istream& in)
 		for (int x = 0; x < w; ++x)
 		{
 			auto& h = *at(x, y);
-			h.clr();
+			h.Clr();
 			ReadBinary(in, h.tile);
 			ReadBinary(in, h.cover);
 			ReadBinary(in, h.mask);

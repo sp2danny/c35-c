@@ -16,6 +16,3 @@ auto C35::Player::All()
 	return a;
 }
 
-
-
-

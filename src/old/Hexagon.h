@@ -53,7 +53,7 @@ struct HexCore
 	bool Bridge() const;
 	bool Hang() const;
 
-	void clr()
+	void Clr()
 	{
 		tile   = 0;
 		mask   = 0;

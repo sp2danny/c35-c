@@ -57,7 +57,7 @@ struct HexCore
 
 	void Update();
 
-	void clr()
+	void Clr()
 	{
 		tile = cover = mask = 0;
 		flavor = resource = 0;
