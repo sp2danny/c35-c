@@ -2,10 +2,12 @@
 #pragma once
 
 #include "FrameSystem.h"
-#include "Board.h"
 
 namespace C35
 {
+
+class Board;
+
 class Minimap : public Frame
 {
 public:

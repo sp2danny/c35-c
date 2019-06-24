@@ -3,6 +3,8 @@
 
 #include <alib.hpp>
 
+#include "Board.h"
+
 namespace
 {
 alib::Refl r_g, r_s, r_c, r_d, r_m, r_n, r_o, r_p, r_r;
@@ -84,7 +86,7 @@ C35::Minimap::~Minimap()
 void C35::Minimap::Display(sf::RenderWindow& rw)
 {
 	sf::Sprite sprite(tex.getTexture());
-	sprite.setPosition(x,y);
+	sprite.setPosition((float)x,(float)y);
 	rw.draw(sprite);
 }
 

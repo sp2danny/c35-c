@@ -16,8 +16,8 @@ namespace C35
 {
 	inline const int SZ = 60;
 	inline const int YSZ = 47;
-	inline const int WW = 1024;//640;
-	inline const int HH = 768;//480;
+	inline const int WW = 640;
+	inline const int HH = 480;
 	inline const int MRG = 60;
 
 	extern float     offs_x, offs_y;
@@ -43,13 +43,10 @@ namespace C35
 	struct Orders;
 	struct Unit;
 	struct City;
-	class  UI;
 	struct City;
 	struct PlayerHex;
 	struct Movement;
 	class  GameEngine;
-	//class  ControllerAPI;
-	//class  Controller;
 
 	typedef unsigned char UC;
 
