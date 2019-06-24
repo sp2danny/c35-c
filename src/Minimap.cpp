@@ -9,7 +9,6 @@ namespace
 {
 alib::Refl r_g, r_s, r_c, r_d, r_m, r_n, r_o, r_p, r_r;
 alib::CIS  c_g, c_s, c_c, c_d, c_m, c_n, c_o, c_p, c_r;
-sf::RenderTexture tex;
 }
 
 C35::Minimap::Minimap(int x, int y, Board& brd)
@@ -20,15 +19,13 @@ C35::Minimap::Minimap(int x, int y, Board& brd)
 	#define LD(x)                          \
 		c_##x.LoadBMP("img/MiniMap/mmm_"  \
 		#x ".bmp", purpl, 0, 0);           \
-		r_##x = c_##x.Refl(0);             \
-		c_##x.UnloadBase()
+		r_##x = c_##x.Refl(0);
 
 	LD(g); LD(s); LD(c);
 	LD(d); LD(m); LD(n);
 	LD(o); LD(p); LD(r);
 
 	#undef LD
-
 
 }
 

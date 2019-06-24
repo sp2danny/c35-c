@@ -3,6 +3,8 @@
 
 #include "FrameSystem.h"
 
+#include <SFML/Graphics.hpp>
+
 namespace C35
 {
 
@@ -27,6 +29,7 @@ public:
 
 private:
 	int x, y;
+	sf::RenderTexture tex;
 };
 
 }  // namespace C35

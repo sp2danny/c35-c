@@ -16,7 +16,6 @@ sf::Text   text;
 alib::CIS  box, circ;
 alib::Refl boxr, circr;
 int        bw, bh;
-
 }  // namespace gui
 
 C35::MapGui::MapGui(Board& brd) : brd(brd), mm(25, 25, brd)
@@ -53,17 +52,14 @@ void C35::MapGui::Display(sf::RenderWindow& rw)
 		auto hex = brd.active->at;
 		if (hex)
 		{
-			int x = hex->px;
-			int y = hex->py;
-			gui::circr.setPosition(x - ox, y - oy);
+			sf::Vector2f pos((float)hex->px - ox, (float)hex->py - oy);
+			gui::circr.setPosition(pos);
 			rw.draw(gui::circr);
 
 			auto r = brd.active->refl;
-			r.setPosition(x - ox, y - oy);
+			r.setPosition(pos);
 			rw.draw(r);
-
 		}
-
 		rw.draw(gui::text);
 	}
 	mm.Display(rw);
