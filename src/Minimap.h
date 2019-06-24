@@ -17,6 +17,8 @@ public:
 	virtual void Update(int) override;
 	virtual bool ParseInput(sf::Event&) override;
 
+	void Recalc();
+
 	std::string Tooltip() const;
 
 private:

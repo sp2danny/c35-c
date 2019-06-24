@@ -74,6 +74,7 @@ MainFrame::MainFrame()
 
 	Unit::unloadBase();
 
+	gui.Recalc();
 }
 
 MainFrame::~MainFrame()
@@ -136,7 +137,7 @@ bool MainFrame::ParseInput(sf::Event& e)
 		if (e.key.code == sf::Keyboard::Down)  down.dn = false;
 	}
 
-	int s = 11;
+	int s = 3;
 	dx = dy = 0;
 	if (down.dn) dy += s;
 	if (down.up) dy -= s;

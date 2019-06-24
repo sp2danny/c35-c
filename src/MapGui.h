@@ -50,6 +50,8 @@ struct MapGui : public Frame
 
 	Ref<Player> pak;
 
+	void Recalc() { mm.Recalc(); }
+
 private:
 	alib::BA minimap, portrait;
 	alib::AC advisors, replay, diplomacy;
