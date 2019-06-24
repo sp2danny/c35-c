@@ -29,7 +29,7 @@ public:
 private:
 	bool wantsQuit = false;
 
-	Board       board;
+	//Board       board;
 	int         ox, oy;
 	Ref<Player> p1, p2;
 
@@ -44,9 +44,10 @@ private:
 };
 
 MainFrame::MainFrame()
-	: gui(board)
 {
 	t1 = t2 = t3 = std::chrono::high_resolution_clock::now();
+
+	Board& board = Game();
 
 	board.Randomize(75, 55);
 	board.Instance();
@@ -87,7 +88,7 @@ MainFrame::~MainFrame()
 
 void MainFrame::Display(sf::RenderWindow& rw)
 {
-	board.Display(rw, ox, oy);
+	Game().Display(rw, ox, oy);
 	gui.SetOfs(ox,oy);
 	gui.Display(rw);
 
@@ -104,7 +105,7 @@ bool MainFrame::Done()
 
 void MainFrame::Update(int ms)
 {
-	board.Update();
+	Game().Update();
 	gui.Update(ms);
 	t1 = t2;
 	t2 = t3;

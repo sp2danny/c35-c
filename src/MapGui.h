@@ -30,7 +30,7 @@ struct Action : RepositoryBase<Action>
 
 struct MapGui : public Frame
 {
-	MapGui(Board&);
+	MapGui();
 
 	virtual void Display(sf::RenderWindow&) override;
 	virtual bool ParseInput(sf::Event&) override;
@@ -55,7 +55,6 @@ struct MapGui : public Frame
 private:
 	alib::BA minimap, portrait;
 	alib::AC advisors, replay, diplomacy;
-	Board& brd;
 	Minimap mm;
 	int ox,oy;
 };

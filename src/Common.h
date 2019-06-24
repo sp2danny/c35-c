@@ -31,25 +31,20 @@ namespace C35
 
 	const short Degree[d6_end] { 60, 0, 300, 240, 180, 120 };
 
-	inline Dir6 operator++(Dir6& d) { return d = (Dir6)(1+(int)d); }
+	inline Dir6 operator++(Dir6& d) { return d = (Dir6)((int)d + 1); }
+	inline Dir6 operator--(Dir6& d) { return d = (Dir6)((int)d - 1);}
 
-	inline Dir6 CW  (Dir6 d) { return (Dir6) ( ((int)d + 1) % 6); }
-	inline Dir6 CCW (Dir6 d) { return (Dir6) ( ((int)d + 5) % 6); }
+	inline Dir6 CW  (Dir6 d) { return (Dir6)(((int)d + 1) % 6); }
+	inline Dir6 CCW (Dir6 d) { return (Dir6)(((int)d + 5) % 6); }
 
 	struct Hexagon;
+	struct HexCore;
+
 	struct Player;
-	class  Board;
-	class  PlayerBoard;
-	struct Orders;
 	struct Unit;
 	struct City;
-	struct City;
-	struct PlayerHex;
-	struct Movement;
-	class  GameEngine;
 
 	typedef unsigned char UC;
-
 }
 
 inline std::string IntToStr(int i) { return std::to_string(i); }
@@ -63,30 +58,11 @@ template<typename T>
 void ReadBinary(std::istream& istr, T& val)
 {
 	istr.read((char*)&val, sizeof(val));
-
-	/*int i,n = sizeof(T);
-	char* p = (char*) &val;
-
-	for (i=0; i<n; ++i)
-	{
-		char c;
-		istr.read(&c,1);
-		(*p) = c;
-		++p;
-	}*/
 }
 
 template<typename T>
 void WriteBinary(std::ostream& ostr, const T& val)
 {
-	int i, n = sizeof(T);
-	const char* p = (char*) &val;
-
-	for (i=0; i<n; ++i)
-	{
-		char c;
-		c = (*p);
-		++p;
-		ostr.write(&c,1);
-	}
+	ostr.write((char*)&val, sizeof(val));
 }
+

@@ -13,7 +13,7 @@ class Board;
 class Minimap : public Frame
 {
 public:
-	Minimap(int, int, Board&);
+	Minimap(int, int);
 	~Minimap();
 
 	virtual void Display(sf::RenderWindow&) override;
@@ -24,8 +24,6 @@ public:
 	void Recalc();
 
 	std::string Tooltip() const;
-
-	Board& brd;
 
 private:
 	int x, y;

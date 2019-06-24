@@ -4,6 +4,13 @@
 #include "Board.h"
 #include "Player.h"
 
+auto C35::Game()
+	-> Board&
+{
+	static Board board;
+	return board;
+}
+
 auto C35::Board::at(int x, int y) -> HexCore*
 {
 	int idx = y * w + x;
@@ -11,7 +18,7 @@ auto C35::Board::at(int x, int y) -> HexCore*
 	return map.data() + idx;
 }
 
-auto C35::Board::pix(int px, int py) -> HexCore*
+auto C35::Board::Pix(int px, int py) -> HexCore*
 {
 	(void)px;
 	(void)py;

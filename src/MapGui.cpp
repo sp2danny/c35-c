@@ -18,7 +18,8 @@ alib::Refl boxr, circr;
 int        bw, bh;
 }  // namespace gui
 
-C35::MapGui::MapGui(Board& brd) : brd(brd), mm(25, 25, brd)
+C35::MapGui::MapGui()
+	: mm(25, 25)
 {
 	gui::font.loadFromFile("arial.ttf");
 	gui::text = sf::Text(" ", gui::font);
@@ -38,6 +39,7 @@ C35::MapGui::MapGui(Board& brd) : brd(brd), mm(25, 25, brd)
 void C35::MapGui::Display(sf::RenderWindow& rw)
 {
 	rw.draw(gui::boxr);
+	Board& brd = Game();
 	if (brd.active)
 	{
 		gui::text.setString(brd.active->name());

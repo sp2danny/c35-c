@@ -11,8 +11,8 @@ alib::Refl r_g, r_s, r_c, r_d, r_m, r_n, r_o, r_p, r_r;
 alib::CIS  c_g, c_s, c_c, c_d, c_m, c_n, c_o, c_p, c_r;
 }
 
-C35::Minimap::Minimap(int x, int y, Board& brd)
-	: x(x), y(y), brd(brd)
+C35::Minimap::Minimap(int x, int y)
+	: x(x), y(y)
 {
 	alib::RGB purpl {255,0,255};
 
@@ -31,6 +31,7 @@ C35::Minimap::Minimap(int x, int y, Board& brd)
 
 void C35::Minimap::Recalc()
 {
+	Board& brd = Game();
 	static bool first = true;
 	if (first) {
 		tex.create(4*brd.w+2, 3*brd.h);

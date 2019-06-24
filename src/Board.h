@@ -12,12 +12,14 @@ namespace C35
 class Board
 {
 public:
-	int                  w, h;
+	int w, h;
+	//int ox, oy;
+
 	std::vector<HexCore> map;
 
 	HexCore*       at(int, int);
 	const HexCore* at(int x, int y) const { return ((Board*)this)->at(x, y); }
-	HexCore*       pix(int, int);
+	HexCore*       Pix(int, int);
 
 	void Randomize(int, int);
 	void Load(std::istream&);
@@ -37,5 +39,7 @@ private:
 
 	alib::AD tiles;
 };
+
+Board& Game();
 
 }  // namespace C35

@@ -11,7 +11,7 @@
 namespace C35
 {
 
-struct Unit;
+class Board;
 
 struct Player : RepositoryBase<Player>
 {
