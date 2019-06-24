@@ -46,16 +46,18 @@ struct MapGui : public Frame
 	std::vector<Ref<Action>> actionGroupMap;
 	std::vector<Ref<Action>> actionGroupUnit;
 
-	Ref<Unit> active;
-
 	Ref<Player> pak;
 
 	void Recalc() { mm.Recalc(); }
 
+	void setOfs(int x, int y) { ox=x; oy=y; }
+
 private:
 	alib::BA minimap, portrait;
 	alib::AC advisors, replay, diplomacy;
+	Board& brd;
 	Minimap mm;
+	int ox,oy;
 };
 
 }  // namespace C35

@@ -61,7 +61,7 @@ MainFrame::MainFrame()
 	Ref<Unit> u;
 
 	u = board.spawn("Worker", p1, {7, 7});
-	gui.active = u;
+	board.active = u;
 	auto hx = u->at;
 	ox = hx->px - WW / 2;
 	oy = hx->py - HH / 2;
@@ -88,6 +88,7 @@ MainFrame::~MainFrame()
 void MainFrame::Display(sf::RenderWindow& rw)
 {
 	board.Display(rw, ox, oy);
+	gui.setOfs(ox,oy);
 	gui.Display(rw);
 	
 	auto dur = std::chrono::duration_cast<std::chrono::microseconds>(t3 - t1).count();

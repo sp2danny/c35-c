@@ -14,8 +14,8 @@ struct Ref
 	Ref() = default;
 	T* operator->() { return T::lookup(m_index); }
 	T& operator*() { return *T::lookup(m_index); }
-	   operator T*() { return T::lookup(m_index); }
-	   operator bool() const { return T::lookup(m_index) != nullptr; }
+	operator T*() { return T::lookup(m_index); }
+	operator bool() const { return T::lookup(m_index) != nullptr; }
 	friend struct RepositoryBase<T>;
 
 private:
@@ -24,10 +24,27 @@ private:
 };
 
 template<typename T>
+struct CRef
+{
+	CRef() = default;
+	const T* operator->() { return T::lookup(m_index); }
+	const T& operator*() { return *T::lookup(m_index); }
+	operator const T*() { return T::lookup(m_index); }
+	operator bool() const { return T::lookup(m_index) != nullptr; }
+	friend struct RepositoryBase<T>;
+
+private:
+	CRef(int idx) : m_index(idx) {}
+	int m_index = 0;
+};
+
+template<typename T>
 struct RepositoryBase
 {
 	int    index() const { return m_index; }
 	Ref<T> ref() { return Ref<T>{m_index}; }
+	CRef<T> ref() const { return CRef<T>{m_index}; }
+	CRef<T> cref() const { return CRef<T>{m_index}; }
 
 	std::string&     name() { return m_name; }
 	std::string_view name() const { return m_name; }

@@ -23,9 +23,10 @@ public:
 
 	std::string Tooltip() const;
 
+	Board& brd;
+
 private:
 	int x, y;
-	Board& brd;
 };
 
 }  // namespace C35

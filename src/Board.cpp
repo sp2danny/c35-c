@@ -210,6 +210,8 @@ void C35::Board::Display(sf::RenderWindow& rw, int ox, int oy)
 		if (yy > (HH + MRG)) break;
 		for (int x = 0; x < w; ++x)
 		{
+			if (active && x==active->x && y==active->y)
+				continue;
 			HexCore& hx = *at(x, y);
 			if (hx.units.empty()) continue;
 			int xx = hx.px - ox;

@@ -5,36 +5,43 @@
 #include <alib.hpp>
 
 #include "Unit.h"
+#include "Hexagon.h"
+#include "Minimap.h"
+#include "Board.h"
 
 namespace gui
 {
 sf::Font   font;
 sf::Text   text;
-alib::CIS  box;
-alib::Refl boxr;
+alib::CIS  box, circ;
+alib::Refl boxr, circr;
 int        bw, bh;
-} // namespace gui
 
-C35::MapGui::MapGui(Board& brd)
-	: mm(25,25, brd)
+}  // namespace gui
+
+C35::MapGui::MapGui(Board& brd) : brd(brd), mm(25, 25, brd)
 {
 	gui::font.loadFromFile("arial.ttf");
 	gui::text = sf::Text(" ", gui::font);
 	gui::box.LoadBMP("img/box.bmp", {255, 0, 255}, 0, 0);
 	gui::box.Instance(0);
-	//gui::box.UnloadBase();
 	gui::boxr = gui::box.Refl(0);
 	gui::bw   = gui::box.Width();
 	gui::bh   = gui::box.Height();
 	gui::boxr.setPosition((float)WW - gui::bw, (float)HH - gui::bh);
+	gui::box.UnloadBase();
+
+	gui::circ.LoadBMP("img/circ_g.bmp", {255, 0, 255}, 33, 21);
+	gui::circ.Instance(0);
+	gui::circr = gui::circ.Refl(0);
 }
 
 void C35::MapGui::Display(sf::RenderWindow& rw)
 {
 	rw.draw(gui::boxr);
-	if (active)
+	if (brd.active)
 	{
-		gui::text.setString(active->name());
+		gui::text.setString(brd.active->name());
 		gui::text.setCharacterSize(18);
 		gui::text.setStyle(sf::Text::Bold);
 		gui::text.setFillColor(sf::Color::Black);
@@ -42,6 +49,20 @@ void C35::MapGui::Display(sf::RenderWindow& rw)
 		int  tw   = (int)bnds.width;
 
 		gui::text.setPosition(WW - gui::bw + gui::bw / 2.0f - tw / 2.0f, HH - gui::bh + 12.0f);
+
+		auto hex = brd.active->at;
+		if (hex)
+		{
+			int x = hex->px;
+			int y = hex->py;
+			gui::circr.setPosition(x - ox, y - oy);
+			rw.draw(gui::circr);
+
+			auto r = brd.active->refl;
+			r.setPosition(x - ox, y - oy);
+			rw.draw(r);
+
+		}
 
 		rw.draw(gui::text);
 	}
