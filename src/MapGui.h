@@ -50,7 +50,7 @@ struct MapGui : public Frame
 
 	void Recalc() { mm.Recalc(); }
 
-	void setOfs(int x, int y) { ox=x; oy=y; }
+	void SetOfs(int x, int y) { ox=x; oy=y; }
 
 private:
 	alib::BA minimap, portrait;

@@ -3,7 +3,7 @@
 
 #include "Player.h"
 
-auto C35::Player::all()
+auto C35::Player::All()
 	-> std::vector<Ref<Player>>
 {
 	std::vector<Ref<Player>> a;

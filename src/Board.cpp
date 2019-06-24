@@ -18,11 +18,11 @@ auto C35::Board::pix(int px, int py) -> HexCore*
 	return nullptr;
 }
 
-void C35::Board::update()
+void C35::Board::Update()
 {
 	for (auto&& hx : map)
 	{
-		hx.update();
+		hx.Update();
 	}
 }
 
@@ -224,7 +224,7 @@ void C35::Board::Display(sf::RenderWindow& rw, int ox, int oy)
 	}
 }
 
-auto C35::Board::spawn(std::string_view type, Ref<Player> player, Pos pos)
+auto C35::Board::Spawn(std::string_view type, Ref<Player> player, Pos pos)
 	-> Ref<Unit>
 {
 	int       id   = Unit::fromtype(type);

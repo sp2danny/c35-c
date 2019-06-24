@@ -70,7 +70,7 @@ bool C35::HexCore::HaveCover() const
 	return cover != 0;
 }
 
-void C35::HexCore::update()
+void C35::HexCore::Update()
 {
 	for (auto&& u : units)
 	{

@@ -35,7 +35,7 @@ struct Player : RepositoryBase<Player>
 	bool isbarb;
 	bool pak;
 
-	static std::vector<Ref<Player>> all();
+	static std::vector<Ref<Player>> All();
 
 };
 

@@ -26,9 +26,9 @@ public:
 	void Instance();
 	void Display(sf::RenderWindow&, int, int);
 
-	Ref<Unit> spawn(std::string_view, Ref<Player>, Pos);
+	Ref<Unit> Spawn(std::string_view, Ref<Player>, Pos);
 
-	void update();
+	void Update();
 
 	Ref<Unit> active;
 

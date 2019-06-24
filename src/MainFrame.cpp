@@ -60,16 +60,16 @@ MainFrame::MainFrame()
 
 	Ref<Unit> u;
 
-	u = board.spawn("Worker", p1, {7, 7});
+	u = board.Spawn("Worker", p1, {7, 7});
 	board.active = u;
 	auto hx = u->at;
 	ox = hx->px - WW / 2;
 	oy = hx->py - HH / 2;
-	u = board.spawn("Worker", p2, {8, 7});
+	u = board.Spawn("Worker", p2, {8, 7});
 	u->set("mine", 90);
-	u = board.spawn("Worker", p2, {8, 8});
+	u = board.Spawn("Worker", p2, {8, 8});
 	u->set("road", 270);
-	u = board.spawn("Warrior", p2, {9, 7});
+	u = board.Spawn("Warrior", p2, {9, 7});
 	u->set("attack");
 
 	Unit::unloadBase();
@@ -88,9 +88,9 @@ MainFrame::~MainFrame()
 void MainFrame::Display(sf::RenderWindow& rw)
 {
 	board.Display(rw, ox, oy);
-	gui.setOfs(ox,oy);
+	gui.SetOfs(ox,oy);
 	gui.Display(rw);
-	
+
 	auto dur = std::chrono::duration_cast<std::chrono::microseconds>(t3 - t1).count();
 	auto fps = 2000000 / dur;
 	old_fps  = 0.99f * old_fps + 0.01f * fps;
@@ -104,7 +104,7 @@ bool MainFrame::Done()
 
 void MainFrame::Update(int ms)
 {
-	board.update();
+	board.Update();
 	gui.Update(ms);
 	t1 = t2;
 	t2 = t3;
