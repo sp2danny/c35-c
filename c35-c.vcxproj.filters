@@ -63,6 +63,9 @@
     <ClCompile Include="src\MapGui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Minimap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\FrameSystem.h">
@@ -114,6 +117,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="src\MapGui.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Minimap.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

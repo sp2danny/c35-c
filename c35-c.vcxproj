@@ -107,6 +107,7 @@
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\MainFrame.cpp" />
     <ClCompile Include="src\MapGui.cpp" />
+    <ClCompile Include="src\Minimap.cpp" />
     <ClCompile Include="src\old\Board.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -142,6 +143,7 @@
     <ClInclude Include="src\FrameSystem.h" />
     <ClInclude Include="src\Hexagon.h" />
     <ClInclude Include="src\MapGui.h" />
+    <ClInclude Include="src\Minimap.h" />
     <ClInclude Include="src\old\Board.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>

@@ -8,6 +8,7 @@
 #include "Common.h"
 #include "Repository.h"
 #include "FrameSystem.h"
+#include "Minimap.h"
 
 namespace C35
 {
@@ -29,7 +30,7 @@ struct Action : RepositoryBase<Action>
 
 struct MapGui : public Frame
 {
-	MapGui();
+	MapGui(Board&);
 
 	virtual void Display(sf::RenderWindow&) override;
 	virtual bool ParseInput(sf::Event&) override;
@@ -52,6 +53,7 @@ struct MapGui : public Frame
 private:
 	alib::BA minimap, portrait;
 	alib::AC advisors, replay, diplomacy;
+	Minimap mm;
 };
 
 }  // namespace C35

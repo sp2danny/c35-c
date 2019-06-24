@@ -15,7 +15,8 @@ alib::Refl boxr;
 int        bw, bh;
 } // namespace gui
 
-C35::MapGui::MapGui()
+C35::MapGui::MapGui(Board& brd)
+	: mm(25,25, brd)
 {
 	gui::font.loadFromFile("arial.ttf");
 	gui::text = sf::Text(" ", gui::font);
@@ -44,6 +45,7 @@ void C35::MapGui::Display(sf::RenderWindow& rw)
 
 		rw.draw(gui::text);
 	}
+	mm.Display(rw);
 }
 
 bool C35::MapGui::ParseInput(sf::Event&)

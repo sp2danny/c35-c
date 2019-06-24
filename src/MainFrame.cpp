@@ -44,10 +44,11 @@ private:
 };
 
 MainFrame::MainFrame()
+	: gui(board)
 {
 	t1 = t2 = t3 = std::chrono::high_resolution_clock::now();
 
-	board.Randomize(300, 200);
+	board.Randomize(75, 55);
 	board.Instance();
 
 	MakeWarr();
@@ -135,7 +136,7 @@ bool MainFrame::ParseInput(sf::Event& e)
 		if (e.key.code == sf::Keyboard::Down)  down.dn = false;
 	}
 
-	int s = 1;
+	int s = 11;
 	dx = dy = 0;
 	if (down.dn) dy += s;
 	if (down.up) dy -= s;

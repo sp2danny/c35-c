@@ -10,6 +10,8 @@
 #include <memory>
 #include <cstddef>
 
+using namespace std::literals;
+
 namespace C35
 {
 	inline const int SZ = 60;
