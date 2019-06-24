@@ -46,10 +46,14 @@ C35::Intro::Intro()
 	back_cis.Instance(0);
 	back = back_cis.Refl(0);
 	back.setPosition(0, 0);
+	float xscale = WW / (float)back_cis.Width();
+	float yscale = HH / (float)back_cis.Height();
+	back.setScale({xscale, yscale});
 	horsie_ac.Load("img/walk.ad");
 	horsie_ac.Instance(90);
 	horsie = horsie_ac.Refl("run", 90 + 45, rand() % 256);
-	horsie.setPosition({500, 350});
+	horsie.setPosition({500*xscale, 350*yscale});
+	horsie.setScale({xscale, yscale});
 }
 
 void C35::Intro::Display(sf::RenderWindow & window)
@@ -80,6 +84,7 @@ void Main(const C35::StrVec& args)
 
 	srand((unsigned int)time(0));
 
+/*
 #ifdef NDEBUG
 	const auto&   vms   = sf::VideoMode::getFullscreenModes();
 	bool          found = false;
@@ -108,9 +113,11 @@ void Main(const C35::StrVec& args)
 	}
 	if (!found) return;
 #endif
+*/
 
 	//#ifndef NDEBUG
-	sf::RenderWindow window({640, 480}, "C35");
+	sf::VideoMode    vm(C35::WW, C35::HH);
+	sf::RenderWindow window(vm, "C35");
 	//#else
 	// sf::RenderWindow window(vm, "C35", sf::Style::Fullscreen);
 	//#endif

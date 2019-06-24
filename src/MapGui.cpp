@@ -25,7 +25,7 @@ C35::MapGui::MapGui()
 	gui::boxr = gui::box.Refl(0);
 	gui::bw   = gui::box.Width();
 	gui::bh   = gui::box.Height();
-	gui::boxr.setPosition(640.0f - gui::bw, 480.0f - gui::bh);
+	gui::boxr.setPosition((float)WW - gui::bw, (float)HH - gui::bh);
 }
 
 void C35::MapGui::Display(sf::RenderWindow& rw)
@@ -40,7 +40,7 @@ void C35::MapGui::Display(sf::RenderWindow& rw)
 		auto bnds = gui::text.getLocalBounds();
 		int  tw   = (int)bnds.width;
 
-		gui::text.setPosition(640.0f - gui::bw + gui::bw / 2.0f - tw / 2.0f, 480.0f - gui::bh + 12.0f);
+		gui::text.setPosition(WW - gui::bw + gui::bw / 2.0f - tw / 2.0f, HH - gui::bh + 12.0f);
 
 		rw.draw(gui::text);
 	}

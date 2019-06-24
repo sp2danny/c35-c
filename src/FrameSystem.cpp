@@ -18,14 +18,6 @@ C35::FramePtr C35::Frame::system = nullptr;
 
 std::string C35::Frame::title;
 
-namespace C35
-{
-const int SZ  = 60;
-const int YSZ = 47;
-[[maybe_unused]] const int WW = 1024;
-[[maybe_unused]] const int HH = 768;
-}  // namespace
-
 void C35::Frame::Init(std::string name)
 {
 	title = name;

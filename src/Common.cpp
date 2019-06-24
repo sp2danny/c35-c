@@ -1,6 +1,8 @@
 
 #include <string>
 
+#include "Common.h"
+
 /*
 std::string ExtractFileExt(std::string )
 {
@@ -12,4 +14,5 @@ std::string ExtractFileBase(std::string)
 	return "";
 }
 */
+
 

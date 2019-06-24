@@ -62,8 +62,8 @@ MainFrame::MainFrame()
 	u = board.spawn("Worker", p1, {7, 7});
 	gui.active = u;
 	auto hx = u->at;
-	ox = hx->px - 640 / 2;
-	oy = hx->py - 480 / 2;
+	ox = hx->px - WW / 2;
+	oy = hx->py - HH / 2;
 	u = board.spawn("Worker", p2, {8, 7});
 	u->set("mine", 90);
 	u = board.spawn("Worker", p2, {8, 8});

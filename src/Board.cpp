@@ -189,18 +189,14 @@ void C35::Board::Display(sf::RenderWindow& rw, int ox, int oy)
 	for (int y = 0; y < h; ++y)
 	{
 		int yy = at(0, y)->py - oy;
-		if (yy < -60)
-			continue;
-		if (yy > (480+60))
-			break;
-		for (int x=0; x<w; ++x)
+		if (yy < -MRG) continue;
+		if (yy > (HH + MRG)) break;
+		for (int x = 0; x < w; ++x)
 		{
 			HexCore& hx   = *at(x, y);
 			int xx = hx.px - ox;
-			if (xx < -60)
-				continue;
-			if (xx > (640+60))
-				break;
+			if (xx < -MRG) continue;
+			if (xx > (WW+MRG)) break;
 			alib::Refl refl = tiles.Refl(hx.tile, 0);
 			refl.setPosition((float)xx, (float)yy);
 			rw.draw(refl);
@@ -210,15 +206,15 @@ void C35::Board::Display(sf::RenderWindow& rw, int ox, int oy)
 	for (int y = 0; y < h; ++y)
 	{
 		int yy = at(0, y)->py - oy;
-		if (yy < -60) continue;
-		if (yy > (480 + 60)) break;
+		if (yy < -MRG) continue;
+		if (yy > (HH + MRG)) break;
 		for (int x = 0; x < w; ++x)
 		{
 			HexCore& hx = *at(x, y);
 			if (hx.units.empty()) continue;
 			int xx = hx.px - ox;
-			if (xx < -60) continue;
-			if (xx > (640 + 60)) break;
+			if (xx < -MRG) continue;
+			if (xx > (WW + MRG)) break;
 			auto r = hx.units.back()->refl;
 			r.setPosition((float)xx, (float)yy);
 			rw.draw(r);
