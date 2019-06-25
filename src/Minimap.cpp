@@ -21,15 +21,9 @@ C35::Minimap::Minimap(int x, int y) : x(x), y(y)
 	data->c_##x.LoadBMP("img/MiniMap/mmm_" #x ".bmp", purpl, 0, 0);    \
 	data->r_##x = data->c_##x.Refl(0);
 
-	LD(g);
-	LD(s);
-	LD(c);
-	LD(d);
-	LD(m);
-	LD(n);
-	LD(o);
-	LD(p);
-	LD(r);
+	LD(g); LD(s); LD(c);
+	LD(d); LD(m); LD(n);
+	LD(o); LD(p); LD(r);
 
 #undef LD
 }
@@ -88,11 +82,39 @@ void C35::Minimap::Recalc()
 
 C35::Minimap::~Minimap() = default;
 
+
+
 void C35::Minimap::Display(sf::RenderWindow& rw)
 {
 	sf::Sprite sprite(tex.getTexture());
 	sprite.setPosition((float)x, (float)y);
 	rw.draw(sprite);
+
+	auto& m  = Game();
+	auto  hx = m.at(m.w - 1, m.h - 1);
+	int   ww = hx->px + SZ;
+	int   hh = hx->py + YSZ;
+
+	float x1, x2, y1, y2;
+	x1 = 0.0f + x + m.ox * pw / ww;
+	x2 = 0.0f + x + m.ox * pw / ww + WW * pw / ww;
+	y1 = 0.0f + y + m.oy * ph / hh;
+	y2 = 0.0f + y + m.oy * ph / hh + HH * ph / hh;
+
+	std::vector<sf::Vertex> line;
+	line.push_back(sf::Vector2f{x1, y1});
+	line.push_back(sf::Vector2f{x2, y1});
+
+	line.push_back(sf::Vector2f{x2, y1});
+	line.push_back(sf::Vector2f{x2, y2});
+
+	line.push_back(sf::Vector2f{x2, y2});
+	line.push_back(sf::Vector2f{x1, y2});
+
+	line.push_back(sf::Vector2f{x1, y2});
+	line.push_back(sf::Vector2f{x1, y1});
+
+	rw.draw(line.data(), line.size(), sf::Lines);
 }
 
 bool C35::Minimap::Done()
@@ -114,10 +136,10 @@ bool C35::Minimap::ParseInput(sf::Event& e)
 	}
 	else if (e.type == sf::Event::MouseButtonPressed)
 	{
-		auto& m   = Game();
-		auto  hx  = m.at(m.w - 1, m.h - 1);
-		int   ww  = hx->px + SZ;
-		int   hh  = hx->py + YSZ;
+		auto& m  = Game();
+		auto  hx = m.at(m.w - 1, m.h - 1);
+		int   ww = hx->px + SZ;
+		int   hh = hx->py + YSZ;
 		if (e.mouseButton.button == sf::Mouse::Left)
 		{
 			int xx = mx-x, yy = my-y;
