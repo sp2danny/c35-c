@@ -50,8 +50,8 @@ MainFrame::MainFrame()
 	board.Randomize(75, 55);
 	board.Instance();
 
-	MakeWarr();
-	MakeWorker();
+	MakeWarrior(), MakeWorker(), MakeSettler(), MakePikeman(), MakeHorseman();
+
 	p1         = Player::lookup(Player::create(100, board, true))->ref();
 	p1->name() = "Player One";
 	p2         = Player::lookup(Player::create(200, board, true))->ref();
@@ -59,7 +59,7 @@ MainFrame::MainFrame()
 
 	Ref<Unit> u;
 
-	u = board.Spawn("Worker", p1, {7, 7});
+	u = board.Spawn("Settler", p1, {7, 7});
 	board.active = u;
 	auto hx = u->at;
 	Game().ox = hx->px - WW / 2;
@@ -70,6 +70,10 @@ MainFrame::MainFrame()
 	u->set("road", 270);
 	u = board.Spawn("Warrior", p2, {9, 7});
 	u->set("attack");
+	u = board.Spawn("Horseman", p1, {9, 8});
+	u->set("idle");
+	u = board.Spawn("Pikeman", p2, {9, 9});
+	u->set("fortify");
 
 	Unit::unloadBase();
 
@@ -102,7 +106,7 @@ bool MainFrame::Done()
 
 void MainFrame::Update(int ms)
 {
-	Game().Update();
+	Game().Update(ms);
 	gui.Update(ms);
 	t1 = t2;
 	t2 = t3;

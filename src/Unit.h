@@ -15,8 +15,8 @@ struct UnitType : RepositoryBase<UnitType>
 	enum
 	{
 		none,
-		att,
-		off
+		off,
+		def
 	} primary;
 	struct
 	{
@@ -56,6 +56,6 @@ private:
 	inline static std::map<std::string, alib::AC> cache;
 };
 
-extern void MakeWarr(), MakeWorker();
+extern void MakeWarrior(), MakeWorker(), MakeSettler(), MakePikeman(), MakeHorseman();
 
 }  // namespace C35

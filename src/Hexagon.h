@@ -55,7 +55,7 @@ struct HexCore
 
 	std::vector<Ref<Unit>> units;
 
-	void Update();
+	void Update(int);
 
 	void Clr()
 	{

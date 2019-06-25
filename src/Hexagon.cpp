@@ -70,11 +70,11 @@ bool C35::HexCore::HaveCover() const
 	return cover != 0;
 }
 
-void C35::HexCore::Update()
+void C35::HexCore::Update(int ms)
 {
 	for (auto&& u : units)
 	{
-		u->refl.Update();
+		u->refl.Update(ms);
 	}
 }
 

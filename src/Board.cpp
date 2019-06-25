@@ -25,11 +25,11 @@ auto C35::Board::Pix(int px, int py) -> HexCore*
 	return nullptr;
 }
 
-void C35::Board::Update()
+void C35::Board::Update(int ms)
 {
 	for (auto&& hx : map)
 	{
-		hx.Update();
+		hx.Update(ms);
 	}
 }
 

@@ -81,7 +81,7 @@ void C35::Unit::set(std::string_view anim, short dir)
 	refl = iter->second.Refl(std::string(anim), dir, owner ? owner->color : 0);
 }
 
-void C35::MakeWarr()
+void C35::MakeWarrior()
 {
 	int       id = UnitType::create();
 	UnitType& ut = *UnitType::lookup(id);
@@ -98,5 +98,36 @@ void C35::MakeWorker()
 
 	ut.name()  = "Worker";
 	ut.primary = UnitType::none;
-	ut.base    = {1, 1, 3, 3};
+	ut.base    = {0, 0, 3, 0};
 }
+
+void C35::MakeSettler()
+{
+	int       id = UnitType::create();
+	UnitType& ut = *UnitType::lookup(id);
+
+	ut.name()  = "Settler";
+	ut.primary = UnitType::none;
+	ut.base    = {0, 0, 3, 0};
+}
+
+void C35::MakePikeman()
+{
+	int       id = UnitType::create();
+	UnitType& ut = *UnitType::lookup(id);
+
+	ut.name()  = "Pikeman";
+	ut.primary = UnitType::def;
+	ut.base    = {1, 3, 3, 3};
+}
+
+void C35::MakeHorseman()
+{
+	int       id = UnitType::create();
+	UnitType& ut = *UnitType::lookup(id);
+
+	ut.name()  = "Horseman";
+	ut.primary = UnitType::off;
+	ut.base    = {2, 1, 6, 3};
+}
+

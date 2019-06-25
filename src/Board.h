@@ -30,7 +30,7 @@ public:
 
 	Ref<Unit> Spawn(std::string_view, Ref<Player>, Pos);
 
-	void Update();
+	void Update(int);
 
 	Ref<Unit> active;
 

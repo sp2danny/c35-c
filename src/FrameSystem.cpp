@@ -55,6 +55,12 @@ void C35::Frame::Run(sf::RenderWindow& window)
 	window.setKeyRepeatEnabled(false);
 	//window.setVerticalSyncEnabled(true);
 
+	sf::Clock clock;
+
+	auto last = clock.getElapsedTime().asMilliseconds();
+
+	Frame* old = nullptr;
+
 	while (true)
 	{
 		if (!window.isOpen())
@@ -84,7 +90,13 @@ void C35::Frame::Run(sf::RenderWindow& window)
 		}
 
 		// --- Update ---
-		int ticks = 7;
+		auto now  = clock.getElapsedTime().asMilliseconds();
+		auto ticks = now - last;
+		if (old != &*stack.back())
+		{
+			ticks = 0;
+			old   = &*stack.back();
+		}
 		stack.back()->Update(ticks);
 		if (modal)
 			modal->Update(ticks);
@@ -92,6 +104,7 @@ void C35::Frame::Run(sf::RenderWindow& window)
 			system->Update(ticks);
 		for (auto&& ut : actives)
 			ut->Update(ticks);
+		last = now;
 
 		// --- Display ---
 		window.clear();
