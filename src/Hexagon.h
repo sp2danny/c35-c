@@ -70,7 +70,5 @@ struct HexCore
 private:
 };
 
-
 }  // namespace C35
-
 

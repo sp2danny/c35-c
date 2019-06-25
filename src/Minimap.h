@@ -26,6 +26,9 @@ public:
 	std::string Tooltip() const;
 
 private:
+	struct Data;
+	std::unique_ptr<Data> data;
+
 	int x, y;
 	sf::RenderTexture tex;
 };

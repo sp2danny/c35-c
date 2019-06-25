@@ -53,13 +53,9 @@ std::ptrdiff_t ssize(const T& t)
 
 template<typename T>
 void ReadBinary(std::istream& istr, T& val)
-{
-	istr.read((char*)&val, sizeof(val));
-}
+{ istr.read((char*)&val, sizeof(val)); }
 
 template<typename T>
 void WriteBinary(std::ostream& ostr, const T& val)
-{
-	ostr.write((char*)&val, sizeof(val));
-}
+{ ostr.write((char*)&val, sizeof(val)); }
 

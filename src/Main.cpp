@@ -128,8 +128,8 @@ void Main(const C35::StrVec& args)
 	C35::Frame::Run(window);
 
 	//std::cout << "\ndone.\n";
-	#ifndef NDEBUG
-	exit(0);
+	#ifdef NDEBUG
+	quick_exit(0);
 	#endif
 }
 

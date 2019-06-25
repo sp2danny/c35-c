@@ -29,8 +29,6 @@ public:
 private:
 	bool wantsQuit = false;
 
-	//Board       board;
-	//int         ox, oy;
 	Ref<Player> p1, p2;
 
 	MapGui gui;
@@ -89,7 +87,6 @@ MainFrame::~MainFrame()
 void MainFrame::Display(sf::RenderWindow& rw)
 {
 	Game().Display(rw);
-	//gui.SetOfs(ox,oy);
 	gui.Display(rw);
 
 	auto dur = std::chrono::duration_cast<std::chrono::microseconds>(t3 - t1).count();

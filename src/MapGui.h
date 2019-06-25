@@ -31,6 +31,7 @@ struct Action : RepositoryBase<Action>
 struct MapGui : public Frame
 {
 	MapGui();
+	~MapGui();
 
 	virtual void Display(sf::RenderWindow&) override;
 	virtual bool ParseInput(sf::Event&) override;
@@ -50,13 +51,13 @@ struct MapGui : public Frame
 
 	void Recalc() { mm.Recalc(); }
 
-	//void SetOfs(int x, int y) { ox=x; oy=y; }
-
 private:
 	alib::BA minimap, portrait;
 	alib::AC advisors, replay, diplomacy;
 	Minimap mm;
-	//int ox,oy;
+
+	struct Data;
+	std::unique_ptr<Data> gui;
 };
 
 }  // namespace C35

@@ -5,21 +5,23 @@
 
 #include "Board.h"
 
-namespace
+struct C35::Minimap::Data
 {
-alib::Refl r_g, r_s, r_c, r_d, r_m, r_n, r_o, r_p, r_r;
-alib::CIS  c_g, c_s, c_c, c_d, c_m, c_n, c_o, c_p, c_r;
-}
+	alib::Refl r_g, r_s, r_c, r_d, r_m, r_n, r_o, r_p, r_r;
+	alib::CIS  c_g, c_s, c_c, c_d, c_m, c_n, c_o, c_p, c_r;
+};
 
 C35::Minimap::Minimap(int x, int y)
 	: x(x), y(y)
 {
+	data = std::make_unique<Data>();
+
 	alib::RGB purpl {255,0,255};
 
-	#define LD(x)                          \
-		c_##x.LoadBMP("img/MiniMap/mmm_"   \
-		#x ".bmp", purpl, 0, 0);           \
-		r_##x = c_##x.Refl(0);
+	#define LD(x)                                \
+		data->c_##x.LoadBMP("img/MiniMap/mmm_"   \
+		#x ".bmp", purpl, 0, 0);                 \
+		data->r_##x = data->c_##x.Refl(0);
 
 	LD(g); LD(s); LD(c);
 	LD(d); LD(m); LD(n);
@@ -51,12 +53,12 @@ void C35::Minimap::Recalc()
 			case grass:
 			// case bonus:
 			case hill:
-				r_g.setPosition({xx, yy});
-				tex.draw(r_g);
+				data->r_g.setPosition({xx, yy});
+				tex.draw(data->r_g);
 				break;
 			case plains:
-				r_p.setPosition({xx, yy});
-				tex.draw(r_p);
+				data->r_p.setPosition({xx, yy});
+				tex.draw(data->r_p);
 				break;
 			// case desert:
 			// case floodp:
@@ -69,8 +71,8 @@ void C35::Minimap::Recalc()
 			case coast:
 			case sea:
 				// case ocean:
-				r_s.setPosition({xx, yy});
-				tex.draw(r_s);
+				data->r_s.setPosition({xx, yy});
+				tex.draw(data->r_s);
 				break;
 			}
 		}
@@ -78,9 +80,8 @@ void C35::Minimap::Recalc()
 	tex.display();
 }
 
-C35::Minimap::~Minimap()
-{
-}
+C35::Minimap::~Minimap() = default;
+
 
 void C35::Minimap::Display(sf::RenderWindow& rw)
 {
