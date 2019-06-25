@@ -17,7 +17,7 @@ auto C35::Unit::fromtype(std::string_view n) -> int
 	int utix = UnitType::lookup(n);
 	if (!utix) return 0;
 	UnitType& ut  = *UnitType::lookup(utix);
-	int       uix = create();
+	int uix = create();
 	if (!uix) return 0;
 	Unit& u    = *lookup(uix);
 	u.ut       = ut.ref();
@@ -26,6 +26,9 @@ auto C35::Unit::fromtype(std::string_view n) -> int
 	u.stats.mr = u.stats.m = ut.base.m;
 	u.stats.hr = u.stats.h = ut.base.h;
 	u.xp = u.lev = 0;
+	u.currently.facing = d6_downleft;
+	u.currently.unit = Ref<Unit>(uix);
+	u.currently.action = UnitAction::none;
 	return uix;
 }
 

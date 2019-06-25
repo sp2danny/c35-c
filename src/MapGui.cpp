@@ -40,6 +40,7 @@ C35::MapGui::MapGui()
 	gui->circr = gui->circ.Refl(0);
 
 	show.minimap = enabled.minimap = true;
+	show.unitaction = enabled.unitaction = true;
 }
 
 void C35::MapGui::Display(sf::RenderWindow& rw)
@@ -76,6 +77,10 @@ void C35::MapGui::Display(sf::RenderWindow& rw)
 
 bool C35::MapGui::ParseInput(sf::Event& e)
 {
+	if (Game().active && enabled.unitaction)
+	{
+		
+	}
 	if (enabled.minimap)
 		mm.ParseInput(e);
 	return false;

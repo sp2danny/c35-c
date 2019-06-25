@@ -136,6 +136,7 @@
     <ClCompile Include="src\Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Action.h" />
     <ClInclude Include="src\Board.h" />
     <ClInclude Include="src\Common.h" />
     <ClInclude Include="src\Conductor.h" />
