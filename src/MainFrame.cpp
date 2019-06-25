@@ -64,9 +64,11 @@ MainFrame::MainFrame()
 	auto hx = u->at;
 	Game().ox = hx->px - WW / 2;
 	Game().oy = hx->py - HH / 2;
-	u = board.Spawn("Worker", p2, {8, 7});
-	u->set("mine", 90);
-	u = board.Spawn("Worker", p2, {8, 8});
+	u = board.Spawn("Worker",  p2, {8, 7});
+	u->set("mine", Degree[Dir6::d6_right]);
+	u->currently.action = UnitAction::working;
+	u->currently.facing = Dir6::d6_right;
+	u = board.Spawn("Worker",  p2, {8, 8});
 	u->set("road", 270);
 	u = board.Spawn("Warrior", p2, {9, 7});
 	u->set("attack");

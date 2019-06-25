@@ -53,7 +53,7 @@ void C35::Frame::Run(sf::RenderWindow& window)
 	lst_mm_e.mouseMove.x = lst_mm_e.mouseMove.y = 0;
 
 	window.setKeyRepeatEnabled(false);
-	//window.setVerticalSyncEnabled(true);
+	window.setVerticalSyncEnabled(true);
 
 	sf::Clock clock;
 
@@ -123,12 +123,8 @@ void C35::Frame::Run(sf::RenderWindow& window)
 		if (modal)
 		{
 			if (modal->Done())
-			{
 				modal = nullptr;
-			}
-		}
-		else
-		{
+		} else {
 			if (stack.back()->Done())
 			{
 				stack.pop_back();
