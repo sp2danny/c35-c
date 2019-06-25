@@ -82,7 +82,30 @@ void C35::Minimap::Recalc()
 
 C35::Minimap::~Minimap() = default;
 
+namespace {
+typedef std::vector<sf::Vertex> VxVec;
 
+void icls(sf::RenderWindow& rw, VxVec& line)
+{
+	line.push_back(line.front());
+	rw.draw(line.data(), line.size(), sf::LineStrip);
+}
+
+template<typename... Args>
+void icls(sf::RenderWindow& rw, VxVec& line, int x, int y, Args... args)
+{
+	line.push_back(sf::Vector2f((float)x, (float)y));
+	icls(rw, line, args...);
+}
+
+template<typename... Args>
+void cls(sf::RenderWindow& rw, Args... args)
+{
+	VxVec line;
+	line.reserve(sizeof...(args)+1);
+	icls(rw, line, args...);
+}
+}  // namespace
 
 void C35::Minimap::Display(sf::RenderWindow& rw)
 {
@@ -95,26 +118,13 @@ void C35::Minimap::Display(sf::RenderWindow& rw)
 	int   ww = hx->px + SZ;
 	int   hh = hx->py + YSZ;
 
-	float x1, x2, y1, y2;
-	x1 = 0.0f + x + m.ox * pw / ww;
-	x2 = 0.0f + x + m.ox * pw / ww + WW * pw / ww;
-	y1 = 0.0f + y + m.oy * ph / hh;
-	y2 = 0.0f + y + m.oy * ph / hh + HH * ph / hh;
+	int x1, x2, y1, y2;
+	x1 = x + m.ox * pw / ww;
+	x2 = x1 + WW * pw / ww;
+	y1 = y + m.oy * ph / hh;
+	y2 = y2 + HH * ph / hh;
 
-	std::vector<sf::Vertex> line;
-	line.push_back(sf::Vector2f{x1, y1});
-	line.push_back(sf::Vector2f{x2, y1});
-
-	line.push_back(sf::Vector2f{x2, y1});
-	line.push_back(sf::Vector2f{x2, y2});
-
-	line.push_back(sf::Vector2f{x2, y2});
-	line.push_back(sf::Vector2f{x1, y2});
-
-	line.push_back(sf::Vector2f{x1, y2});
-	line.push_back(sf::Vector2f{x1, y1});
-
-	rw.draw(line.data(), line.size(), sf::Lines);
+	cls(rw, x1,y1, x2,y1, x2,y2, x1,y2);
 }
 
 bool C35::Minimap::Done()
