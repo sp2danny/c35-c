@@ -30,6 +30,8 @@ private:
 	std::unique_ptr<Data> data;
 
 	int x, y;
+	int mx, my;
+	int pw, ph;
 	sf::RenderTexture tex;
 };
 

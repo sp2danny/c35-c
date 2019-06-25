@@ -11,32 +11,38 @@ struct C35::Minimap::Data
 	alib::CIS  c_g, c_s, c_c, c_d, c_m, c_n, c_o, c_p, c_r;
 };
 
-C35::Minimap::Minimap(int x, int y)
-	: x(x), y(y)
+C35::Minimap::Minimap(int x, int y) : x(x), y(y)
 {
 	data = std::make_unique<Data>();
 
-	alib::RGB purpl {255,0,255};
+	alib::RGB purpl{255, 0, 255};
 
-	#define LD(x)                                \
-		data->c_##x.LoadBMP("img/MiniMap/mmm_"   \
-		#x ".bmp", purpl, 0, 0);                 \
-		data->r_##x = data->c_##x.Refl(0);
+#define LD(x)                                                                                                          \
+	data->c_##x.LoadBMP("img/MiniMap/mmm_" #x ".bmp", purpl, 0, 0);                                                    \
+	data->r_##x = data->c_##x.Refl(0);
 
-	LD(g); LD(s); LD(c);
-	LD(d); LD(m); LD(n);
-	LD(o); LD(p); LD(r);
+	LD(g);
+	LD(s);
+	LD(c);
+	LD(d);
+	LD(m);
+	LD(n);
+	LD(o);
+	LD(p);
+	LD(r);
 
-	#undef LD
-
+#undef LD
 }
 
 void C35::Minimap::Recalc()
 {
-	Board& brd = Game();
+	Board&      brd   = Game();
 	static bool first = true;
-	if (first) {
-		tex.create(4*brd.w+2, 3*brd.h);
+	if (first)
+	{
+		pw    = 4 * brd.w + 2;
+		ph    = 3 * brd.h;
+		tex.create(pw, ph);
 		first = false;
 	}
 
@@ -82,25 +88,50 @@ void C35::Minimap::Recalc()
 
 C35::Minimap::~Minimap() = default;
 
-
 void C35::Minimap::Display(sf::RenderWindow& rw)
 {
 	sf::Sprite sprite(tex.getTexture());
-	sprite.setPosition((float)x,(float)y);
+	sprite.setPosition((float)x, (float)y);
 	rw.draw(sprite);
 }
 
-bool C35::Minimap::Done() { return false; }
+bool C35::Minimap::Done()
+{
+	return false;
+}
 
-void C35::Minimap::Update(int) {}
+void C35::Minimap::Update([[maybe_unused]] int ms)
+{
+	//
+}
 
-bool C35::Minimap::ParseInput(sf::Event&) { return false; }
+bool C35::Minimap::ParseInput(sf::Event& e)
+{
+	if (e.type == sf::Event::MouseMoved)
+	{
+		mx = e.mouseMove.x;
+		my = e.mouseMove.y;
+	}
+	else if (e.type == sf::Event::MouseButtonPressed)
+	{
+		auto& m   = Game();
+		auto  hx  = m.at(m.w - 1, m.h - 1);
+		int   ww  = hx->px + SZ;
+		int   hh  = hx->py + YSZ;
+		if (e.mouseButton.button == sf::Mouse::Left)
+		{
+			int xx = mx-x, yy = my-y;
+			if (x>0 && x<pw && y>0 && y<ph)
+			{
+				m.ox = (xx * ww / pw) - (WW / 2);
+				m.oy = (yy * hh / ph) - (HH / 2);
+			}
+		}
+	}
+	return false;
+}
 
 std::string C35::Minimap::Tooltip() const
 {
 	return ""s;
 }
-
-
-
-

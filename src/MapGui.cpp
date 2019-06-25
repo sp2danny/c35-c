@@ -38,6 +38,8 @@ C35::MapGui::MapGui()
 	gui->circ.LoadBMP("img/circ_g.bmp", {255, 0, 255}, 33, 21);
 	gui->circ.Instance(0);
 	gui->circr = gui->circ.Refl(0);
+
+	show.minimap = enabled.minimap = true;
 }
 
 void C35::MapGui::Display(sf::RenderWindow& rw)
@@ -68,15 +70,22 @@ void C35::MapGui::Display(sf::RenderWindow& rw)
 		}
 		rw.draw(gui->text);
 	}
-	mm.Display(rw);
+	if (show.minimap)
+		mm.Display(rw);
 }
 
-bool C35::MapGui::ParseInput(sf::Event&)
+bool C35::MapGui::ParseInput(sf::Event& e)
 {
+	if (enabled.minimap)
+		mm.ParseInput(e);
 	return false;
 }
 
-void C35::MapGui::Update(int) {}
+void C35::MapGui::Update(int ms)
+{
+	if (enabled.minimap)
+		mm.Update(ms);
+}
 
 bool C35::MapGui::Done()
 {
