@@ -99,7 +99,7 @@ void icls(sf::RenderWindow& rw, VxVec& line, int x, int y, Args... args)
 }
 
 template<typename... Args>
-void cls(sf::RenderWindow& rw, Args... args)
+void cls(sf::RenderWindow& rw, Args... args) // closed line strip
 {
 	VxVec line;
 	line.reserve(sizeof...(args)+1);
@@ -122,7 +122,7 @@ void C35::Minimap::Display(sf::RenderWindow& rw)
 	x1 = x + m.ox * pw / ww;
 	x2 = x1 + WW * pw / ww;
 	y1 = y + m.oy * ph / hh;
-	y2 = y2 + HH * ph / hh;
+	y2 = y1 + HH * ph / hh;
 
 	cls(rw, x1,y1, x2,y1, x2,y2, x1,y2);
 }
