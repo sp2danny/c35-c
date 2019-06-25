@@ -30,7 +30,7 @@ private:
 	bool wantsQuit = false;
 
 	//Board       board;
-	int         ox, oy;
+	//int         ox, oy;
 	Ref<Player> p1, p2;
 
 	MapGui gui;
@@ -64,8 +64,8 @@ MainFrame::MainFrame()
 	u = board.Spawn("Worker", p1, {7, 7});
 	board.active = u;
 	auto hx = u->at;
-	ox = hx->px - WW / 2;
-	oy = hx->py - HH / 2;
+	Game().ox = hx->px - WW / 2;
+	Game().oy = hx->py - HH / 2;
 	u = board.Spawn("Worker", p2, {8, 7});
 	u->set("mine", 90);
 	u = board.Spawn("Worker", p2, {8, 8});
@@ -88,8 +88,8 @@ MainFrame::~MainFrame()
 
 void MainFrame::Display(sf::RenderWindow& rw)
 {
-	Game().Display(rw, ox, oy);
-	gui.SetOfs(ox,oy);
+	Game().Display(rw);
+	//gui.SetOfs(ox,oy);
 	gui.Display(rw);
 
 	auto dur = std::chrono::duration_cast<std::chrono::microseconds>(t3 - t1).count();
@@ -110,8 +110,8 @@ void MainFrame::Update(int ms)
 	t1 = t2;
 	t2 = t3;
 	t3 = std::chrono::high_resolution_clock::now();
-	ox += dx;
-	oy += dy;
+	Game().ox += dx;
+	Game().oy += dy;
 }
 
 bool MainFrame::ParseInput(sf::Event& e)

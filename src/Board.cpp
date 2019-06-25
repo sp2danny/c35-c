@@ -191,7 +191,7 @@ void C35::Board::Instance()
 	tiles.Instance(0);
 }
 
-void C35::Board::Display(sf::RenderWindow& rw, int ox, int oy)
+void C35::Board::Display(sf::RenderWindow& rw)
 {
 	for (int y = 0; y < h; ++y)
 	{

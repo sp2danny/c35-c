@@ -54,7 +54,7 @@ void C35::MapGui::Display(sf::RenderWindow& rw)
 		auto hex = brd.active->at;
 		if (hex)
 		{
-			sf::Vector2f pos((float)hex->px - ox, (float)hex->py - oy);
+			sf::Vector2f pos((float)hex->px - brd.ox, (float)hex->py - brd.oy);
 			gui::circr.setPosition(pos);
 			rw.draw(gui::circr);
 

@@ -13,7 +13,7 @@ class Board
 {
 public:
 	int w, h;
-	//int ox, oy;
+	int ox=0, oy=0;
 
 	std::vector<HexCore> map;
 
@@ -26,7 +26,7 @@ public:
 	void Save(std::ostream&) const;
 
 	void Instance();
-	void Display(sf::RenderWindow&, int, int);
+	void Display(sf::RenderWindow&);
 
 	Ref<Unit> Spawn(std::string_view, Ref<Player>, Pos);
 

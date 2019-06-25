@@ -50,13 +50,13 @@ struct MapGui : public Frame
 
 	void Recalc() { mm.Recalc(); }
 
-	void SetOfs(int x, int y) { ox=x; oy=y; }
+	//void SetOfs(int x, int y) { ox=x; oy=y; }
 
 private:
 	alib::BA minimap, portrait;
 	alib::AC advisors, replay, diplomacy;
 	Minimap mm;
-	int ox,oy;
+	//int ox,oy;
 };
 
 }  // namespace C35
