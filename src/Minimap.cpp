@@ -17,8 +17,8 @@ C35::Minimap::Minimap(int x, int y) : x(x), y(y)
 
 	alib::RGB purpl{255, 0, 255};
 
-#define LD(x)                                                                                                          \
-	data->c_##x.LoadBMP("img/MiniMap/mmm_" #x ".bmp", purpl, 0, 0);                                                    \
+#define LD(x)                                                          \
+	data->c_##x.LoadBMP("img/MiniMap/mmm_" #x ".bmp", purpl, 0, 0);    \
 	data->r_##x = data->c_##x.Refl(0);
 
 	LD(g);
