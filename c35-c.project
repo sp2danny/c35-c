@@ -22,6 +22,9 @@
     <File Name="src/Conductor.h"/>
     <File Name="src/MapGui.cpp"/>
     <File Name="src/MapGui.h"/>
+    <File Name="src/Action.h"/>
+    <File Name="src/Minimap.cpp"/>
+    <File Name="src/Minimap.h"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>

@@ -17,9 +17,7 @@ struct Ref
 	operator T*() { return T::lookup(m_index); }
 	operator bool() const { return T::lookup(m_index) != nullptr; }
 	friend struct RepositoryBase<T>;
-
-friend
-	typename T;
+	friend T;
 
 private:
 	Ref(int idx) : m_index(idx) {}
