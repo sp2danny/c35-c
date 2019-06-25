@@ -176,3 +176,12 @@ void C35::Frame::System(FramePtr s)
 	system = std::move(s);
 }
 
+void C35::Frame::Shutdown()
+{
+	stack.clear();
+	modal.reset();
+	system.reset();
+	actives.clear();
+	listeners.clear();
+}
+

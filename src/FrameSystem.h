@@ -66,6 +66,7 @@ private:
 
 	static void Init(std::string);
 	static void Run(sf::RenderWindow&);
+	static void Shutdown();
 
 friend
 	void ::Main(const C35::StrVec&);

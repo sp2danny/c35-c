@@ -153,7 +153,7 @@ bool C35::Minimap::ParseInput(sf::Event& e)
 		if (e.mouseButton.button == sf::Mouse::Left)
 		{
 			int xx = mx-x, yy = my-y;
-			if (x>0 && x<pw && y>0 && y<ph)
+			if (xx>0 && xx<pw && yy>0 && yy<ph)
 			{
 				m.ox = (xx * ww / pw) - (WW / 2);
 				m.oy = (yy * hh / ph) - (HH / 2);

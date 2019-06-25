@@ -12,7 +12,8 @@
 #include "Common.h"
 #include "FrameSystem.h"
 #include "FrameForwards.h"
-//#include "Unit.h"
+#include "Unit.h"
+#include "Player.h"
 
 namespace C35
 {
@@ -126,6 +127,13 @@ void Main(const C35::StrVec& args)
 	C35::Frame::Push(std::make_shared<C35::Intro>());
 
 	C35::Frame::Run(window);
+	C35::Frame::Shutdown();
+
+	C35::Player::clear();
+	C35::UnitType::clear();
+	C35::Unit::clear();
+	C35::Unit::clearcache();
+	C35::Action::clear();
 
 	//std::cout << "\ndone.\n";
 	#ifdef NDEBUG
