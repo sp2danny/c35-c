@@ -66,6 +66,9 @@
     <ClCompile Include="src\Minimap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Dijkstras.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\FrameSystem.h">
@@ -123,6 +126,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Action.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dijkstras.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

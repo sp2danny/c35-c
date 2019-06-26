@@ -33,7 +33,6 @@ const USh hill   = 7;
 const USh coast  = 9;
 const USh sea    = 10;
 
-
 struct Hexagon;
 
 struct HexCore

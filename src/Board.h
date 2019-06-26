@@ -1,6 +1,8 @@
 
 #pragma once
 
+#include <optional>
+
 #include <alib.hpp>
 
 #include "Common.h"
@@ -34,6 +36,7 @@ public:
 
 	Ref<Unit> active;
 	HexCore* mouseover;
+	std::optional<alib::Refl> mor;
 
 private:
 	void MapN(bool = true);

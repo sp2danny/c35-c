@@ -13,6 +13,7 @@ auto C35::Game() -> Board&
 
 auto C35::Board::at(int x, int y) -> HexCore*
 {
+	assert(x >= 0 && x < w && y >= 0 && y < h);
 	int idx = y * w + x;
 	assert((idx >= 0) && (idx < ssize(map)));
 	return map.data() + idx;
@@ -203,6 +204,7 @@ void C35::Board::Instance()
 	mo.Instance(0);
 	roads.Load("img/roads.ad");
 	roads.Instance(0);
+	mor.reset();
 }
 
 void C35::Board::Display(sf::RenderWindow& rw)
@@ -223,7 +225,7 @@ void C35::Board::Display(sf::RenderWindow& rw)
 			rw.draw(refl);
 			if (mouseover == &hx)
 			{
-				alib::Refl refl = mo.Refl(0);
+				alib::Refl refl = mor ? *mor : mo.Refl(0);
 				refl.setPosition((float)xx, (float)yy);
 				rw.draw(refl);
 			}
