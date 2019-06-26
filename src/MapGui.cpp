@@ -84,6 +84,12 @@ bool C35::MapGui::ParseInput(sf::Event& e)
 		auto hx = b.Pix(e.mouseMove.x + b.ox, e.mouseMove.y + b.oy);
 		b.mouseover = hx;
 	}
+	else if (e.type == sf::Event::MouseButtonPressed)
+	{
+		if (e.mouseButton.button == sf::Mouse::Left)
+			if (b.mouseover)
+				b.mouseover->mask ^= road;
+	}
 
 	if (b.active && enabled.unitaction)
 	{

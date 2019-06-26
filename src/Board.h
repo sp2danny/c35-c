@@ -40,6 +40,7 @@ private:
 
 	alib::AD tiles;
 	alib::CIS mo;
+	alib::AD roads;
 };
 
 Board& Game();

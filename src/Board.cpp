@@ -20,8 +20,8 @@ auto C35::Board::at(int x, int y) -> HexCore*
 
 auto C35::Board::Pix(int px, int py) -> HexCore*
 {
-	HexCore* bsf;
-	float    dst;
+	HexCore* bsf = nullptr;
+	float    dst = 0.0f;
 	for (auto&& h : map)
 	{
 		float d = (float)std::hypot(py - h.py, px - h.px);
@@ -202,6 +202,8 @@ void C35::Board::Instance()
 	tiles.Instance(0);
 	mo.LoadBMP("img/circ_b.bmp", {255,0,255}, 32,42);
 	mo.Instance(0);
+	roads.Load("img/roads.ad");
+	roads.Instance(0);
 }
 
 void C35::Board::Display(sf::RenderWindow& rw)
@@ -224,6 +226,21 @@ void C35::Board::Display(sf::RenderWindow& rw)
 			{
 				alib::Refl refl = mo.Refl(0);
 				refl.setPosition((float)xx, (float)yy);
+				rw.draw(refl);
+			}
+			if (hx.mask & road)
+			{
+				short r = 0;
+				for (Dir6 d = d6_beg; d != d6_end; ++d)
+				{
+					auto n = hx.neigh[d];
+					if (!n) continue;
+					if (n->mask & road)
+						r |= 1 << d;
+				}
+				assert(r>=0 && r<64);
+				alib::Refl refl = roads.Refl(r, 0);
+				refl.setPosition((float)xx-32, (float)yy-32);
 				rw.draw(refl);
 			}
 		}
