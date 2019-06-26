@@ -27,7 +27,7 @@ C35::MapGui::MapGui()
 
 	gui->font.loadFromFile("arial.ttf");
 	gui->text = sf::Text(" ", gui->font);
-	gui->box.LoadBMP("img/box.bmp", {255, 0, 255}, 0, 0);
+	gui->box.LoadBMP("img/uib.bmp", {255, 0, 255}, 0, 0);
 	gui->box.Instance(0);
 	gui->boxr = gui->box.Refl(0);
 	gui->bw   = gui->box.Width();
@@ -77,7 +77,15 @@ void C35::MapGui::Display(sf::RenderWindow& rw)
 
 bool C35::MapGui::ParseInput(sf::Event& e)
 {
-	if (Game().active && enabled.unitaction)
+	auto& b = Game();
+
+	if (e.type == sf::Event::MouseMoved)
+	{
+		auto hx = b.Pix(e.mouseMove.x + b.ox, e.mouseMove.y + b.oy);
+		b.mouseover = hx;
+	}
+
+	if (b.active && enabled.unitaction)
 	{
 		
 	}

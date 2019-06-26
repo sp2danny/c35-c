@@ -1,11 +1,11 @@
 
 #include <cassert>
+#include <cmath>
 
 #include "Board.h"
 #include "Player.h"
 
-auto C35::Game()
-	-> Board&
+auto C35::Game() -> Board&
 {
 	static Board board;
 	return board;
@@ -20,9 +20,22 @@ auto C35::Board::at(int x, int y) -> HexCore*
 
 auto C35::Board::Pix(int px, int py) -> HexCore*
 {
-	(void)px;
-	(void)py;
-	return nullptr;
+	HexCore* bsf;
+	float    dst;
+	for (auto&& h : map)
+	{
+		float d = (float)std::hypot(py - h.py, px - h.px);
+		if (!bsf || d < dst)
+		{
+			bsf = &h;
+			dst = d;
+			continue;
+		}
+	}
+	if (dst < 25.0f)
+		return bsf;
+	else
+		return nullptr;
 }
 
 void C35::Board::Update(int ms)
@@ -58,8 +71,8 @@ void C35::Board::Randomize(int ww, int hh)
 		{
 			auto& h = *at(x, y);
 			h.Clr();
-			h.x = x;
-			h.y = y;
+			h.x    = x;
+			h.y    = y;
 			auto d = dfe(h.x, h.y);
 			if (d < 3)
 			{
@@ -129,11 +142,9 @@ void C35::Board::Save(std::ostream& out) const
 
 void C35::Board::MapN(bool wrap)
 {
-	auto add_n = [&](C35::HexCore& hex, Dir6 d, int x, int y)
-	{
+	auto add_n = [&](C35::HexCore& hex, Dir6 d, int x, int y) {
 		hex.neigh[d] = nullptr;
-		if (y < 0 || y >= h)
-			return;
+		if (y < 0 || y >= h) return;
 		if (x < 0)
 		{
 			if (wrap)
@@ -189,6 +200,8 @@ void C35::Board::Instance()
 {
 	tiles.Load("img/tiles.ad");
 	tiles.Instance(0);
+	mo.LoadBMP("img/circ_b.bmp", {255,0,255}, 32,42);
+	mo.Instance(0);
 }
 
 void C35::Board::Display(sf::RenderWindow& rw)
@@ -200,13 +213,19 @@ void C35::Board::Display(sf::RenderWindow& rw)
 		if (yy > (HH + MRG)) break;
 		for (int x = 0; x < w; ++x)
 		{
-			HexCore& hx   = *at(x, y);
-			int xx = hx.px - ox;
+			HexCore& hx = *at(x, y);
+			int      xx = hx.px - ox;
 			if (xx < -MRG) continue;
-			if (xx > (WW+MRG)) break;
+			if (xx > (WW + MRG)) break;
 			alib::Refl refl = tiles.Refl(hx.tile, 0);
 			refl.setPosition((float)xx, (float)yy);
 			rw.draw(refl);
+			if (mouseover == &hx)
+			{
+				alib::Refl refl = mo.Refl(0);
+				refl.setPosition((float)xx, (float)yy);
+				rw.draw(refl);
+			}
 		}
 	}
 
@@ -217,8 +236,7 @@ void C35::Board::Display(sf::RenderWindow& rw)
 		if (yy > (HH + MRG)) break;
 		for (int x = 0; x < w; ++x)
 		{
-			if (active && x==active->x && y==active->y)
-				continue;
+			if (active && x == active->x && y == active->y) continue;
 			HexCore& hx = *at(x, y);
 			if (hx.units.empty()) continue;
 			int xx = hx.px - ox;
@@ -231,18 +249,17 @@ void C35::Board::Display(sf::RenderWindow& rw)
 	}
 }
 
-auto C35::Board::Spawn(std::string_view type, Ref<Player> player, Pos pos)
-	-> Ref<Unit>
+auto C35::Board::Spawn(std::string_view type, Ref<Player> player, Pos pos) -> Ref<Unit>
 {
 	int       id   = Unit::fromtype(type);
 	Unit&     unit = *Unit::lookup(id);
 	HexCore*  hx   = at(pos.x, pos.y);
 	Ref<Unit> ref  = unit.ref();
 
-	unit.x      = pos.x;
-	unit.y      = pos.y;
-	unit.owner  = player;
-	unit.at     = hx;
+	unit.x     = pos.x;
+	unit.y     = pos.y;
+	unit.owner = player;
+	unit.at    = hx;
 
 	std::string name = player->name();
 	name += "'s ";
@@ -254,6 +271,3 @@ auto C35::Board::Spawn(std::string_view type, Ref<Player> player, Pos pos)
 
 	return ref;
 }
-
-
-

@@ -33,11 +33,13 @@ public:
 	void Update(int);
 
 	Ref<Unit> active;
+	HexCore* mouseover;
 
 private:
 	void MapN(bool = true);
 
 	alib::AD tiles;
+	alib::CIS mo;
 };
 
 Board& Game();

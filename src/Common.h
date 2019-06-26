@@ -16,11 +16,11 @@ namespace C35
 {
 	inline const int SZ = 60;
 	inline const int YSZ = 47;
-	inline const int WW = 1024;//640;
-	inline const int HH = 768;//480;
+	inline const int WW = 640;
+	inline const int HH = 480;
 	inline const int MRG = 60;
 
-	extern float     offs_x, offs_y;
+	extern float offs_x, offs_y;
 
 	typedef std::vector<std::string> StrVec;
 	typedef std::vector<int> IdList;
