@@ -3,9 +3,18 @@
 
 namespace {
 
+	struct H;
+
+	struct Neigh
+	{
+		bool avail = false;
+		int cost = 0;
+		H* hex = nullptr;
+	};
+
 	struct H {
 		int cost;
-		H* neigh[6];
+		Neigh neigh[6];
 		C35::HexCore* orig;
 	};
 
@@ -21,7 +30,7 @@ void C35::prepare_dijkstras(const HexCore& from)
 	map.reserve(b.map.size());
 	for (auto& hx : b.map)
 	{
-		H h { -1, {0,0,0,0,0}, &hx };
+		H h { -1, {}, &hx };
 		map.push_back(h);
 		if (&hx == &from)
 		{
@@ -29,6 +38,7 @@ void C35::prepare_dijkstras(const HexCore& from)
 			found.push_back(&map.back());
 		}
 	}
+	// TODO: set up neigh
 }
 
 int C35::linear_distance([[maybe_unused]] const HexCore& to)
