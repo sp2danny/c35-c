@@ -7,6 +7,20 @@
 // *** HexCore ***
 // ***************
 
+void C35::HexCore::AddU(Ref<Unit> u)
+{
+	auto itr = std::find(units.begin(), units.end(), u);
+	if (itr == units.end())
+		units.push_back(u);
+}
+
+void C35::HexCore::RemU(Ref<Unit> u)
+{
+	auto itr = std::find(units.begin(), units.end(), u);
+	if (itr != units.end())
+		units.erase(itr);
+}
+
 bool C35::HexCore::Roaded() const
 {
 	return city || (mask & road);

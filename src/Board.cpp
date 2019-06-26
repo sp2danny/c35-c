@@ -71,8 +71,7 @@ void C35::Board::Randomize(int ww, int hh)
 		{
 			auto& h = *at(x, y);
 			h.Clr();
-			h.x    = x;
-			h.y    = y;
+			h.x = x; h.y = y;
 			auto d = dfe(h.x, h.y);
 			if (d < 3)
 			{
@@ -173,9 +172,9 @@ void C35::Board::MapN(bool wrap)
 			if (y % 2)
 			{
 				// odd
-				add_n(h, d6_upleft, x, y - 1);
-				add_n(h, d6_upright, x + 1, y - 1);
-				add_n(h, d6_downleft, x, y + 1);
+				add_n(h, d6_upleft,    x,     y - 1);
+				add_n(h, d6_upright,   x + 1, y - 1);
+				add_n(h, d6_downleft,  x,     y + 1);
 				add_n(h, d6_downright, x + 1, y + 1);
 				h.px = SZ + SZ * x;
 				h.py = YSZ * y;
@@ -183,15 +182,15 @@ void C35::Board::MapN(bool wrap)
 			else
 			{
 				// even
-				add_n(h, d6_upleft, x - 1, y - 1);
-				add_n(h, d6_upright, x, y - 1);
-				add_n(h, d6_downleft, x - 1, y + 1);
-				add_n(h, d6_downright, x, y + 1);
+				add_n(h, d6_upleft,    x - 1, y - 1);
+				add_n(h, d6_upright,   x,     y - 1);
+				add_n(h, d6_downleft,  x - 1, y + 1);
+				add_n(h, d6_downright, x,     y + 1);
 				h.px = (SZ / 2) + SZ * x;
 				h.py = YSZ * y;
 			}
 			add_n(h, d6_right, x + 1, y);
-			add_n(h, d6_left, x - 1, y);
+			add_n(h, d6_left,  x - 1, y);
 		}
 	}
 }

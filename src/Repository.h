@@ -19,6 +19,9 @@ struct Ref
 	friend struct RepositoryBase<T>;
 	friend T;
 
+	bool operator <(const Ref& other) const { return m_index  < other.m_index; }
+	bool operator==(const Ref& other) const { return m_index == other.m_index; }
+
 private:
 	Ref(int idx) : m_index(idx) {}
 	int m_index = 0;
@@ -34,6 +37,9 @@ struct CRef
 	operator bool() const { return T::lookup(m_index) != nullptr; }
 	friend struct RepositoryBase<T>;
 
+	bool operator <(const CRef& other) const { return m_index  < other.m_index; }
+	bool operator==(const CRef& other) const { return m_index == other.m_index; }
+
 private:
 	CRef(int idx) : m_index(idx) {}
 	int m_index = 0;
@@ -42,7 +48,7 @@ private:
 template<typename T>
 struct RepositoryBase
 {
-	int    index() const { return m_index; }
+	int index() const { return m_index; }
 	Ref<T> ref() { return Ref<T>{m_index}; }
 	CRef<T> ref() const { return CRef<T>{m_index}; }
 	CRef<T> cref() const { return CRef<T>{m_index}; }
@@ -86,9 +92,9 @@ protected:
 	static const std::map<int, T>& tab() { return table; }
 
 private:
-	inline static int              nextIndex = 1;
+	inline static int nextIndex = 1;
 	inline static std::map<int, T> table;
 
-	int         m_index;
+	int m_index;
 	std::string m_name;
 };
