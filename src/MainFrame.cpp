@@ -50,7 +50,8 @@ MainFrame::MainFrame()
 	board.Randomize(75, 55);
 	board.Instance();
 
-	MakeWarrior(), MakeWorker(), MakeSettler(), MakePikeman(), MakeHorseman();
+	MakeActions();
+	MakeUnits();
 
 	p1         = Player::lookup(Player::create(100, board, true))->ref();
 	p1->name() = "Player One";
@@ -60,7 +61,7 @@ MainFrame::MainFrame()
 	Ref<Unit> u;
 
 	u = board.Spawn("Settler", p1, {7, 7});
-	board.active = u;
+	board.Activate(u);
 	auto hx = u->at;
 	Game().ox = hx->px - WW / 2;
 	Game().oy = hx->py - HH / 2;
@@ -88,6 +89,7 @@ MainFrame::~MainFrame()
 	Unit::clear();
 	Unit::clearcache();
 	Player::clear();
+	Action::clear();
 }
 
 void MainFrame::Display(sf::RenderWindow& rw)

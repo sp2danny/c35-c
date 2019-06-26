@@ -91,6 +91,18 @@ struct RepositoryBase
 protected:
 	static const std::map<int, T>& tab() { return table; }
 
+	struct iterator
+	{
+		iterator operator++() { ++underlying; return *this; }
+		bool operator!=(iterator other) { return underlying != other.underlying; }
+		T& operator*() { return underlying->second; }
+		T* operator->() { return &underlying->second; }
+		typename std::map<int, T>::iterator underlying;
+	};
+
+	static const iterator begin() { return {table.begin()}; }
+	static const iterator end()   { return {table.end()  }; }
+
 private:
 	inline static int nextIndex = 1;
 	inline static std::map<int, T> table;

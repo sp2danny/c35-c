@@ -34,11 +34,15 @@ public:
 
 	void Update(int);
 
-	Ref<Unit> active;
+	void Activate(Ref<Unit>);
+	Ref<Unit> Active();
+
 	HexCore* mouseover;
 	std::optional<alib::Refl> mor;
 
 private:
+	Ref<Unit> active;
+
 	void MapN(bool = true);
 
 	alib::AD tiles;

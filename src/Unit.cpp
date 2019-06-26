@@ -84,6 +84,19 @@ void C35::Unit::set(std::string_view anim, short dir)
 	refl = iter->second.Refl(std::string(anim), dir, owner ? owner->color : 0);
 }
 
+namespace C35 {
+	void MakeWarrior(), MakeWorker(), MakeSettler(), MakePikeman(), MakeHorseman();
+	void AddAct(UnitType& ut, std::string_view sv)
+	{
+		ut.available.push_back(Action::lookup(Action::lookup(sv))->ref());
+	}
+}
+
+void C35::MakeUnits()
+{
+	MakeWarrior(), MakeWorker(), MakeSettler(), MakePikeman(), MakeHorseman();
+}
+
 void C35::MakeWarrior()
 {
 	int       id = UnitType::create();
@@ -92,6 +105,8 @@ void C35::MakeWarrior()
 	ut.name()  = "Warrior";
 	ut.primary = UnitType::off;
 	ut.base    = {1, 1, 3, 3};
+	AddAct(ut, "goto");
+	AddAct(ut, "fortify");
 }
 
 void C35::MakeWorker()
@@ -102,6 +117,8 @@ void C35::MakeWorker()
 	ut.name()  = "Worker";
 	ut.primary = UnitType::none;
 	ut.base    = {0, 0, 3, 0};
+	AddAct(ut, "goto");
+	AddAct(ut, "fortify");
 }
 
 void C35::MakeSettler()
@@ -112,6 +129,8 @@ void C35::MakeSettler()
 	ut.name()  = "Settler";
 	ut.primary = UnitType::none;
 	ut.base    = {0, 0, 3, 0};
+	AddAct(ut, "goto");
+	AddAct(ut, "fortify");
 }
 
 void C35::MakePikeman()
@@ -122,6 +141,8 @@ void C35::MakePikeman()
 	ut.name()  = "Pikeman";
 	ut.primary = UnitType::def;
 	ut.base    = {1, 3, 3, 3};
+	AddAct(ut, "goto");
+	AddAct(ut, "fortify");
 }
 
 void C35::MakeHorseman()
@@ -132,5 +153,7 @@ void C35::MakeHorseman()
 	ut.name()  = "Horseman";
 	ut.primary = UnitType::off;
 	ut.base    = {2, 1, 6, 3};
+	AddAct(ut, "goto");
+	AddAct(ut, "fortify");
 }
 

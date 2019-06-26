@@ -47,9 +47,9 @@ void C35::MapGui::Display(sf::RenderWindow& rw)
 {
 	rw.draw(gui->boxr);
 	Board& brd = Game();
-	if (brd.active)
+	if (brd.Active())
 	{
-		gui->text.setString(brd.active->name());
+		gui->text.setString(brd.Active()->name());
 		gui->text.setCharacterSize(18);
 		gui->text.setStyle(sf::Text::Bold);
 		gui->text.setFillColor(sf::Color::Black);
@@ -58,18 +58,27 @@ void C35::MapGui::Display(sf::RenderWindow& rw)
 
 		gui->text.setPosition(WW - gui->bw + gui->bw / 2.0f - tw / 2.0f, HH - gui->bh + 12.0f);
 
-		auto hex = brd.active->at;
+		auto hex = brd.Active()->at;
 		if (hex)
 		{
 			sf::Vector2f pos((float)hex->px - brd.ox, (float)hex->py - brd.oy);
 			gui->circr.setPosition(pos);
 			rw.draw(gui->circr);
 
-			auto r = brd.active->refl;
+			auto r = brd.Active()->refl;
 			r.setPosition(pos);
 			rw.draw(r);
 		}
 		rw.draw(gui->text);
+
+		int n = 0;
+		for (auto&& a : brd.Active()->ut->available)
+		{
+			auto r = a->button.Refl(0, 0);
+			r.setPosition(a->x, a->y);
+			rw.draw(r);
+		}
+
 	}
 	if (show.minimap)
 		mm.Display(rw);
@@ -91,9 +100,14 @@ bool C35::MapGui::ParseInput(sf::Event& e)
 				b.mouseover->mask ^= road;
 	}
 
-	if (b.active && enabled.unitaction)
+	if (b.Active() && enabled.unitaction)
 	{
-		
+		int n = 0;
+		for (auto&& a : b.Active()->ut->available)
+		{
+			//a->button.
+		}
+
 	}
 	if (enabled.minimap)
 		mm.ParseInput(e);

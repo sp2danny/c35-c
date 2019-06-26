@@ -47,6 +47,25 @@ void C35::Board::Update(int ms)
 	}
 }
 
+void C35::Board::Activate(Ref<Unit> u)
+{
+	active = u;
+	Action::AllOff();
+	auto& avail = u->ut->available;
+	int i=0, n = ssize(avail);
+	for (auto&& a : avail)
+	{
+		a->x = WW/2 - 25*n + 50*i++;
+		a->y = HH - 75;
+		a->enabled = a->visible = true;
+	}
+}
+
+auto C35::Board::Active() ->Ref<Unit>
+{
+	return active;
+}
+
 void C35::Board::Randomize(int ww, int hh)
 {
 	w = ww;

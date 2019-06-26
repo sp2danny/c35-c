@@ -2,6 +2,9 @@
 #pragma once
 
 #include <functional>
+#include <string>
+
+#include <alib.hpp>
 
 #include "Common.h"
 #include "Repository.h"
@@ -11,7 +14,6 @@ namespace C35
 
 struct Action : RepositoryBase<Action>
 {
-	std::string name;
 	bool        haveButton;
 	bool        haveShortcut;
 	bool        dynamicLocation;
@@ -24,6 +26,8 @@ struct Action : RepositoryBase<Action>
 	char        shortcut;
 
 	std::function<void(Ref<Action>)> onActivate;
+
+	static void AllOff();
 };
 
 struct Unit;
@@ -35,6 +39,8 @@ struct UnitAction
 	Pos target;
 	Dir6 facing;
 };
+
+void MakeActions();
 
 }  // namespace C35
 

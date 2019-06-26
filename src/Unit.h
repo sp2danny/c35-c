@@ -53,6 +53,6 @@ private:
 	inline static std::map<std::string, alib::AC> cache;
 };
 
-extern void MakeWarrior(), MakeWorker(), MakeSettler(), MakePikeman(), MakeHorseman();
+extern void MakeUnits();
 
 }  // namespace C35
