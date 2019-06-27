@@ -71,7 +71,7 @@ void C35::MapGui::Display(sf::RenderWindow& rw)
 		}
 		rw.draw(gui->text);
 
-		int n = 0;
+		//int n = 0;
 		for (auto&& a : brd.Active()->ut->available)
 		{
 			auto r = a->button.Refl(0, 0);
@@ -102,11 +102,11 @@ bool C35::MapGui::ParseInput(sf::Event& e)
 
 	if (b.Active() && enabled.unitaction)
 	{
-		int n = 0;
-		for (auto&& a : b.Active()->ut->available)
-		{
-			//a->button.
-		}
+		//int n = 0;
+		//for (auto&& a : b.Active()->ut->available)
+		//{
+		//	//a->button.
+		//}
 
 	}
 	if (enabled.minimap)

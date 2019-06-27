@@ -25,6 +25,9 @@
     <File Name="src/Action.h"/>
     <File Name="src/Minimap.cpp"/>
     <File Name="src/Minimap.h"/>
+    <File Name="src/Action.cpp"/>
+    <File Name="src/Dijkstras.cpp"/>
+    <File Name="src/Dijkstras.h"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
