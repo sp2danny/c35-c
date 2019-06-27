@@ -37,8 +37,9 @@ private:
 
 	TP t1, t2, t3;
 
-	int   dx = 0, dy = 0;
-	float old_fps = 60.0f;
+	float dx = 0, dy = 0;
+	float iox, ioy;
+	float fps, old_fps = 60.0f;
 };
 
 MainFrame::MainFrame()
@@ -63,8 +64,10 @@ MainFrame::MainFrame()
 	u = board.Spawn("Settler", p1, {7, 7});
 	board.Activate(u);
 	auto hx = u->at;
-	Game().ox = hx->px - WW / 2;
-	Game().oy = hx->py - HH / 2;
+	iox = hx->px - WW / 2.0f;
+	ioy = hx->py - HH / 2.0f;
+	Game().ox = (int)iox;
+	Game().oy = (int)ioy;
 	u = board.Spawn("Worker",  p2, {8, 7});
 	u->set("mine", Degree[Dir6::d6_right]);
 	u->currently.action = UnitAction::working;
@@ -98,7 +101,7 @@ void MainFrame::Display(sf::RenderWindow& rw)
 	gui.Display(rw);
 
 	auto dur = std::chrono::duration_cast<std::chrono::microseconds>(t3 - t1).count();
-	auto fps = 2000000 / dur;
+	fps = 2000000 / (float)dur;
 	old_fps  = 0.99f * old_fps + 0.01f * fps;
 	rw.setTitle(std::to_string((int)(old_fps + 0.5)));
 }
@@ -115,8 +118,10 @@ void MainFrame::Update(int ms)
 	t1 = t2;
 	t2 = t3;
 	t3 = std::chrono::high_resolution_clock::now();
-	Game().ox += dx;
-	Game().oy += dy;
+	iox += dx * ms / 16.7f;
+	ioy += dy * ms / 16.7f;
+	Game().ox = (int)iox;
+	Game().oy = (int)ioy;
 }
 
 bool MainFrame::ParseInput(sf::Event& e)
@@ -144,7 +149,7 @@ bool MainFrame::ParseInput(sf::Event& e)
 		if (e.key.code == sf::Keyboard::Down)  down.dn = false;
 	}
 
-	int s = 3;
+	float s = 8.0f;// *60.0f / fps;
 	dx = dy = 0;
 	if (down.dn) dy += s;
 	if (down.up) dy -= s;
@@ -152,6 +157,9 @@ bool MainFrame::ParseInput(sf::Event& e)
 	if (down.lf) dx -= s;
 
 	gui.ParseInput(e);
+	auto& b = Game();
+	if (b.ox != (int)iox) iox = (float)b.ox;
+	if (b.oy != (int)ioy) ioy = (float)b.oy;
 
 	return false;
 }

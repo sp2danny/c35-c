@@ -25,7 +25,7 @@ auto C35::Board::Pix(int px, int py) -> HexCore*
 	float    dst = 0.0f;
 	for (auto&& h : map)
 	{
-		float d = (float)std::hypot(py - h.py, px - h.px);
+		float d = (float)std::hypot((py+11) - h.py, px - h.px);
 		if (!bsf || d < dst)
 		{
 			bsf = &h;
