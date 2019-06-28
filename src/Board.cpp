@@ -56,7 +56,7 @@ void C35::Board::Activate(Ref<Unit> u)
 	for (auto&& a : avail)
 	{
 		a->x = WW/2 - 25*n + 50*i++;
-		a->y = HH - 75;
+		a->y = HH - 20;
 		a->enabled = a->visible = true;
 	}
 }

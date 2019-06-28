@@ -85,6 +85,9 @@ void Main(const C35::StrVec& args)
 
 	srand((unsigned int)time(0));
 
+	C35::WW = 1024;
+	C35::HH = 768;
+
 /*
 #ifdef NDEBUG
 	const auto&   vms   = sf::VideoMode::getFullscreenModes();

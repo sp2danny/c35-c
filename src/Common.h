@@ -16,8 +16,8 @@ namespace C35
 {
 	inline const int SZ = 60;
 	inline const int YSZ = 47;
-	inline const int WW = 640;
-	inline const int HH = 480;
+	inline int WW;
+	inline int HH;
 	inline const int MRG = 60;
 
 	extern float offs_x, offs_y;

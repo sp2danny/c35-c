@@ -15,6 +15,7 @@
 //	std::function<void(Ref<Action>)> onActivate;
 
 namespace C35 {
+
 void RunAction(Ref<Action> a)
 {
 	std::cout << a->name() << std::endl;
@@ -50,7 +51,8 @@ bool C35::Action::ParseInput(sf::Event& e)
 
 	if (e.type == sf::Event::MouseMoved)
 	{
-		if (inside(e.mouseMove, rect)) {
+		if (inside(e.mouseMove, rect))
+		{
 			refl = button.Refl(1, 0);
 			return true;
 		} else {
@@ -80,7 +82,6 @@ bool C35::Action::Done()
 {
 	return false;
 }
-
 
 void AddAction(alib::AC& ua, std::string name, std::string anim, std::string tt, int location, char shortcut)
 {
