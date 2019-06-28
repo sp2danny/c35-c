@@ -46,7 +46,7 @@ void C35::Minimap::Recalc()
 		{
 			float xx  = 4.0f * x + ((y % 2) ? 2.0f : 0.0f);
 			float yy  = 3.0f * y;
-			auto  hex = brd.at(x, y);
+			auto  hex = brd.At(x, y);
 
 			switch (hex->tile)
 			{
@@ -114,7 +114,7 @@ void C35::Minimap::Display(sf::RenderWindow& rw)
 	rw.draw(sprite);
 
 	auto& m  = Game();
-	auto  hx = m.at(m.w - 1, m.h - 1);
+	auto  hx = m.At(m.w - 1, m.h - 1);
 	int   ww = hx->px + SZ;
 	int   hh = hx->py + YSZ;
 
@@ -147,7 +147,7 @@ bool C35::Minimap::ParseInput(sf::Event& e)
 	else if (e.type == sf::Event::MouseButtonPressed)
 	{
 		auto& m  = Game();
-		auto  hx = m.at(m.w - 1, m.h - 1);
+		auto  hx = m.At(m.w - 1, m.h - 1);
 		int   ww = hx->px + SZ;
 		int   hh = hx->py + YSZ;
 		if (e.mouseButton.button == sf::Mouse::Left)

@@ -11,7 +11,7 @@ auto C35::Game() -> Board&
 	return board;
 }
 
-auto C35::Board::at(int x, int y) -> HexCore*
+auto C35::Board::At(int x, int y) -> HexCore*
 {
 	assert(x >= 0 && x < w && y >= 0 && y < h);
 	int idx = y * w + x;
@@ -90,7 +90,7 @@ void C35::Board::Randomize(int ww, int hh)
 	{
 		for (int x = 0; x < w; ++x)
 		{
-			auto& h = *at(x, y);
+			auto& h = *At(x, y);
 			h.Clr();
 			h.x = x; h.y = y;
 			auto d = dfe(h.x, h.y);
@@ -127,7 +127,7 @@ void C35::Board::Load(std::istream& in)
 	{
 		for (int x = 0; x < w; ++x)
 		{
-			auto& h = *at(x, y);
+			auto& h = *At(x, y);
 			h.Clr();
 			ReadBinary(in, h.tile);
 			ReadBinary(in, h.cover);
@@ -150,7 +150,7 @@ void C35::Board::Save(std::ostream& out) const
 	{
 		for (int x = 0; x < w; ++x)
 		{
-			const auto& h = *at(x, y);
+			const auto& h = *At(x, y);
 			WriteBinary(out, h.tile);
 			WriteBinary(out, h.cover);
 			WriteBinary(out, h.mask);
@@ -179,14 +179,14 @@ void C35::Board::MapN(bool wrap)
 			else
 				return;
 		}
-		hex.neigh[d] = at(x, y);
+		hex.neigh[d] = At(x, y);
 	};
 
 	for (int y = 0; y < h; ++y)
 	{
 		for (int x = 0; x < w; ++x)
 		{
-			HexCore& h = *at(x, y);
+			HexCore& h = *At(x, y);
 
 			h.x = x;
 			h.y = y;
@@ -231,12 +231,12 @@ void C35::Board::Display(sf::RenderWindow& rw)
 {
 	for (int y = 0; y < h; ++y)
 	{
-		int yy = at(0, y)->py - oy;
+		int yy = At(0, y)->py - oy;
 		if (yy < -MRG) continue;
 		if (yy > (HH + MRG)) break;
 		for (int x = 0; x < w; ++x)
 		{
-			HexCore& hx = *at(x, y);
+			HexCore& hx = *At(x, y);
 			int      xx = hx.px - ox;
 			if (xx < -MRG) continue;
 			if (xx > (WW + MRG)) break;
@@ -269,13 +269,13 @@ void C35::Board::Display(sf::RenderWindow& rw)
 
 	for (int y = 0; y < h; ++y)
 	{
-		int yy = at(0, y)->py - oy;
+		int yy = At(0, y)->py - oy;
 		if (yy < -MRG) continue;
 		if (yy > (HH + MRG)) break;
 		for (int x = 0; x < w; ++x)
 		{
 			if (active && x == active->x && y == active->y) continue;
-			HexCore& hx = *at(x, y);
+			HexCore& hx = *At(x, y);
 			if (hx.units.empty()) continue;
 			int xx = hx.px - ox;
 			if (xx < -MRG) continue;
@@ -291,7 +291,7 @@ auto C35::Board::Spawn(std::string_view type, Ref<Player> player, Pos pos) -> Re
 {
 	int       id   = Unit::fromtype(type);
 	Unit&     unit = *Unit::lookup(id);
-	HexCore*  hx   = at(pos.x, pos.y);
+	HexCore*  hx   = At(pos.x, pos.y);
 	Ref<Unit> ref  = unit.ref();
 
 	unit.x     = pos.x;

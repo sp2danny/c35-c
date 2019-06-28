@@ -19,8 +19,8 @@ public:
 
 	std::vector<HexCore> map;
 
-	HexCore*       at(int, int);
-	const HexCore* at(int x, int y) const { return ((Board*)this)->at(x, y); }
+	HexCore*       At(int, int);
+	const HexCore* At(int x, int y) const { return ((Board*)this)->At(x, y); }
 	HexCore*       Pix(int, int);
 
 	void Randomize(int, int);
