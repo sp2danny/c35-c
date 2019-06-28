@@ -74,7 +74,8 @@ void C35::MapGui::Display(sf::RenderWindow& rw)
 		//int n = 0;
 		for (auto&& a : brd.Active()->ut->available)
 		{
-			rw.draw(a->refl);
+			if (a->enabled && a->visible)
+				rw.draw(a->refl);
 			//auto r = a->button.Refl(0, 0);
 			//r.setPosition((float)a->x, (float)a->y);
 			//rw.draw(r);

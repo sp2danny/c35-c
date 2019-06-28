@@ -29,23 +29,22 @@ public:
 	virtual bool Done() =0;
 };
 
-class Frame;
-
-typedef std::shared_ptr<Frame>        FramePtr;
-typedef std::shared_ptr<UpdateTarget> UpdatePtr;
-typedef std::shared_ptr<InputTarget>  InputPtr;
-
 struct DisplayObject : UpdateTarget, InputTarget
 {
 	virtual void Display(sf::RenderWindow&) = 0;
 	virtual bool Done() override = 0;
 };
 
+class Frame;
+
+typedef std::shared_ptr<Frame>          FramePtr;
+typedef std::shared_ptr<UpdateTarget>   UpdatePtr;
+typedef std::shared_ptr<InputTarget>    InputPtr;
+typedef std::shared_ptr<DisplayObject>  DisplayPtr;
+
 class Frame : public DisplayObject
 {
 public:
-	virtual void Display(sf::RenderWindow&) = 0;
-	virtual bool Done() override = 0;
 
 	static void PushUnder(FramePtr);
 	static void Push(FramePtr);

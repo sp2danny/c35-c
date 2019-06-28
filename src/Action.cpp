@@ -37,8 +37,7 @@ void C35::Action::Update(int)
 bool C35::Action::ParseInput(sf::Event& e)
 {
 	if (!enabled) return false;
-	sf::FloatRect fr;
-	refl.getTransform().transformRect(fr);
+	auto rect = refl.Extent();
 
 	auto inside = [](auto p, auto r) -> bool
 	{
@@ -51,7 +50,7 @@ bool C35::Action::ParseInput(sf::Event& e)
 
 	if (e.type == sf::Event::MouseMoved)
 	{
-		if (inside(e.mouseMove, fr)) {
+		if (inside(e.mouseMove, rect)) {
 			refl = button.Refl(1, 0);
 			return true;
 		} else {
@@ -60,7 +59,7 @@ bool C35::Action::ParseInput(sf::Event& e)
 	}
 	else if (e.type == sf::Event::MouseButtonPressed)
 	{
-		if (inside(e.mouseButton, fr))
+		if (inside(e.mouseButton, rect))
 		{
 			onActivate(this->ref());
 			return true;
