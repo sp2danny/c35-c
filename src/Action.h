@@ -8,11 +8,12 @@
 
 #include "Common.h"
 #include "Repository.h"
+#include "FrameSystem.h"
 
 namespace C35
 {
 
-struct Action : RepositoryBase<Action>
+struct Action : RepositoryBase<Action>, DisplayObject
 {
 	bool        haveButton;
 	bool        haveShortcut;
@@ -26,6 +27,13 @@ struct Action : RepositoryBase<Action>
 	char        shortcut;
 
 	std::function<void(Ref<Action>)> onActivate;
+
+	virtual void Update(int) override;
+	virtual bool ParseInput(sf::Event&) override;
+	virtual void Display(sf::RenderWindow&) override;
+	virtual bool Done() override;
+
+	alib::Refl refl;
 
 	static void AllOff();
 };

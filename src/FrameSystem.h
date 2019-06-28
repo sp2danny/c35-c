@@ -35,7 +35,13 @@ typedef std::shared_ptr<Frame>        FramePtr;
 typedef std::shared_ptr<UpdateTarget> UpdatePtr;
 typedef std::shared_ptr<InputTarget>  InputPtr;
 
-class Frame : public UpdateTarget, InputTarget
+struct DisplayObject : UpdateTarget, InputTarget
+{
+	virtual void Display(sf::RenderWindow&) = 0;
+	virtual bool Done() override = 0;
+};
+
+class Frame : public DisplayObject
 {
 public:
 	virtual void Display(sf::RenderWindow&) = 0;

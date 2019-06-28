@@ -74,9 +74,10 @@ void C35::MapGui::Display(sf::RenderWindow& rw)
 		//int n = 0;
 		for (auto&& a : brd.Active()->ut->available)
 		{
-			auto r = a->button.Refl(0, 0);
-			r.setPosition((float)a->x, (float)a->y);
-			rw.draw(r);
+			rw.draw(a->refl);
+			//auto r = a->button.Refl(0, 0);
+			//r.setPosition((float)a->x, (float)a->y);
+			//rw.draw(r);
 		}
 
 	}
@@ -103,10 +104,10 @@ bool C35::MapGui::ParseInput(sf::Event& e)
 	if (b.Active() && enabled.unitaction)
 	{
 		//int n = 0;
-		//for (auto&& a : b.Active()->ut->available)
-		//{
-		//	//a->button.
-		//}
+		for (auto&& a : b.Active()->ut->available)
+		{
+			a->ParseInput(e);
+		}
 
 	}
 	if (enabled.minimap)
@@ -118,6 +119,10 @@ void C35::MapGui::Update(int ms)
 {
 	if (enabled.minimap)
 		mm.Update(ms);
+	auto& b = Game();
+	if (b.Active() && enabled.unitaction)
+		for (auto&& a : b.Active()->ut->available)
+			a->Update(ms);
 }
 
 bool C35::MapGui::Done()

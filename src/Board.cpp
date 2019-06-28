@@ -61,7 +61,8 @@ void C35::Board::Activate(Ref<Unit> u)
 	}
 }
 
-auto C35::Board::Active() ->Ref<Unit>
+auto C35::Board::Active()
+	-> Ref<Unit>
 {
 	return active;
 }

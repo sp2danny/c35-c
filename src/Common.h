@@ -48,8 +48,8 @@ namespace C35
 }
 
 template<typename T>
-std::ptrdiff_t ssize(const T& t)
-{ return (std::ptrdiff_t)std::size(t); }
+int ssize(const T& t)
+{ return (int)std::size(t); }
 
 template<typename T>
 void ReadBinary(std::istream& istr, T& val)
