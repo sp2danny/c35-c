@@ -20,8 +20,7 @@ struct C35::MapGui::Data
 
 C35::MapGui::~MapGui() = default;
 
-C35::MapGui::MapGui()
-	: mm(25, 25)
+C35::MapGui::MapGui() : mm(25, 25)
 {
 	gui = std::make_unique<Data>();
 
@@ -60,20 +59,16 @@ void C35::MapGui::Display(sf::RenderWindow& rw)
 		gui->text.setPosition(WW - gui->bw + gui->bw / 2.0f - tw / 2.0f, HH - gui->bh + 12.0f);
 		rw.draw(gui->text);
 
-		std::string stats =
-			std::to_string(u.stats.a)  + "." +
-			std::to_string(u.stats.d)  + " " +
-			std::to_string(u.stats.hr) + "/" +
-			std::to_string(u.stats.h)  + " " +
-			std::to_string(u.stats.mr) + "/" +
-			std::to_string(u.stats.m)  ;
-			
+		std::string stats = std::to_string(u.stats.a) + "." + std::to_string(u.stats.d) + " "
+							+ std::to_string(u.stats.hr) + "/" + std::to_string(u.stats.h) + " "
+							+ std::to_string(u.stats.mr) + "/" + std::to_string(u.stats.m);
+
 		gui->text.setString(stats);
 		gui->text.setCharacterSize(14);
 		gui->text.setStyle(0);
 		gui->text.setFillColor(sf::Color::Black);
 		bnds = gui->text.getLocalBounds();
-		tw = (int)bnds.width;
+		tw   = (int)bnds.width;
 
 		gui->text.setPosition(WW - gui->bw + gui->bw / 2.0f - tw / 2.0f, HH - gui->bh + 30.0f);
 		rw.draw(gui->text);
@@ -90,19 +85,16 @@ void C35::MapGui::Display(sf::RenderWindow& rw)
 			rw.draw(r);
 		}
 
-		//int n = 0;
+		// int n = 0;
 		for (auto&& a : brd.Active()->ut->available)
 		{
-			if (a->enabled && a->visible)
-				rw.draw(a->refl);
-			//auto r = a->button.Refl(0, 0);
-			//r.setPosition((float)a->x, (float)a->y);
-			//rw.draw(r);
+			if (a->enabled && a->visible) rw.draw(a->refl);
+			// auto r = a->button.Refl(0, 0);
+			// r.setPosition((float)a->x, (float)a->y);
+			// rw.draw(r);
 		}
-
 	}
-	if (show.minimap)
-		mm.Display(rw);
+	if (show.minimap) mm.Display(rw);
 }
 
 bool C35::MapGui::ParseInput(sf::Event& e)
@@ -111,34 +103,36 @@ bool C35::MapGui::ParseInput(sf::Event& e)
 
 	if (e.type == sf::Event::MouseMoved)
 	{
-		auto hx = b.Pix(e.mouseMove.x + b.ox, e.mouseMove.y + b.oy);
+		auto hx     = b.Pix(e.mouseMove.x + b.ox, e.mouseMove.y + b.oy);
 		b.mouseover = hx;
 	}
 	else if (e.type == sf::Event::MouseButtonPressed)
 	{
 		if (e.mouseButton.button == sf::Mouse::Left)
 			if (b.mouseover)
-				b.mouseover->mask ^= road;
+			{
+				if (b.mouseover->units.empty())
+					b.mouseover->mask ^= road;
+				else
+					b.Activate(b.mouseover->units.back());
+			}
 	}
 
 	if (b.Active() && enabled.unitaction)
 	{
-		//int n = 0;
+		// int n = 0;
 		for (auto&& a : b.Active()->ut->available)
 		{
 			a->ParseInput(e);
 		}
-
 	}
-	if (enabled.minimap)
-		mm.ParseInput(e);
+	if (enabled.minimap) mm.ParseInput(e);
 	return false;
 }
 
 void C35::MapGui::Update(int ms)
 {
-	if (enabled.minimap)
-		mm.Update(ms);
+	if (enabled.minimap) mm.Update(ms);
 	auto& b = Game();
 	if (b.Active() && enabled.unitaction)
 		for (auto&& a : b.Active()->ut->available)
