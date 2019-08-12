@@ -52,7 +52,6 @@ struct HexCore
 	bool IsRivered(Dir6) const;
 	bool HaveCover() const;
 
-
 	void AddU(Ref<Unit>);
 	void RemU(Ref<Unit>);
 	std::vector<Ref<Unit>> units;

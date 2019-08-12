@@ -11,7 +11,8 @@ struct C35::Minimap::Data
 	alib::CIS  c_g, c_s, c_c, c_d, c_m, c_n, c_o, c_p, c_r;
 };
 
-C35::Minimap::Minimap(int x, int y) : x(x), y(y)
+C35::Minimap::Minimap(int x, int y)
+	: x(x), y(y)
 {
 	data = std::make_unique<Data>();
 
@@ -19,7 +20,7 @@ C35::Minimap::Minimap(int x, int y) : x(x), y(y)
 
 #define LD(x)                                                          \
 	data->c_##x.LoadBMP("img/MiniMap/mmm_" #x ".bmp", purpl, 0, 0);    \
-	data->r_##x = data->c_##x.Refl(0);
+	data->r_##x = data->c_##x.Refl(0)
 
 	LD(g); LD(s); LD(c);
 	LD(d); LD(m); LD(n);
@@ -167,3 +168,4 @@ std::string C35::Minimap::Tooltip() const
 {
 	return ""s;
 }
+
