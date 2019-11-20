@@ -88,7 +88,7 @@ void Main(const C35::StrVec& args)
 	C35::WW = 1024;
 	C35::HH = 768;
 
-/*
+/* */
 #ifdef NDEBUG
 	const auto&   vms   = sf::VideoMode::getFullscreenModes();
 	bool          found = false;
@@ -117,14 +117,14 @@ void Main(const C35::StrVec& args)
 	}
 	if (!found) return;
 #endif
-*/
+/* */
 
-	//#ifndef NDEBUG
+	#ifndef NDEBUG
 	sf::VideoMode    vm(C35::WW, C35::HH);
 	sf::RenderWindow window(vm, "C35");
-	//#else
-	// sf::RenderWindow window(vm, "C35", sf::Style::Fullscreen);
-	//#endif
+	#else
+	sf::RenderWindow window(vm, "C35", sf::Style::Fullscreen);
+	#endif
 
 	C35::Frame::Init("C35");
 	C35::Frame::Push(std::make_shared<C35::Intro>());

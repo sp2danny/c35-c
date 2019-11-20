@@ -59,9 +59,9 @@ void C35::MapGui::Display(sf::RenderWindow& rw)
 		gui->text.setPosition(WW - gui->bw + gui->bw / 2.0f - tw / 2.0f, HH - gui->bh + 12.0f);
 		rw.draw(gui->text);
 
-		std::string stats = std::to_string(u.stats.a) + "." + std::to_string(u.stats.d) + " "
-							+ std::to_string(u.stats.hr) + "/" + std::to_string(u.stats.h) + " "
-							+ std::to_string(u.stats.mr) + "/" + std::to_string(u.stats.m);
+		std::string stats = std::to_string(u.stats.a)  + "." + std::to_string(u.stats.d) + " "
+		                  + std::to_string(u.stats.hr) + "/" + std::to_string(u.stats.h) + " "
+		                  + std::to_string(u.stats.mr) + "/" + std::to_string(u.stats.m);
 
 		gui->text.setString(stats);
 		gui->text.setCharacterSize(14);
