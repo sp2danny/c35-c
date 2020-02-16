@@ -25,7 +25,7 @@ auto C35::Board::Pix(int px, int py) -> HexCore*
 	float    dst = 0.0f;
 	for (auto&& h : map)
 	{
-		float d = (float)std::hypot((py+11) - h.py, px - h.px);
+		float d = (float)std::hypot((py + 11) - h.py, px - h.px);
 		if (!bsf || d < dst)
 		{
 			bsf = &h;
@@ -52,17 +52,16 @@ void C35::Board::Activate(Ref<Unit> u)
 	active = u;
 	Action::AllOff();
 	auto& avail = u->ut->available;
-	int i=0, n = ssize(avail);
+	int   i = 0, n = ssize(avail);
 	for (auto&& a : avail)
 	{
-		a->x = WW/2 - 25*n + 50*i++;
-		a->y = HH - 20;
+		a->x       = WW / 2 - 25 * n + 50 * i++;
+		a->y       = HH - 20;
 		a->enabled = a->visible = true;
 	}
 }
 
-auto C35::Board::Active()
-	-> Ref<Unit>
+auto C35::Board::Active() -> Ref<Unit>
 {
 	return active;
 }
@@ -92,7 +91,8 @@ void C35::Board::Randomize(int ww, int hh)
 		{
 			auto& h = *At(x, y);
 			h.Clr();
-			h.x = x; h.y = y;
+			h.x    = x;
+			h.y    = y;
 			auto d = dfe(h.x, h.y);
 			if (d < 3)
 			{
@@ -193,9 +193,9 @@ void C35::Board::MapN(bool wrap)
 			if (y % 2)
 			{
 				// odd
-				add_n(h, d6_upleft,    x,     y - 1);
-				add_n(h, d6_upright,   x + 1, y - 1);
-				add_n(h, d6_downleft,  x,     y + 1);
+				add_n(h, d6_upleft, x, y - 1);
+				add_n(h, d6_upright, x + 1, y - 1);
+				add_n(h, d6_downleft, x, y + 1);
 				add_n(h, d6_downright, x + 1, y + 1);
 				h.px = SZ + SZ * x;
 				h.py = YSZ * y;
@@ -203,15 +203,15 @@ void C35::Board::MapN(bool wrap)
 			else
 			{
 				// even
-				add_n(h, d6_upleft,    x - 1, y - 1);
-				add_n(h, d6_upright,   x,     y - 1);
-				add_n(h, d6_downleft,  x - 1, y + 1);
-				add_n(h, d6_downright, x,     y + 1);
+				add_n(h, d6_upleft, x - 1, y - 1);
+				add_n(h, d6_upright, x, y - 1);
+				add_n(h, d6_downleft, x - 1, y + 1);
+				add_n(h, d6_downright, x, y + 1);
 				h.px = (SZ / 2) + SZ * x;
 				h.py = YSZ * y;
 			}
 			add_n(h, d6_right, x + 1, y);
-			add_n(h, d6_left,  x - 1, y);
+			add_n(h, d6_left, x - 1, y);
 		}
 	}
 }
@@ -220,7 +220,7 @@ void C35::Board::Instance()
 {
 	tiles.Load("img/tiles.ad");
 	tiles.Instance(0);
-	mo.LoadBMP("img/circ_b.bmp", {255,0,255}, 32,42);
+	mo.LoadBMP("img/circ_b.bmp", {255, 0, 255}, 32, 42);
 	mo.Instance(0);
 	roads.Load("img/roads.ad");
 	roads.Instance(0);
@@ -256,12 +256,11 @@ void C35::Board::Display(sf::RenderWindow& rw)
 				{
 					auto n = hx.neigh[d];
 					if (!n) continue;
-					if (n->mask & road)
-						r |= 1 << d;
+					if (n->mask & road) r |= 1 << d;
 				}
-				assert(r>=0 && r<64);
+				assert(r >= 0 && r < 64);
 				alib::Refl refl = roads.Refl(r, 0);
-				refl.setPosition((float)xx-32, (float)yy-32);
+				refl.setPosition((float)xx - 32, (float)yy - 32);
 				rw.draw(refl);
 			}
 		}

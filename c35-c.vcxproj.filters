@@ -16,6 +16,9 @@
     <Filter Include="Source Files\old">
       <UniqueIdentifier>{b5d652de-924d-414f-88ca-4cd91ccc5b34}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Library Types">
+      <UniqueIdentifier>{48f7eb50-60bb-45dd-9444-0222501de4c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
@@ -132,6 +135,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Dijkstras.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Controllers.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

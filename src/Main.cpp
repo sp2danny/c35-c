@@ -14,6 +14,7 @@
 #include "FrameForwards.h"
 #include "Unit.h"
 #include "Player.h"
+#include "Conductor.h"
 
 namespace C35
 {
@@ -53,21 +54,27 @@ C35::Intro::Intro()
 	horsie_ac.Load("img/walk.ad");
 	horsie_ac.Instance(90);
 	horsie = horsie_ac.Refl("run", 90 + 45, rand() % 256);
-	horsie.setPosition({500*xscale, 350*yscale});
+	horsie.setPosition({500 * xscale, 350 * yscale});
 	horsie.setScale({xscale, yscale});
 }
 
-void C35::Intro::Display(sf::RenderWindow & window)
+void C35::Intro::Display(sf::RenderWindow& window)
 {
 	window.draw(back);
 	window.draw(horsie);
 }
 
-bool C35::Intro::Done() { return wantquit; }
+bool C35::Intro::Done()
+{
+	return wantquit;
+}
 
-void C35::Intro::Update(int) { horsie.Update(); }
+void C35::Intro::Update(int)
+{
+	horsie.Update();
+}
 
-bool C35::Intro::ParseInput(sf::Event & e)
+bool C35::Intro::ParseInput(sf::Event& e)
 {
 	if (e.type == sf::Event::KeyPressed)
 	{
@@ -79,9 +86,11 @@ bool C35::Intro::ParseInput(sf::Event & e)
 	return false;
 }
 
-void Main(const C35::StrVec& args)
+#include "Windows.h"
+
+void Main([[maybe_unused]] const C35::StrVec& args)
 {
-	(void)args;
+	//(void)args;
 
 	srand((unsigned int)time(0));
 
@@ -96,35 +105,48 @@ void Main(const C35::StrVec& args)
 	sf::VideoMode vm;
 	for (const auto& x : vms)
 	{
-		if ((x.width >= 640) && (x.height >= 480) && x.bitsPerPixel >= 24)
+		if ((int(x.width) >= C35::WW) && (int(x.height) >= C35::HH) && x.bitsPerPixel >= 24)
 		{
 			if (!found)
 			{
 				vm     = x;
 				found  = true;
-				pixcnt = x.width * x.height;
+				pixcnt = x.width;
+				pixcnt *= x.height;
 			}
 			else
 			{
-				long long pc = x.width * x.height;
+				long long pc = x.width;
+				pc *= x.height;
 				if (pc < pixcnt)
 				{
 					pixcnt = pc;
 					vm     = x;
 				}
+				if (pc == pixcnt)
+				{
+					if (x.bitsPerPixel < vm.bitsPerPixel)
+					{
+						pixcnt = pc;
+						vm     = x;
+					}
+				}
 			}
 		}
 	}
 	if (!found) return;
+	std::string msg = std::to_string(vm.width) + "x" + std::to_string(vm.height) + " ("
+					  + std::to_string(vm.bitsPerPixel) + " bpp)";
+	MessageBoxA(0, msg.c_str(), "Meddelande", MB_OK);
 #endif
-/* */
+	/* */
 
-	#ifndef NDEBUG
+#ifndef NDEBUG
 	sf::VideoMode    vm(C35::WW, C35::HH);
 	sf::RenderWindow window(vm, "C35");
-	#else
+#else
 	sf::RenderWindow window(vm, "C35", sf::Style::Fullscreen);
-	#endif
+#endif
 
 	C35::Frame::Init("C35");
 	C35::Frame::Push(std::make_shared<C35::Intro>());
@@ -138,10 +160,10 @@ void Main(const C35::StrVec& args)
 	C35::Unit::clearcache();
 	C35::Action::clear();
 
-	//std::cout << "\ndone.\n";
-	#ifdef NDEBUG
+// std::cout << "\ndone.\n";
+#ifdef NDEBUG
 	quick_exit(0);
-	#endif
+#endif
 }
 
 C35::StrVec split(const std::string& s, char delim)
@@ -151,15 +173,14 @@ C35::StrVec split(const std::string& s, char delim)
 	std::string       item;
 
 	while (std::getline(ss, item, delim))
-	{
 		result.push_back(item);
-	}
 
 	return result;
 }
 
 #ifndef CONSOLE
-int __cdecl WinMain(void*, void*, char* cargs, int)
+int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR cargs, int)
+// int __cdecl WinMain(void*, void*, char* cargs, int)
 {
 	Main(split(cargs, ' '));
 	return 0;
@@ -173,4 +194,3 @@ int main(int argc, char* argv[])
 	Main(args);
 }
 #endif
-
