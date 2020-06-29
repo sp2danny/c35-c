@@ -47,9 +47,9 @@ namespace C35
 	typedef unsigned char UC;
 }
 
-template<typename T>
-int ssize(const T& t)
-{ return (int)std::size(t); }
+//template<typename T>
+//int ssize(const T& t)
+//{ return (int)std::size(t); }
 
 template<typename T>
 void ReadBinary(std::istream& istr, T& val)
