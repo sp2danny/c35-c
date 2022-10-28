@@ -100,10 +100,10 @@ void MainFrame::Display(sf::RenderWindow& rw)
 	Game().Display(rw);
 	gui.Display(rw);
 
-	auto dur = std::chrono::duration_cast<std::chrono::microseconds>(t3 - t1).count();
-	fps = 2000000 / (float)dur;
+	auto dur = std::chrono::duration_cast<std::chrono::microseconds>(t3 - t2).count();
+	fps = 1'000'000.0f / (float)dur;
 	old_fps  = 0.99f * old_fps + 0.01f * fps;
-	rw.setTitle(std::to_string((int)(old_fps + 0.5)));
+	rw.setTitle(std::to_string((int)(old_fps + 0.5f)));
 }
 
 bool MainFrame::Done()
@@ -149,7 +149,7 @@ bool MainFrame::ParseInput(sf::Event& e)
 		if (e.key.code == sf::Keyboard::Down)  down.dn = false;
 	}
 
-	float s = 8.0f;// *60.0f / fps;
+	float s = 8000.0f / fps;
 	dx = dy = 0;
 	if (down.dn) dy += s;
 	if (down.up) dy -= s;

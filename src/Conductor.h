@@ -8,6 +8,7 @@
 #include "Board.h"
 #include "Controllers.h"
 
+
 namespace C35
 {
 struct Conductor : public UpdateTarget, InputTarget
@@ -27,9 +28,9 @@ protected:
 	Board&      board;
 	FramePtr    owner;
 
-	AnimationController& animationController;
-	DisplayController&   displayController;
-	InputController&     inputController;
+	ref<AnimationController> animationController;
+	ref<DisplayController>   displayController;
+	ref<InputController>     inputController;
 };
 
 }  // namespace C35

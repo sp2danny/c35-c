@@ -86,7 +86,7 @@ bool C35::Intro::ParseInput(sf::Event& e)
 	return false;
 }
 
-#include "Windows.h"
+// #include "Windows.h"
 
 void Main([[maybe_unused]] const C35::StrVec& args)
 {
@@ -137,7 +137,7 @@ void Main([[maybe_unused]] const C35::StrVec& args)
 	if (!found) return;
 	std::string msg = std::to_string(vm.width) + "x" + std::to_string(vm.height) + " ("
 					  + std::to_string(vm.bitsPerPixel) + " bpp)";
-	MessageBoxA(0, msg.c_str(), "Meddelande", MB_OK);
+	//MessageBoxA(0, msg.c_str(), "Meddelande", MB_OK);
 #endif
 	/* */
 

@@ -9,6 +9,7 @@
 #include <cstdint>
 #include <memory>
 #include <cstddef>
+#include <utility>
 
 using namespace std::literals;
 
@@ -45,6 +46,10 @@ namespace C35
 	struct City;
 
 	typedef unsigned char UC;
+	
+	template<typename T>
+	using ref = T&;
+
 }
 
 //template<typename T>
