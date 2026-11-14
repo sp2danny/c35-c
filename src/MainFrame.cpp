@@ -40,6 +40,10 @@ private:
 	float dx = 0, dy = 0;
 	float iox, ioy;
 	float fps, old_fps = 60.0f;
+
+	sf::Font   font;
+	sf::Text   text;
+
 };
 
 MainFrame::MainFrame()
@@ -53,6 +57,9 @@ MainFrame::MainFrame()
 
 	MakeActions();
 	MakeUnits();
+
+	font.loadFromFile("arial.ttf");
+	text = sf::Text(" ", font);
 
 	p1         = Player::lookup(Player::create(100, board, true))->ref();
 	p1->name() = "Player One";
@@ -103,7 +110,20 @@ void MainFrame::Display(sf::RenderWindow& rw)
 	auto dur = std::chrono::duration_cast<std::chrono::microseconds>(t3 - t2).count();
 	fps = 1'000'000.0f / (float)dur;
 	old_fps  = 0.99f * old_fps + 0.01f * fps;
-	rw.setTitle(std::to_string((int)(old_fps + 0.5f)));
+
+	auto fps_s = std::to_string((int)(old_fps + 0.5f));
+
+	text.setString(fps_s);
+	text.setCharacterSize(14);
+	text.setStyle(0);
+	text.setFillColor(sf::Color::Black);
+	text.setPosition(5, 5);
+	rw.draw(text);
+	text.setFillColor(sf::Color::White);
+	text.setPosition(4, 4);
+	rw.draw(text);
+
+	rw.setTitle(fps_s);
 }
 
 bool MainFrame::Done()

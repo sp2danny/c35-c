@@ -35,11 +35,22 @@ private:
 	alib::AC   horsie_ac;
 	alib::Refl horsie, back;
 	bool       wantquit = false;
+
+	void SetH();
 };
 
 C35::Intro::~Intro()
 {
 	std::cerr << "intro done" << std::endl;
+}
+
+void C35::Intro::SetH()
+{
+	float xscale = WW / (float)back_cis.Width();
+	float yscale = HH / (float)back_cis.Height();
+	horsie = horsie_ac.Refl("run", 90 + 45, rand() % 256);
+	horsie.setPosition({500 * xscale, 350 * yscale});
+	horsie.setScale({xscale, yscale});
 }
 
 C35::Intro::Intro()
@@ -53,9 +64,7 @@ C35::Intro::Intro()
 	back.setScale({xscale, yscale});
 	horsie_ac.Load("img/walk.ad");
 	horsie_ac.Instance(90);
-	horsie = horsie_ac.Refl("run", 90 + 45, rand() % 256);
-	horsie.setPosition({500 * xscale, 350 * yscale});
-	horsie.setScale({xscale, yscale});
+	SetH();
 }
 
 void C35::Intro::Display(sf::RenderWindow& window)
@@ -80,13 +89,15 @@ bool C35::Intro::ParseInput(sf::Event& e)
 	{
 		/**/ if (e.key.code == sf::Keyboard::Escape)
 			wantquit = true;
+		else if (e.key.code == sf::Keyboard::Enter)
+			SetH();
 		else if (e.key.code == sf::Keyboard::Space)
 			Push(MakeMainFrame());
 	}
 	return false;
 }
 
-// #include "Windows.h"
+#include "Windows.h"
 
 void Main([[maybe_unused]] const C35::StrVec& args)
 {
@@ -111,13 +122,11 @@ void Main([[maybe_unused]] const C35::StrVec& args)
 			{
 				vm     = x;
 				found  = true;
-				pixcnt = x.width;
-				pixcnt *= x.height;
+				pixcnt = x.width * x.height;
 			}
 			else
 			{
-				long long pc = x.width;
-				pc *= x.height;
+				long long pc = x.width * x.height;
 				if (pc < pixcnt)
 				{
 					pixcnt = pc;
@@ -137,7 +146,7 @@ void Main([[maybe_unused]] const C35::StrVec& args)
 	if (!found) return;
 	std::string msg = std::to_string(vm.width) + "x" + std::to_string(vm.height) + " ("
 					  + std::to_string(vm.bitsPerPixel) + " bpp)";
-	//MessageBoxA(0, msg.c_str(), "Meddelande", MB_OK);
+	MessageBoxA(0, msg.c_str(), "Resolution", MB_OK);
 #endif
 	/* */
 

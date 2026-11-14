@@ -52,7 +52,7 @@ void C35::Board::Activate(Ref<Unit> u)
 	active = u;
 	Action::AllOff();
 	auto& avail = u->ut->available;
-	int   i = 0, n = ssize(avail);
+	int   i = 0, n = (int)ssize(avail);
 	for (auto&& a : avail)
 	{
 		a->x       = WW / 2 - 25 * n + 50 * i++;

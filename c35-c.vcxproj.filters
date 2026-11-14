@@ -77,21 +77,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\FrameSystem.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Common.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\FrameForwards.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Hexagon.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Board.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\old\Board.h">
       <Filter>Source Files\old</Filter>
     </ClInclude>
@@ -113,32 +98,47 @@
     <ClInclude Include="src\old\UnitAction.h">
       <Filter>Source Files\old</Filter>
     </ClInclude>
-    <ClInclude Include="src\Unit.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="src\Action.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Player.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="src\Board.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Repository.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="src\Common.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Conductor.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MapGui.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Minimap.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Action.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Dijkstras.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Controllers.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Dijkstras.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FrameSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FrameForwards.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Hexagon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MapGui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Minimap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Unit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Repository.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Player.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

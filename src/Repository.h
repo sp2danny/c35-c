@@ -15,7 +15,7 @@ struct Ref
 	T* operator->() { return T::lookup(m_index); }
 	T& operator*() { return *T::lookup(m_index); }
 	operator T*() { return T::lookup(m_index); }
-	operator bool() const { return T::lookup(m_index) != nullptr; }
+	explicit operator bool() const { return T::lookup(m_index) != nullptr; }
 	friend struct RepositoryBase<T>;
 	friend T;
 
