@@ -4,9 +4,13 @@
 #include <string>
 #include <string_view>
 #include <map>
+#include <concepts>
 
 template<typename T>
 struct RepositoryBase;
+
+template<typename T>
+struct CRef;
 
 template<typename T>
 struct Ref
@@ -19,8 +23,9 @@ struct Ref
 	friend struct RepositoryBase<T>;
 	friend T;
 
-	bool operator <(const Ref& other) const { return m_index  < other.m_index; }
-	bool operator==(const Ref& other) const { return m_index == other.m_index; }
+	auto operator <=> (const Ref&) const = default;
+
+	operator CRef<T>() const;
 
 private:
 	Ref(int idx) : m_index(idx) {}
@@ -36,14 +41,19 @@ struct CRef
 	operator const T*() { return T::lookup(m_index); }
 	operator bool() const { return T::lookup(m_index) != nullptr; }
 	friend struct RepositoryBase<T>;
+	friend struct Ref<T>;
 
-	bool operator <(const CRef& other) const { return m_index  < other.m_index; }
-	bool operator==(const CRef& other) const { return m_index == other.m_index; }
+	auto operator <=> (const CRef&) const = default;
+
+	auto operator <=> (const Ref<T>& ref) const { return (*this) <=> (CRef)ref; }
 
 private:
 	CRef(int idx) : m_index(idx) {}
 	int m_index = 0;
 };
+
+template<typename T>
+Ref<T>::operator CRef<T>() const { return CRef<T>{m_index}; }
 
 template<typename T>
 struct RepositoryBase
