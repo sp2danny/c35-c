@@ -48,9 +48,10 @@ void C35::Intro::SetH()
 {
 	float xscale = WW / (float)back_cis.Width();
 	float yscale = HH / (float)back_cis.Height();
+	horsie_ac.
 	horsie = horsie_ac.Refl("run", 90 + 45, rand() % 256);
 	horsie.setPosition({500 * xscale, 350 * yscale});
-	horsie.setScale({xscale, yscale});
+	//horsie.setScale({2.0f, 2.0f});
 }
 
 C35::Intro::Intro()

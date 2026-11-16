@@ -87,6 +87,8 @@ MainFrame::MainFrame()
 	u->set("idle");
 	u = board.Spawn("Pikeman", p2, {9, 9});
 	u->set("fortify");
+	u = board.Spawn("Archer", p1, {10, 10});
+	u->set("run", 0);
 
 	Unit::unloadBase();
 

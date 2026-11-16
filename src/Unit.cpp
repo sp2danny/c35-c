@@ -85,7 +85,7 @@ void C35::Unit::set(std::string_view anim, short dir)
 }
 
 namespace C35 {
-	void MakeWarrior(), MakeWorker(), MakeSettler(), MakePikeman(), MakeHorseman();
+	void MakeWarrior(), MakeWorker(), MakeSettler(), MakePikeman(), MakeHorseman(), MakeArcher();
 	void AddAct(UnitType& ut, std::string_view sv)
 	{
 		ut.available.push_back(Action::lookup(Action::lookup(sv))->ref());
@@ -94,7 +94,19 @@ namespace C35 {
 
 void C35::MakeUnits()
 {
-	MakeWarrior(), MakeWorker(), MakeSettler(), MakePikeman(), MakeHorseman();
+	MakeWarrior(), MakeWorker(), MakeSettler(), MakePikeman(), MakeHorseman(), MakeArcher();
+}
+
+void C35::MakeArcher()
+{
+	int       id = UnitType::create();
+	UnitType& ut = *UnitType::lookup(id);
+
+	ut.name()  = "Archer";
+	ut.primary = UnitType::off;
+	ut.base    = {2, 1, 3, 3};
+	AddAct(ut, "goto");
+	AddAct(ut, "fortify");
 }
 
 void C35::MakeWarrior()

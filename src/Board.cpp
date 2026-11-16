@@ -304,7 +304,8 @@ auto C35::Board::Spawn(std::string_view type, Ref<Player> player, Pos pos) -> Re
 	unit.name() = name;
 
 	unit.instance(player->color);
-	hx->units.push_back(ref);
+	//hx->units.push_back(ref);
+	hx->AddU(ref);
 
 	return ref;
 }

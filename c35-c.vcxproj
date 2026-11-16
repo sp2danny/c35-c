@@ -110,6 +110,7 @@
   <ItemGroup>
     <ClCompile Include="src\Action.cpp" />
     <ClCompile Include="src\Board.cpp" />
+    <ClCompile Include="src\Combat.cpp" />
     <ClCompile Include="src\Common.cpp" />
     <ClCompile Include="src\Dijkstras.cpp" />
     <ClCompile Include="src\FrameSystem.cpp" />
@@ -148,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="src\Action.h" />
     <ClInclude Include="src\Board.h" />
+    <ClInclude Include="src\Combat.h" />
     <ClInclude Include="src\Common.h" />
     <ClInclude Include="src\Conductor.h" />
     <ClInclude Include="src\Controllers.h" />
