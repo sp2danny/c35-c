@@ -7,5 +7,7 @@ bin
 Makefile
 *.txt
 .vs
+*.fzac
+*.7z
 
 
